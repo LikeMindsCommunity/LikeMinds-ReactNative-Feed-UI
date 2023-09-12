@@ -1,8 +1,8 @@
 import {StyleSheet, Text} from 'react-native';
 import React from 'react';
-import {TextProps} from './types';
+import {TextUI} from './types';
 
-const LMText = ({text, maxLines, textStyle, selectable}: TextProps) => {
+const LMText = ({text, maxLines, textStyle, selectable}: TextUI) => {
   return (
      // this renders the text component
     <Text
