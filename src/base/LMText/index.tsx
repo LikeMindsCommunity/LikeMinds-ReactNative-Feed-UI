@@ -1,27 +1,27 @@
 import {StyleSheet, Text} from 'react-native';
 import React from 'react';
-import {TextUI} from './types';
+import {LMTextProps} from './types';
 
-const LMText = ({text, maxLines, textStyle, selectable}: TextUI) => {
+const LMText = ({text, maxLines, textStyle, selectable}: LMTextProps) => {
   return (
-     // this renders the text component
+    // this renders the text component
     <Text
       selectable={selectable ? selectable : true} // default selectable value is true
       numberOfLines={maxLines}
-      style={[defaultTextStyle.textStyle, textStyle]}>
+      style={StyleSheet.flatten([defaultStyles.textStyle, textStyle])}>
       {text}
     </Text>
   );
 };
 
 // default text style
-const defaultTextStyle = StyleSheet.create({
+const defaultStyles = StyleSheet.create({
   textStyle: {
     color: '#000000',
-    fontSize: 14,
+    fontSize: 35,
     fontFamily: 'Arial',
     textAlign: 'auto',
-    fontStyle:'normal'
+    fontStyle: 'normal',
   },
 });
 
