@@ -18,7 +18,7 @@ const LMText = ({text, maxLines, textStyle, selectable}: LMTextProps) => {
 const defaultStyles = StyleSheet.create({
   textStyle: {
     color: '#000000',
-    fontSize: 35,
+    fontSize: 14,
     fontFamily: 'Arial',
     textAlign: 'auto',
     fontStyle: 'normal',
