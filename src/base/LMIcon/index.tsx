@@ -6,7 +6,8 @@ const LMIcon = ({
   type,
   assetPath,
   color,
-  size,
+  height,
+  width,
   boxStyle,
   iconStyle,
   boxFit,
@@ -14,7 +15,7 @@ const LMIcon = ({
   return (
     <>
       {/* this renders the png image */}
-      {type === 'png' ? (
+      {type === 'png' && (
         <View style={boxStyle}>
           <Image
             source={{
@@ -23,8 +24,8 @@ const LMIcon = ({
             style={StyleSheet.flatten([
               iconStyle,
               {
-                width: size ? size : defaultStyles.iconStyle.width,
-                height: size ? size : defaultStyles.iconStyle.height,
+                width: width ? width : defaultStyles.iconStyle.width,
+                height: height ? height : defaultStyles.iconStyle.height,
                 tintColor: color,
                 resizeMode: boxFit
                   ? boxFit
@@ -33,7 +34,7 @@ const LMIcon = ({
             ])}
           />
         </View>
-      ) : null}
+      )}
     </>
   );
 };

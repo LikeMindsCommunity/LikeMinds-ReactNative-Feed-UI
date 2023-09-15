@@ -41,7 +41,8 @@ const LMButton = ({
               // this renders the icon in active state
               <LMIcon
                 type={activeIcon.type}
-                size={activeIcon.size}
+                width={activeIcon.width}
+                height={activeIcon.height}
                 assetPath={activeIcon.assetPath}
                 color={activeIcon.color}
                 iconStyle={activeIcon.iconStyle}
@@ -53,7 +54,8 @@ const LMButton = ({
             // this renders the icon in inactive state
             <LMIcon
               type={icon.type}
-              size={icon.size}
+              width={icon.width}
+              height={icon.height}
               assetPath={icon.assetPath}
               color={icon.color}
               iconStyle={icon.iconStyle}
