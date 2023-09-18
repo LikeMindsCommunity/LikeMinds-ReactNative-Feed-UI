@@ -16,8 +16,8 @@ const LMInputText = ({
 }: LMInputTextProps) => {
   return (
     <TextInput
-      onChangeText={val => {
-        onType ? onType(val) : null;
+      onChangeText={enteredText => {
+        onType ? onType(enteredText) : null;
       }}
       style={StyleSheet.flatten([defaultStyles.textInput, inputTextStyle])}
       value={inputText}
