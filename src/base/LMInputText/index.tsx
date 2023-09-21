@@ -44,8 +44,6 @@ const defaultStyles = StyleSheet.create({
     backgroundColor: '#ffffff',
     paddingVertical: 10,
     fontSize: 14,
-    marginTop: 100,
-    fontFamily: 'Arial',
     color: '#000000',
   },
 });

@@ -26,6 +26,7 @@ const LMProfilePicture = ({
             {
               width: size ? size : defaultStyles.avatarView.width,
               height: size ? size : defaultStyles.avatarView.height,
+              resizeMode:'cover'
             },
           ])}
         />
