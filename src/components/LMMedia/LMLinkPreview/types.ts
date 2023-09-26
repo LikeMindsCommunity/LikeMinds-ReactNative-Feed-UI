@@ -1,24 +1,7 @@
 import {ImageStyle, TextStyle, ViewStyle} from 'react-native';
 
-// data model for ogTags object in attachmentMeta
-interface OgTagsProps {
-  description: string;
-  title: string;
-  url: string;
-  image?: string;
-}
-
-// data model for attachmentMeta
-interface AttachmentMeta {
-  entityId: string;
-  ogTags: OgTagsProps;
-}
-
 export interface LMLinkPreviewProps {
-  attachments: {
-    attachmentMeta: AttachmentMeta;
-    attachmentType: number;
-  }; // this represents the object of data of link's attachment of 0 index
+  attachments: Array<LMAttachmentUI>; // this represents the object of data of link's attachment of 0 index
   onTap?: () => void; // this represents the function to be executed on click over the link preview
   showLinkUrl?: boolean; // this represents if the link url has to be displayed in the preview or not
   linkPreviewBoxStyle?: ViewStyle; // this represents the style of the preview container

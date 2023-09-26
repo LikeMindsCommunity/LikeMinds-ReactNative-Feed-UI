@@ -10,6 +10,7 @@ import React from 'react';
 import layout from '../../../utils/layout';
 import {LMDocumentProps} from './types';
 import LMIcon from '../../../base/LMIcon';
+import STYLES from '../../../constants/constants'
 
 const LMDocument = ({
   attachments,
@@ -72,7 +73,6 @@ const LMDocument = ({
                 {item?.attachmentMeta?.name}
               </Text>
               <View style={styles.alignRow}>
-                {/* // todo: remove static data */}
                 {/* document page count text */}
                 <Text
                   style={StyleSheet.flatten([
@@ -80,13 +80,14 @@ const LMDocument = ({
                     documentDetailStyle,
                     {
                       display:
-                        showPageCount != undefined
-                          ? showPageCount
-                            ? 'flex'
-                            : 'none'
-                          : 'flex',
+                      showPageCount != undefined
+                      ? showPageCount
+                      ? 'flex'
+                      : 'none'
+                      : 'flex',
                     },
                   ])}>
+                    {/* // todo: remove static data */}
                   2 Pages
                 </Text>
                 <Image
@@ -119,6 +120,7 @@ const LMDocument = ({
                           : 'flex',
                     },
                   ])}>
+                     {/* // todo: remove static data */}
                   278 Kb
                 </Text>
                 <Image
@@ -168,7 +170,7 @@ const styles = StyleSheet.create({
   },
   docView: {
     flexDirection: 'row',
-    borderColor: '#00000066',
+    borderColor: STYLES.$COLORS.LIGHT_GREY,
     borderWidth: 1,
     marginHorizontal: 15,
     borderRadius: 5,
@@ -185,15 +187,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   docTitle: {
-    color: '#00000099',
+    color: STYLES.$COLORS.TEXT_COLOR,
     fontSize: 18,
     fontWeight: '500',
-    // fontFamily: STYLES.$FONT_FAMILY.REGULAR
   },
   docDetail: {
-    color: '#00000077',
+    color: STYLES.$COLORS.TEXT_COLOR,
     fontSize: 14,
-    // fontFamily: STYLES.$FONT_FAMILY.REGULAR
   },
   dotImageSize: {
     width: layout.normalize(6),

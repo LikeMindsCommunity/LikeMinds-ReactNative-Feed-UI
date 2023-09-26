@@ -11,6 +11,8 @@ import Video from 'react-native-video';
 import {LMVideoProps} from './types';
 import LMLoader from '../../../base/LMLoader';
 import layout from '../../../utils/layout';
+import STYLES from '../../../constants/constants'
+import { MEDIA_FETCH_ERROR } from '../../../constants/strings';
 
 const LMVideo = ({
   videoUrl,
@@ -65,9 +67,7 @@ const LMVideo = ({
           {errorWidget ? (
             errorWidget
           ) : (
-            <Text style={defaultStyles.errorText}>
-              An error occured while fetching the media
-            </Text>
+            <Text style={defaultStyles.errorText}>{MEDIA_FETCH_ERROR}</Text>
           )}
         </View>
       ) : null}
@@ -157,7 +157,7 @@ const LMVideo = ({
 const defaultStyles = StyleSheet.create({
   videoContainer: {
     width: layout.window.width,
-    backgroundColor: 'black',
+    backgroundColor: STYLES.$BACKGROUND_COLORS.DARK,
   },
   videoStyle: {
     width: layout.window.width,
@@ -171,14 +171,14 @@ const defaultStyles = StyleSheet.create({
     zIndex: 1000,
   },
   errorView: {
-    backgroundColor: '#e0e0e0',
+    backgroundColor: STYLES.$COLORS.LIGHT_GREY,
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1000,
   },
   errorText: {
-    color: 'red',
+    color: STYLES.$COLORS.RED,
   },
 });
 

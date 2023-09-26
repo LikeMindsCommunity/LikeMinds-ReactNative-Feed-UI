@@ -1,24 +1,8 @@
 import {TextStyle, ViewStyle} from 'react-native';
 import {LMIconProps} from '../../../base/LMIcon/types';
 
-// data model for attachmentMeta object inside attachments
-interface AttachmentMeta {
-  entityId: string;
-  format: string;
-  name: string;
-  ogTags: Object;
-  size: number;
-  url: string;
-}
-
-// data model for array of attachments
-interface DocumentItem {
-  attachmentMeta: AttachmentMeta;
-  attachmentType: number;
-}
-
 export interface LMDocumentProps {
-  attachments: Array<DocumentItem>; // this represents the array of document attachments to be displayed
+  attachments: Array<LMAttachmentUI>; // this represents the array of document attachments to be displayed
   documentIcon?: LMIconProps; // this represents the pdf icon to be displayed
   defaultIconSize?: number; // this represents the size of the default pdf icon
   showPageCount?: boolean; // this represents if the page count has to be displayed in the view or not

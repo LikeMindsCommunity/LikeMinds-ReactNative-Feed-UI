@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import {LMImageProps} from './types';
 import LMLoader from '../../../base/LMLoader';
 import layout from '../../../utils/layout';
+import STYLES from '../../../constants/constants';
+import {MEDIA_FETCH_ERROR} from '../../../constants/strings';
 
 const LMImage = ({
   imageUrl,
@@ -47,9 +49,7 @@ const LMImage = ({
           {errorWidget ? (
             errorWidget
           ) : (
-            <Text style={defaultStyles.errorText}>
-              An error occured while fetching the media
-            </Text>
+            <Text style={defaultStyles.errorText}>{MEDIA_FETCH_ERROR}</Text>
           )}
         </View>
       ) : null}
@@ -64,7 +64,7 @@ const defaultStyles = StyleSheet.create({
     resizeMode: 'contain',
   },
   imageContainer: {
-    backgroundColor: '#000',
+    backgroundColor: STYLES.$COLORS.BLACK,
     width: layout.window.width,
   },
   loaderView: {
@@ -74,14 +74,14 @@ const defaultStyles = StyleSheet.create({
     zIndex: 1000,
   },
   errorView: {
-    backgroundColor: '#e0e0e0',
+    backgroundColor: STYLES.$COLORS.LIGHT_GREY,
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1000,
   },
   errorText: {
-    color: 'red',
+    color: STYLES.$COLORS.RED,
   },
 });
 

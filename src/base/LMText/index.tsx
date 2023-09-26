@@ -1,6 +1,7 @@
 import {StyleSheet, Text} from 'react-native';
 import React from 'react';
 import {LMTextProps} from './types';
+import STYLES from '../../constants/constants'
 
 const LMText = ({text, maxLines, textStyle, selectable}: LMTextProps) => {
   return (
@@ -17,7 +18,7 @@ const LMText = ({text, maxLines, textStyle, selectable}: LMTextProps) => {
 // default text style
 const defaultStyles = StyleSheet.create({
   textStyle: {
-    color: '#000000',
+    color: STYLES.$COLORS.TEXT_COLOR,
     fontSize: 14,
     fontFamily: 'Arial',
     textAlign: 'auto',

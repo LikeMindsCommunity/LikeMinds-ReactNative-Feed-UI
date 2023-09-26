@@ -5,6 +5,8 @@ import {LMCarouselProps} from './types';
 import LMImage from '../LMImage';
 import LMVideo from '../LMVideo';
 import layout from '../../../utils/layout';
+import STYLES from '../../../constants/constants'
+import { IMAGE_ATTACHMENT_TYPE, VIDEO_ATTACHMENT_TYPE } from '../../../constants/strings';
 
 const LMCarousel = ({
   attachments,
@@ -28,19 +30,19 @@ const LMCarousel = ({
       // handling custom style of active pagination item
       paginationStyleItemActive={StyleSheet.flatten([
         styles.paginationItemStyle,
-        {backgroundColor: '#5046E5'},
+        {backgroundColor: STYLES.$COLORS.THEME},
         activeIndicatorStyle,
       ])}
       // handling custom style of inactive pagination item
       paginationStyleItemInactive={StyleSheet.flatten([
         styles.paginationItemStyle,
-        {backgroundColor: '#e0e0e0'},
+        {backgroundColor: STYLES.$COLORS.LIGHT_GREY},
         inactiveIndicatorStyle,
       ])}
       renderItem={({item}) => (
         <>
           {/* this section render image */}
-          {item?.attachmentType === 1 && (
+          {item?.attachmentType === IMAGE_ATTACHMENT_TYPE && (
             <LMImage
               imageUrl={item?.attachmentMeta?.url}
               width={imageItem?.width}
@@ -54,7 +56,7 @@ const LMCarousel = ({
             />
           )}
           {/* this section render video */}
-          {item?.attachmentType === 2 && (
+          {item?.attachmentType === VIDEO_ATTACHMENT_TYPE && (
             <LMVideo
               videoUrl={item?.attachmentMeta?.url}
               height={videoItem?.height}
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
   mediaDimensions: {
     width: layout.window.width,
     height: 325,
-    backgroundColor: 'black',
+    backgroundColor: STYLES.$BACKGROUND_COLORS.DARK,
   },
   swiperView: {
     marginBottom: 30,

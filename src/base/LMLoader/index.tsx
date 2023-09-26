@@ -1,9 +1,10 @@
 import {ActivityIndicator, View} from 'react-native';
 import React from 'react';
-import { LoaderProps } from './types';
+import { LMLoaderProps } from './types';
+import STYLES from '../../constants/constants'
 
-const LMLoader = ({color, size}: LoaderProps) => {
-  return <ActivityIndicator size={size ? size : 'large'} color={color? color : '#5046E5'} />;
+const LMLoader = ({color, size}: LMLoaderProps) => {
+  return <ActivityIndicator size={size ? size : 'large'} color={color? color : STYLES.$COLORS.THEME} />;
 };
 
 export default LMLoader;

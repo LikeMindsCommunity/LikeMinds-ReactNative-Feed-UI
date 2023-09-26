@@ -2,6 +2,7 @@ import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import {LMProfilePictureProps} from './types';
 import {getNameInitials} from '../../utils';
+import STYLES from '../../constants/constants'
 
 const LMProfilePicture = ({
   fallbackText,
@@ -61,12 +62,12 @@ const defaultStyles = StyleSheet.create({
     height: 48,
     borderRadius: 25,
     justifyContent: 'center',
-    backgroundColor: '#5046E5',
+    backgroundColor: STYLES.$COLORS.THEME,
     alignItems: 'center',
     resizeMode: 'contain',
   },
   nameInitialText: {
-    color: '#ffffff',
+    color: STYLES.$COLORS.WHITE,
     fontWeight: '500',
     fontSize: 16,
     fontFamily: 'Arial',

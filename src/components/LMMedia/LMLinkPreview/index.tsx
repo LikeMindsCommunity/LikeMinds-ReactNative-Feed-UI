@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import {LMLinkPreviewProps} from './types';
+import STYLES from '../../../constants/constants'
 
 const LMLinkPreview = ({
   attachments,
@@ -19,11 +20,12 @@ const LMLinkPreview = ({
   linkDescriptionStyle,
   linkUrlStyle,
 }: LMLinkPreviewProps) => {
+  const linkPreviewAttachment = attachments[0].attachmentMeta.ogTags[0]
   return (
     <TouchableOpacity
       style={styles.postMedia}
       onPress={() => {
-        Linking.openURL(attachments?.attachmentMeta?.ogTags?.url), onTap;
+        Linking.openURL(linkPreviewAttachment?.url), onTap;
       }}>
       {/* link preview image */}
       <View
@@ -33,7 +35,7 @@ const LMLinkPreview = ({
         ])}>
         <Image
           source={
-            attachments && {uri: attachments?.attachmentMeta?.ogTags?.image}
+            attachments && {uri: linkPreviewAttachment?.image}
           }
           style={StyleSheet.flatten([styles.previewImage, linkImageStyle])}
         />
@@ -42,7 +44,7 @@ const LMLinkPreview = ({
           {/* preview title */}
           <Text
             style={StyleSheet.flatten([styles.previewTitle, linkTitleStyle])}>
-            {attachments?.attachmentMeta?.ogTags?.title}
+            {linkPreviewAttachment?.title}
           </Text>
           {/* preview description */}
           <Text
@@ -50,7 +52,7 @@ const LMLinkPreview = ({
               styles.previewDescription,
               linkDescriptionStyle,
             ])}>
-            {attachments?.attachmentMeta?.ogTags?.description}
+            {linkPreviewAttachment?.description}
           </Text>
           {/* preview url */}
           <Text
@@ -66,7 +68,7 @@ const LMLinkPreview = ({
                     : 'flex',
               },
             ])}>
-            {attachments?.attachmentMeta?.ogTags?.url}
+            {linkPreviewAttachment?.url}
           </Text>
         </View>
       </View>
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   previewContainer: {
-    borderColor: '#00000066',
+    borderColor: STYLES.$COLORS.LIGHT_GREY,
     borderWidth: 0.5,
     borderRadius: 10,
     marginTop: 10,
@@ -94,19 +96,18 @@ const styles = StyleSheet.create({
   },
   previewTitle: {
     fontWeight: '500',
-    color: '#484F67',
+    color: STYLES.$COLORS.TEXT_COLOR,
     fontSize: 16,
-    // fontFamily: STYLES.$FONT_FAMILY.MEDIUM
   },
   previewDescription: {
-    color: '#484F6799',
+    color: STYLES.$COLORS.TEXT_COLOR,
     paddingVertical: 2,
-    // fontFamily: STYLES.$FONT_FAMILY.REGULAR
+    opacity: 0.8
   },
   previewLink: {
-    color: '#484F6799',
+    color: STYLES.$COLORS.TEXT_COLOR,
     fontSize: 12,
-    // fontFamily: STYLES.$FONT_FAMILY.REGULAR
+    opacity:0.7
   },
   previewDetailView: {
     paddingHorizontal: 10,

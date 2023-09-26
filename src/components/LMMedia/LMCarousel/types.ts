@@ -3,7 +3,7 @@ import {LMImageProps} from '../LMImage/types';
 import {LMVideoProps} from '../LMVideo/types';
 
 export interface LMCarouselProps {
-  attachments: Array<object>; // this represents the array of image & video attachments to be displayed
+  attachments: Array<LMAttachmentUI>; // this represents the array of image & video attachments to be displayed
   carouselStyle?: ViewStyle; // this represents the style of the carousel container
   paginationBoxStyle?: ViewStyle; // this represents the style of the pagination container which contains the indicators
   activeIndicatorStyle?: ViewStyle; // this represents the style for the active indicator of pagination
