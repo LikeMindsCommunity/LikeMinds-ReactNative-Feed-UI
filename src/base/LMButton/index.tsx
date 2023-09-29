@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import LMText from '../LMText';
 import LMIcon from '../LMIcon';
 import {LMButtonProps} from './types';
+import STYLES from '../../constants/constants'
 
 const LMButton = ({
   text,
@@ -101,8 +102,8 @@ const LMButton = ({
 const defaultStyles = StyleSheet.create({
   buttonViewStyle: {
     width: 100,
-    backgroundColor: '#ffffff',
-    borderColor: '#000000',
+    backgroundColor: STYLES.$BACKGROUND_COLORS.LIGHT,
+    borderColor: STYLES.$COLORS.BLACK,
     borderWidth: 2,
     justifyContent: 'center',
     paddingVertical: 5,

@@ -1,6 +1,7 @@
 import {View, Text, TextInput, StyleSheet} from 'react-native';
 import React from 'react';
 import {LMInputTextProps} from './types';
+import STYLES from '../../constants/constants'
 
 const LMInputText = ({
   inputText,
@@ -22,7 +23,7 @@ const LMInputText = ({
       style={StyleSheet.flatten([defaultStyles.textInput, inputTextStyle])}
       value={inputText}
       placeholderTextColor={
-        placeholderTextColor ? placeholderTextColor : '#000000'
+        placeholderTextColor ? placeholderTextColor : STYLES.$COLORS.BLACK
       }
       placeholder={placeholderText}
       autoCapitalize={autoCapitalize ? autoCapitalize : 'none'}
@@ -41,12 +42,10 @@ const defaultStyles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 8,
     borderRadius: 10,
-    backgroundColor: '#ffffff',
+    backgroundColor: STYLES.$BACKGROUND_COLORS.LIGHT,
     paddingVertical: 10,
     fontSize: 14,
-    marginTop: 100,
-    fontFamily: 'Arial',
-    color: '#000000',
+    color: STYLES.$COLORS.BLACK,
   },
 });
 
