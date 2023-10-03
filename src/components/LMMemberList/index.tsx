@@ -14,6 +14,7 @@ const LMMemberList = ({
 }: LMMemberListProps) => {
   return (
     <View style={StyleSheet.flatten([styles.container, boxStyle])}>
+      {/* avatar view */}
       <LMProfilePicture
         fallbackText={memberProfilePicture.fallbackText}
         fallbackTextBoxStyle={memberProfilePicture.fallbackTextBoxStyle}
@@ -23,12 +24,14 @@ const LMMemberList = ({
         imageUrl={memberProfilePicture.imageUrl}
         profilePictureStyle={memberProfilePicture.profilePictureStyle}
       />
+      {/* member name */}
       <LMText
         text={memberName.text}
         textStyle={StyleSheet.flatten([styles.memberName, memberName.textStyle])}
         selectable={memberName.selectable}
         maxLines={memberName.maxLines}
       />
+      {/* member title */}
       {memberTitle?.text && (
         <>
           <Image
