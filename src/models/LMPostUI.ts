@@ -12,9 +12,8 @@ interface LMPostUI {
     isSaved: boolean;
     likesCount: number;
     menuItems: Array<LMMenuItemsUI>;
-    tempId: null;
+    tempId: string;
     text: string;
-    topics: null;
     updatedAt: number;
     userId: string;
     uuid: string;
