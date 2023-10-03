@@ -3,6 +3,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {LMPostContentProps} from './types';
 import STYLES from '../../../constants/constants';
 import {MAX_DEFAULT_POST_CONTENT_LINES} from '../../../constants/strings';
+import LMText from '../../../base/LMText';
 
 const LMPostContent = ({
   text,
@@ -10,7 +11,7 @@ const LMPostContent = ({
   textStyle,
   linkStyle,
   visibleLines,
-  showMoreTextStyle,
+  showMoreText,
   postContentViewStyle,
 }: LMPostContentProps) => {
   const MAX_LINES = visibleLines
@@ -74,9 +75,7 @@ const LMPostContent = ({
           disabled={showText ? true : false}
           onPress={() => setShowText(showText => !showText)}
           accessibilityRole="button">
-          <Text style={StyleSheet.flatten([showMoreTextStyle])}>
-            {showText ? '' : 'Show More'}
-          </Text>
+          <LMText text={showText ? '' : showMoreText?.text ? showMoreText.text : 'Show More'} textStyle={StyleSheet.flatten([showMoreText?.textStyle])} />
         </TouchableOpacity>
       )}
     </View>

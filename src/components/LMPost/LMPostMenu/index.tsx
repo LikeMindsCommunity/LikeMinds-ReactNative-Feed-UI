@@ -11,6 +11,7 @@ import React from 'react';
 import STYLES from '../../../constants/constants';
 import {LMPostMenuProps} from './types';
 import layout from '../../../utils/layout';
+import LMText from '../../../base/LMText';
 
 const LMPostMenu = ({
   menuItems,
@@ -28,7 +29,7 @@ const LMPostMenu = ({
       animationType="fade"
       transparent={true}
       onRequestClose={onCloseModal}>
-        {/* modal backdrop section */}
+      {/* modal backdrop section */}
       <Pressable
         style={StyleSheet.flatten([
           styles.modal,
@@ -59,13 +60,13 @@ const LMPostMenu = ({
                   onPress={() => {
                     onSelected(item.id), onCloseModal();
                   }}>
-                  <Text
-                    style={StyleSheet.flatten([
+                  <LMText
+                    text={item.title}
+                    textStyle={StyleSheet.flatten([
                       styles.listText,
                       menuItemTextStyle,
-                    ])}>
-                    {item.title}
-                  </Text>
+                    ])}
+                  />
                 </TouchableOpacity>
               );
             })}

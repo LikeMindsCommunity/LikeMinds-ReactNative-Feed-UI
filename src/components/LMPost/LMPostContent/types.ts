@@ -1,4 +1,5 @@
 import {TextStyle, ViewStyle} from 'react-native';
+import { LMTextProps } from '../../../base/LMText/types';
 
 export interface LMPostContentProps {
   text: string; // text content of the post
@@ -6,6 +7,6 @@ export interface LMPostContentProps {
   textStyle?: TextStyle; // style for the post content text
   linkStyle?: TextStyle; // style for the links url
   visibleLines?: number; // this represenst ths number of lines to be visible to perform show more functionality
-  showMoreTextStyle?: TextStyle; // style for the show more text
+  showMoreText?: LMTextProps; // style for the show more text
   postContentViewStyle?: ViewStyle; // style for the post content box
 }
