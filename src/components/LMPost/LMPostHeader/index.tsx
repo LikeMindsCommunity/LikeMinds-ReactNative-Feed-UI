@@ -24,6 +24,7 @@ const LMPostHeader = ({
   isPinned,
   menuIcon,
   postMenu,
+  onTap
 }: LMPostHeaderProps) => {
   const [modalPosition, setModalPosition] = useState(postMenu?.modalPosition);
   const [showPostMenuModal, setShowPostMenuModal] = useState(
@@ -45,6 +46,7 @@ const LMPostHeader = ({
   return (
     <View style={StyleSheet.flatten([styles.postHeader, postHeaderViewStyle])}>
       {/* author detail section */}
+      <TouchableOpacity onPress={() => onTap(user)}>
       <View style={styles.alignRow}>
         <LMProfilePicture
           fallbackText={profilePicture.fallbackText}
@@ -117,6 +119,7 @@ const LMPostHeader = ({
           </View>
         </View>
       </View>
+      </TouchableOpacity>
 
       {/* Top right action buttons */}
       <View
