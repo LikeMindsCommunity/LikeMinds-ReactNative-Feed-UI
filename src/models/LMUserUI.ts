@@ -4,7 +4,7 @@ interface LMUserUI {
     name: string;
     imageUrl: string;
     userUniqueId: string;
-    sdkClientInfo: LMsdkClientInfoUIModel;
+    sdkClientInfo: LMSDKClientInfoUI;
     uuid: string;
     isGuest: boolean;
     isDeleted: boolean;
