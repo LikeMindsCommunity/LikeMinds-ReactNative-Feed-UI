@@ -26,6 +26,7 @@ const LMPost = ({
           modalVisible: false,
           onCloseModal: () => {},
         },
+        onTap: () => {}
       };
 
   //creating footer props as per customization

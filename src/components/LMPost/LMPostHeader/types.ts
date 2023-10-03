@@ -19,4 +19,5 @@ export interface LMPostHeaderProps {
   pinIcon?: LMIconProps, // this represents the pin icon to display
   menuIcon?: LMIconProps, // this represents the icon that makes the menu list visible on click over it
   postMenu: LMPostMenuProps // this represents the post menu props
+  onTap: (user?: LMUserUI) => void // callback function executed on tap of post header
 }
