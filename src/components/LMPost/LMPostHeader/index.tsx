@@ -9,12 +9,7 @@ import LMPostMenu from '../LMPostMenu';
 import LMText from '../../../base/LMText';
 
 const LMPostHeader = ({
-  user,
-  onProfileTap,
-  profileTextStyle,
-  profileTextViewStyle,
-  imageViewStyle,
-  imageSize,
+  profilePicture,
   titleText,
   createdAt,
   isEdited,
@@ -25,19 +20,17 @@ const LMPostHeader = ({
   postHeaderViewStyle,
   pinIcon,
   isPinned,
-  menuItems,
   menuIcon,
-  onMenuItemTap,
-  menuItemTextStyle,
-  menuViewStyle,
-  menuBackdropColor,
+  postMenu,
 }: LMPostHeaderProps) => {
-  const [modalPosition, setModalPosition] = useState({x: 0, y: 0});
-  const [showPostMenuModal, setShowPostMenuModal] = useState(false);
+  const [modalPosition, setModalPosition] = useState(postMenu?.modalPosition);
+  const [showPostMenuModal, setShowPostMenuModal] = useState(
+    postMenu?.modalVisible,
+  );
 
   // this function closes the menu list modal
   const closePostMenuModal = () => {
-    setShowPostMenuModal(false);
+    postMenu?.onCloseModal();
   };
 
   // this function is executed on the click of menu icon & handles the position and visibility of the modal
@@ -52,13 +45,13 @@ const LMPostHeader = ({
       {/* author detail section */}
       <View style={styles.alignRow}>
         <LMProfilePicture
-          fallbackText={user.name}
-          imageUrl={user.imageUrl}
-          onTap={onProfileTap}
-          size={imageSize}
-          fallbackTextStyle={profileTextStyle}
-          fallbackTextBoxStyle={profileTextViewStyle}
-          profilePictureStyle={imageViewStyle}
+          fallbackText={profilePicture.fallbackText}
+          imageUrl={profilePicture.imageUrl}
+          onTap={profilePicture.onTap}
+          size={profilePicture.size}
+          fallbackTextStyle={profilePicture.fallbackTextStyle}
+          fallbackTextBoxStyle={profilePicture.fallbackTextBoxStyle}
+          profilePictureStyle={profilePicture.profilePictureStyle}
         />
         {/* author details */}
         <View style={{marginLeft: 10}}>
@@ -129,7 +122,7 @@ const LMPostHeader = ({
           styles.topRightView,
           isPinned && {justifyContent: 'space-between'},
         ]}>
-          {/* pin icon section */}
+        {/* pin icon section */}
         {isPinned && (
           <>
             {pinIcon ? (
@@ -161,14 +154,14 @@ const LMPostHeader = ({
 
       {/* menu list modal */}
       <LMPostMenu
-        menuItems={menuItems}
-        onSelected={onMenuItemTap}
+        menuItems={postMenu.menuItems}
+        onSelected={postMenu.onSelected}
         modalPosition={modalPosition}
         modalVisible={showPostMenuModal}
         onCloseModal={closePostMenuModal}
-        menuItemTextStyle={menuItemTextStyle}
-        menuViewStyle={menuViewStyle}
-        backdropColor={menuBackdropColor}
+        menuItemTextStyle={postMenu.menuItemTextStyle}
+        menuViewStyle={postMenu.menuViewStyle}
+        backdropColor={postMenu.backdropColor}
       />
     </View>
   );
