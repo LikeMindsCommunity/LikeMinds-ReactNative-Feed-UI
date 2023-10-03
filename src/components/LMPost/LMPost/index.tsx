@@ -1,30 +1,40 @@
 import {View} from 'react-native';
 import React from 'react';
 import LMPostHeader from '../LMPostHeader';
-import {LMPostProps} from './types';
 import LMPostContent from '../LMPostContent';
 import LMPostMedia from '../LMPostMedia';
 import LMPostFooter from '../LMPostFooter';
 
-const LMPost = ({post, user}: LMPostProps) => {
+const LMPost = ({
+  id,
+  user,
+  menuItems,
+  text,
+  attachments,
+  isLiked,
+  isSaved,
+  likesCount,
+  commentsCount,
+}: LMPostUI) => {
   return (
     <View>
       {/* post header */}
       <LMPostHeader
         user={user}
-        menuItems={post.menuItems}
+        menuItems={menuItems}
+        // todo: make a callback function to return the id of menu item clicked and execute further functionality according to it
         onMenuItemTap={() => {}}
       />
       {/* post content */}
-      <LMPostContent text={post.text} />
+      <LMPostContent text={text} />
       {/* post media */}
-      <LMPostMedia attachments={post.attachments} />
+      <LMPostMedia attachments={attachments} />
       {/* post footer */}
       <LMPostFooter
-        isLiked={post.isLiked}
-        isSaved={post.isSaved}
-        likesCount={post.likesCount}
-        commentsCount={post.commentsCount}
+        isLiked={isLiked}
+        isSaved={isSaved}
+        likesCount={likesCount}
+        commentsCount={commentsCount}
       />
     </View>
   );

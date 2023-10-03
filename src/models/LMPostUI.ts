@@ -1,6 +1,6 @@
 // data model for ogTags object in attachmentMeta
 interface LMPostUI {
-    Id: string;
+    id: string;
     attachments: Array<LMAttachmentUI>
     commentsCount: number;
     communityId: string;
@@ -11,11 +11,12 @@ interface LMPostUI {
     isPinned: boolean;
     isSaved: boolean;
     likesCount: number;
-    menuItems: Array<LMPostMenuItemsUI>;
+    menuItems: Array<LMMenuItemsUI>;
     tempId: null;
     text: string;
     topics: null;
     updatedAt: number;
     userId: string;
     uuid: string;
+    user: LMUserUI
 }

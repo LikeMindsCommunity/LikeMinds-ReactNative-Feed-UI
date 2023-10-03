@@ -19,7 +19,7 @@ export interface LMPostHeaderProps {
   postHeaderViewStyle?: ViewStyle, // style of the post header section
   isPinned?: boolean, // this represents if the post is pinned or not
   pinIcon?: LMIconProps, // this represents the pin icon to display
-  menuItems: Array<LMPostMenuItemsUI>, // menu list items of the post
+  menuItems: Array<LMMenuItemsUI>, // menu list items of the post
   menuIcon?: LMIconProps, // this represents the icon that makes the menu list visible on click over it
   onMenuItemTap: (menuId?: number) => void, // this represents the callback function that executes on the click of every menu item
   menuItemTextStyle?: TextStyle, // style of the menu item text

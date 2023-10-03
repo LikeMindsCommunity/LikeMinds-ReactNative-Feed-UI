@@ -1,5 +1,5 @@
 // data model for menu items of post
-interface LMPostMenuItemsUI {
+interface LMMenuItemsUI {
     id: number;
     title: string
 }
