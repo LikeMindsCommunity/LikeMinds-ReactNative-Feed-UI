@@ -4,15 +4,9 @@ interface LMUserUI {
     name: string;
     imageUrl: string;
     userUniqueId: string;
-    sdkClientInfo: {
-      community: number;
-      user: number;
-      userUniqueId: string;
-      uuid: string;
-    };
+    sdkClientInfo: LMsdkClientInfoUIModel;
     uuid: string;
     isGuest: boolean;
     isDeleted: boolean;
     customTitle: string;
-    questionAnswers: null; // Define a specific type if needed
 }

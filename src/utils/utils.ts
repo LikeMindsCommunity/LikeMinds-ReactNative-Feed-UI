@@ -14,7 +14,7 @@ export const timeStamp = (value: number) => {
   let currentDate = Number(new Date());
   let postedDate = Number(new Date(value));
   var difference = currentDate - postedDate;
-
+  //  calculating the seconds, minutes, hours, days, months, years in the time difference betwen the posted time and current time
   var seconds = Math.floor(difference / 1000),
     minutes = Math.floor(seconds / 60),
     hours = Math.floor(minutes / 60),
@@ -29,6 +29,7 @@ export const timeStamp = (value: number) => {
   months %= 12;
 
   let createdDuration;
+  // returns the greatest unit of time among years/months/days/hours/minutes/seconds
   if (years >= 1) {
     if (years === 1) {
       createdDuration = years + ' year';
