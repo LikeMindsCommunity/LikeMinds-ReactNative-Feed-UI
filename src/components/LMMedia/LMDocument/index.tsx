@@ -30,7 +30,7 @@ const LMDocument = ({
         // document View
         <TouchableOpacity
           onPress={() => {
-            Linking.openURL(item?.attachmentMeta?.url);
+            Linking.openURL(item?.attachmentMeta?.url ? item?.attachmentMeta?.url : '');
             onTap;
           }}
           key={index}
@@ -40,6 +40,7 @@ const LMDocument = ({
             {documentIcon ? (
               <LMIcon
                 type={documentIcon?.type}
+                iconUrl={documentIcon?.iconUrl}
                 assetPath={documentIcon?.assetPath}
                 iconStyle={documentIcon?.iconStyle}
                 color={documentIcon?.color}

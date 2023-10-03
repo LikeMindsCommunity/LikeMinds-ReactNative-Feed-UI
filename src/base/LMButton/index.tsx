@@ -44,6 +44,7 @@ const LMButton = ({
                 type={activeIcon.type}
                 width={activeIcon.width}
                 height={activeIcon.height}
+                iconUrl={activeIcon.iconUrl}
                 assetPath={activeIcon.assetPath}
                 color={activeIcon.color}
                 iconStyle={activeIcon.iconStyle}
@@ -57,6 +58,7 @@ const LMButton = ({
               type={icon.type}
               width={icon.width}
               height={icon.height}
+              iconUrl={icon.iconUrl}
               assetPath={icon.assetPath}
               color={icon.color}
               iconStyle={icon.iconStyle}
@@ -101,10 +103,9 @@ const LMButton = ({
 // default button style
 const defaultStyles = StyleSheet.create({
   buttonViewStyle: {
-    width: 100,
     backgroundColor: STYLES.$BACKGROUND_COLORS.LIGHT,
     borderColor: STYLES.$COLORS.BLACK,
-    borderWidth: 2,
+    borderWidth: 1,
     justifyContent: 'center',
     paddingVertical: 5,
     borderRadius: 5,

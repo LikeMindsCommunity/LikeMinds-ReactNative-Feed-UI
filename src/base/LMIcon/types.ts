@@ -1,8 +1,9 @@
 import { ImageStyle, ViewStyle } from "react-native";
 
 export interface LMIconProps {
-    type: 'png', // this represents the type of icon 
-    assetPath?: string, // this represents the url the icon
+    type: 'png', // this represents the type of icon
+    iconUrl?: string, // this represents the url the icon
+    assetPath?: object, // this represents the path of the local image
     color?: string, // this represents the tintcolor of the icon
     height?: number, // this represents the height of the icon
     width?: number, // this represents the width of the icon
