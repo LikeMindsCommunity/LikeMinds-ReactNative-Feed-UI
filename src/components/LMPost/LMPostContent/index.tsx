@@ -43,11 +43,15 @@ const LMPostContent = ({
   const renderLinks = () => {
     return linkData?.map(item => {
       return (
-        <Text
-          style={StyleSheet.flatten([styles.linkText, linkStyle])}
-          key={item.attachmentMeta.ogTags.url}>
-          {item.attachmentMeta.ogTags.url}
-        </Text>
+        <>
+          {item.attachmentMeta.ogTags.url && (
+            <LMText
+              key={item.attachmentMeta.ogTags.url}
+              text={item.attachmentMeta.ogTags.url}
+              textStyle={StyleSheet.flatten([styles.linkText, linkStyle])}
+            />
+          )}
+        </>
       );
     });
   };
@@ -55,12 +59,12 @@ const LMPostContent = ({
   return (
     <View style={StyleSheet.flatten([postContentViewStyle])}>
       {/* post content text */}
-      <Text
-        style={StyleSheet.flatten([styles.contentText, textStyle])}
-        onTextLayout={onTextLayout}
-        numberOfLines={numberOfLines}>
-        {text}
-      </Text>
+      <LMText
+        text={text}
+        maxLines={numberOfLines}
+        textStyle={StyleSheet.flatten([styles.contentText, textStyle])}
+        onTextLayout={e => onTextLayout(e)}
+      />
       {/* link urls section */}
       {showMoreButton ? (
         showText ? (
@@ -75,7 +79,16 @@ const LMPostContent = ({
           disabled={showText ? true : false}
           onPress={() => setShowText(showText => !showText)}
           accessibilityRole="button">
-          <LMText text={showText ? '' : showMoreText?.text ? showMoreText.text : 'Show More'} textStyle={StyleSheet.flatten([showMoreText?.textStyle])} />
+          <LMText
+            text={
+              showText
+                ? ''
+                : showMoreText?.text
+                ? showMoreText.text
+                : 'Show More'
+            }
+            textStyle={StyleSheet.flatten([showMoreText?.textStyle])}
+          />
         </TouchableOpacity>
       )}
     </View>

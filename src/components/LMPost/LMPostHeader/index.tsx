@@ -7,8 +7,10 @@ import {LMPostHeaderProps} from './types';
 import {timeStamp} from '../../../utils';
 import LMPostMenu from '../LMPostMenu';
 import LMText from '../../../base/LMText';
+import LMIcon from '../../../base/LMIcon';
 
 const LMPostHeader = ({
+  user,
   profilePicture,
   titleText,
   createdAt,
@@ -73,13 +75,13 @@ const LMPostHeader = ({
                   styles.labelView,
                   memberStateViewStyle,
                 ])}>
-                <Text
-                  style={StyleSheet.flatten([
+                <LMText
+                  text="Admin"
+                  textStyle={StyleSheet.flatten([
                     styles.labelText,
                     memberStateTextStyle,
-                  ])}>
-                  Admin
-                </Text>
+                  ])}
+                />
               </View>
             )}
           </View>
@@ -98,18 +100,18 @@ const LMPostHeader = ({
             {/* checks if the post is edited or not */}
             {isEdited && (
               <>
-                <Image
-                  source={require('../../../assets/images/single_dot3x.png')}
-                  resizeMode={'contain'}
-                  style={styles.dotImageSize}
+                <LMIcon
+                  assetPath={require('../../../assets/images/single_dot3x.png')}
+                  type="png"
+                  iconStyle={styles.dotImageSize}
                 />
-                <Text
-                  style={StyleSheet.flatten([
+                <LMText
+                  text="Edited"
+                  textStyle={StyleSheet.flatten([
                     styles.postedDetail,
                     createdAt?.textStyle,
-                  ])}>
-                  Edited
-                </Text>
+                  ])}
+                />
               </>
             )}
           </View>
@@ -128,10 +130,10 @@ const LMPostHeader = ({
             {pinIcon ? (
               pinIcon
             ) : (
-              <Image
-                source={require('../../../assets/images/pin_icon3x.png')}
-                resizeMode={'contain'}
-                style={styles.iconSize}
+              <LMIcon
+                assetPath={require('../../../assets/images/pin_icon3x.png')}
+                type="png"
+                iconStyle={styles.iconSize}
               />
             )}
           </>
@@ -142,10 +144,10 @@ const LMPostHeader = ({
             {menuIcon ? (
               menuIcon
             ) : (
-              <Image
-                source={require('../../../assets/images/three_dots3x.png')}
-                resizeMode="contain"
-                style={styles.iconSize}
+              <LMIcon
+                assetPath={require('../../../assets/images/three_dots3x.png')}
+                type="png"
+                iconStyle={styles.iconSize}
               />
             )}
           </>
@@ -202,11 +204,13 @@ const styles = StyleSheet.create({
   iconSize: {
     width: layout.normalize(22),
     height: layout.normalize(22),
+    resizeMode: 'contain',
   },
   dotImageSize: {
     width: layout.normalize(6),
     height: layout.normalize(6),
     marginHorizontal: 5,
+    resizeMode: 'contain',
   },
   topRightView: {
     width: '20%',

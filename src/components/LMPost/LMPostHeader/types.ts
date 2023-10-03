@@ -5,6 +5,7 @@ import { LMPostMenuProps } from '../LMPostMenu/types';
 import { LMProfilePictureProps } from '../../../base/LMProfilePicture/types';
 
 export interface LMPostHeaderProps {
+  user: LMUserUI, // user data of post creator
   profilePicture: LMProfilePictureProps // props for profile avatar
   titleText?: LMTextProps, // this represents the title of the post
   createdAt?: LMTextProps, // time of creation of post

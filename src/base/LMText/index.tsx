@@ -3,12 +3,13 @@ import React from 'react';
 import {LMTextProps} from './types';
 import STYLES from '../../constants/constants'
 
-const LMText = ({text, maxLines, textStyle, selectable}: LMTextProps) => {
+const LMText = ({text, maxLines, textStyle, selectable, onTextLayout}: LMTextProps) => {
   return (
     // this renders the text component
     <Text
       selectable={selectable ? selectable : true} // default selectable value is true
       numberOfLines={maxLines}
+      onTextLayout={onTextLayout}
       style={StyleSheet.flatten([defaultStyles.textStyle, textStyle])}>
       {text}
     </Text>
