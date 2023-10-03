@@ -1,4 +1,4 @@
-// data model for ogTags object in attachmentMeta
+// data model for post UI
 interface LMPostUI {
     id: string;
     attachments: Array<LMAttachmentUI>
