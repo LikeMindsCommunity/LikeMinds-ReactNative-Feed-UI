@@ -6,3 +6,6 @@ export const LINK_ATTACHMENT_TYPE = 4;
 
 // error messages
 export const MEDIA_FETCH_ERROR = 'An error occured while fetching the media'
+
+// default maximum number of lines to be visible of the post content
+export const MAX_DEFAULT_POST_CONTENT_LINES = 3

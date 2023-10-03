@@ -4,6 +4,7 @@ import {LMIconProps} from './types';
 
 const LMIcon = ({
   type,
+  iconUrl,
   assetPath,
   color,
   height,
@@ -12,15 +13,24 @@ const LMIcon = ({
   iconStyle,
   boxFit,
 }: LMIconProps) => {
+  // this throws the error if both image url and image path are passed as props because only one is required
+  if (iconUrl && assetPath) {
+    throw new Error(`Property iconUrl and assetPath can not exist together.`);
+  }
+
   return (
     <>
       {/* this renders the png image */}
       {type === 'png' && (
         <View style={boxStyle}>
           <Image
-            source={{
-              uri: assetPath,
-            }}
+            source={
+              assetPath
+                ? assetPath
+                : {
+                    uri: iconUrl,
+                  }
+            }
             style={StyleSheet.flatten([
               iconStyle,
               {

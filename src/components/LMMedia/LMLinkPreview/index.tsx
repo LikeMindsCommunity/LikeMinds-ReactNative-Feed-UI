@@ -20,12 +20,12 @@ const LMLinkPreview = ({
   linkDescriptionStyle,
   linkUrlStyle,
 }: LMLinkPreviewProps) => {
-  const linkPreviewAttachment = attachments[0].attachmentMeta.ogTags[0]
+  const previewAttachmentData = attachments[0].attachmentMeta.ogTags
   return (
     <TouchableOpacity
       style={styles.postMedia}
       onPress={() => {
-        Linking.openURL(linkPreviewAttachment?.url), onTap;
+        Linking.openURL(previewAttachmentData?.url ? previewAttachmentData.url : ''), onTap;
       }}>
       {/* link preview image */}
       <View
@@ -35,7 +35,7 @@ const LMLinkPreview = ({
         ])}>
         <Image
           source={
-            attachments && {uri: linkPreviewAttachment?.image}
+            attachments && {uri: previewAttachmentData?.image}
           }
           style={StyleSheet.flatten([styles.previewImage, linkImageStyle])}
         />
@@ -44,7 +44,7 @@ const LMLinkPreview = ({
           {/* preview title */}
           <Text
             style={StyleSheet.flatten([styles.previewTitle, linkTitleStyle])}>
-            {linkPreviewAttachment?.title}
+            {previewAttachmentData?.title}
           </Text>
           {/* preview description */}
           <Text
@@ -52,7 +52,7 @@ const LMLinkPreview = ({
               styles.previewDescription,
               linkDescriptionStyle,
             ])}>
-            {linkPreviewAttachment?.description}
+            {previewAttachmentData?.description}
           </Text>
           {/* preview url */}
           <Text
@@ -68,7 +68,7 @@ const LMLinkPreview = ({
                     : 'flex',
               },
             ])}>
-            {linkPreviewAttachment?.url}
+            {previewAttachmentData?.url}
           </Text>
         </View>
       </View>
