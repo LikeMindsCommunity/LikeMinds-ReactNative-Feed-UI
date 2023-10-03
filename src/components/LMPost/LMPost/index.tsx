@@ -11,10 +11,14 @@ const LMPost = ({post}: LMPostProps) => {
     <View>
       {/* post header */}
       <LMPostHeader
-        user={post.user}
-        menuItems={post.menuItems}
-        // todo: make a callback function to return the id of menu item clicked and execute further functionality according to it
-        onMenuItemTap={() => {}}
+        profilePicture={{fallbackText: post.user.name}}
+        postMenu={{
+          menuItems: post.menuItems,
+          onSelected: () => {},
+          modalPosition: {x: 0, y: 0},
+          modalVisible: false,
+          onCloseModal: () => {},
+        }}
       />
       {/* post content */}
       <LMPostContent text={post.text} />
