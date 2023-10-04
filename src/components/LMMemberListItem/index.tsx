@@ -16,27 +16,27 @@ const LMMemberListItem = ({
   onTap
 }: LMMemberListItemProps) => {
   return (
-    <TouchableOpacity onPress={() => onTap(user)}>
+    <TouchableOpacity onPress={() => onTap ? onTap(user) : null}>
     <View style={StyleSheet.flatten([styles.container, boxStyle])}>
       {/* avatar view */}
       <LMProfilePicture
-        fallbackText={profilePictureProps.fallbackText}
-        fallbackTextBoxStyle={profilePictureProps.fallbackTextBoxStyle}
-        fallbackTextStyle={profilePictureProps.fallbackTextStyle}
-        size={profilePictureProps.size ? profilePictureProps.size : 50}
-        onTap={profilePictureProps.onTap}
-        imageUrl={profilePictureProps.imageUrl}
-        profilePictureStyle={profilePictureProps.profilePictureStyle}
+        fallbackText={profilePictureProps?.fallbackText ? profilePictureProps.fallbackText : user.name }
+        fallbackTextBoxStyle={profilePictureProps?.fallbackTextBoxStyle}
+        fallbackTextStyle={profilePictureProps?.fallbackTextStyle}
+        size={profilePictureProps?.size ? profilePictureProps.size : 50}
+        onTap={profilePictureProps?.onTap}
+        imageUrl={profilePictureProps?.imageUrl}
+        profilePictureStyle={profilePictureProps?.profilePictureStyle}
       />
       {/* member name */}
       <LMText
-        text={nameProps.text}
-        textStyle={StyleSheet.flatten([styles.memberName, nameProps.textStyle])}
-        selectable={nameProps.selectable}
-        maxLines={nameProps.maxLines}
+        text={nameProps?.text ? nameProps.text : user.name}
+        textStyle={StyleSheet.flatten([styles.memberName, nameProps?.textStyle])}
+        selectable={nameProps?.selectable}
+        maxLines={nameProps?.maxLines}
       />
       {/* member title */}
-      {customTitleProps?.text && (
+      {user.customTitle && (
         <>
           <LMIcon
             assetPath={require('../../assets/images/single_dot3x.png')}
@@ -44,13 +44,13 @@ const LMMemberListItem = ({
             iconStyle={styles.dotImageSize}
           />
           <LMText
-            text={customTitleProps.text}
+            text={customTitleProps?.text ? customTitleProps.text : user.customTitle}
             textStyle={StyleSheet.flatten([
               styles.memberTitleText,
-              customTitleProps.textStyle,
+              customTitleProps?.textStyle,
             ])}
-            selectable={customTitleProps.selectable}
-            maxLines={customTitleProps.maxLines}
+            selectable={customTitleProps?.selectable}
+            maxLines={customTitleProps?.maxLines}
           />
         </>
       )}
