@@ -105,6 +105,8 @@ const LMPostHeader = ({
                 <LMIcon
                   assetPath={require('../../../assets/images/single_dot3x.png')}
                   type="png"
+                  width={styles.dotImageSize.width}
+                  height={styles.dotImageSize.height}
                   iconStyle={styles.dotImageSize}
                 />
                 <LMText

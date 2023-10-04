@@ -5,6 +5,7 @@ import LMProfilePicture from './base/LMProfilePicture';
 import LMInputText from './base/LMInputText';
 import { LMImage, LMVideo, LMCarousel, LMDocument, LMLinkPreview } from './components/LMMedia';
 import { LMPostHeader, LMPostFooter , LMPostMedia, LMPostContent} from './components/LMPost';
+import LMMemberListItem from './components/LMMemberListItem'
 import LMNotification from './components/LMNotification';
 
-export {LMText, LMIcon, LMButton, LMProfilePicture, LMInputText,LMImage, LMVideo, LMCarousel, LMDocument, LMLinkPreview, LMPostHeader, LMPostFooter, LMPostMedia, LMPostContent, LMNotification};
+export {LMText, LMIcon, LMButton, LMProfilePicture, LMInputText,LMImage, LMVideo, LMCarousel, LMDocument, LMLinkPreview, LMPostHeader, LMPostFooter, LMPostMedia, LMPostContent, LMMemberListItem, LMNotification};
