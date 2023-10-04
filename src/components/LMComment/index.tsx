@@ -8,6 +8,7 @@ import LMInputText from '../../base/LMInputText';
 import {timeStamp} from '../../utils';
 import LMIcon from '../../base/LMIcon';
 import {PARENT_LEVEL_COMMENT} from '../../constants/strings';
+import {FlashList} from '@shopify/flash-list';
 
 const LMComment = ({
   likeIconButton,
@@ -209,7 +210,7 @@ const LMComment = ({
       {/* replies section */}
       {(showReplies || showReplyInput) && (
         <View style={{marginLeft: 30}}>
-          <FlatList
+          <FlashList
             data={repliesArray}
             renderItem={({item}) => {
               return <LMComment comment={item} />;
