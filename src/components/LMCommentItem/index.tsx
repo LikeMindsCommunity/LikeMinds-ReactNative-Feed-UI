@@ -10,7 +10,7 @@ import LMIcon from '../../base/LMIcon';
 import {PARENT_LEVEL_COMMENT} from '../../constants/strings';
 import {FlashList} from '@shopify/flash-list';
 
-const LMComment = ({
+const LMCommentItem = ({
   likeIconButton,
   likeTextButton,
   comment,
@@ -36,8 +36,8 @@ const LMComment = ({
 
   // this handles the show more functionality
   const onTextLayout = useCallback(
-    (e: any) => {
-      if (e.nativeEvent.lines.length > MAX_LINES && !showText) {
+    (event: any) => {
+      if (event.nativeEvent.lines.length > MAX_LINES && !showText) {
         setShowMoreButton(true);
         setNumberOfLines(MAX_LINES);
       }
@@ -57,7 +57,7 @@ const LMComment = ({
     ? commentContentProps
     : {
         text: comment.text,
-        onTextLayout: (e: any) => onTextLayout(e),
+        onTextLayout: (event: any) => onTextLayout(event),
         maxLines: numberOfLines,
       };
 
@@ -213,7 +213,7 @@ const LMComment = ({
           <FlashList
             data={repliesArray}
             renderItem={({item}) => {
-              return <LMComment comment={item} />;
+              return <LMCommentItem comment={item} />;
             }}
             ListFooterComponent={
               <LMButton
@@ -250,4 +250,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LMComment;
+export default LMCommentItem;

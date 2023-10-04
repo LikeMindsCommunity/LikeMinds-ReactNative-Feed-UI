@@ -15,4 +15,4 @@ export const MAX_DEFAULT_COMMENT_LINES = 3
 
 // comment levels
 export const PARENT_LEVEL_COMMENT = 0
-export const CHILD_LEVELCOMMENT = 1
+export const CHILD_LEVEL_COMMENT = 1
