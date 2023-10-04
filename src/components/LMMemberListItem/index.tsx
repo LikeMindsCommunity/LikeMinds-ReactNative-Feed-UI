@@ -13,48 +13,62 @@ const LMMemberListItem = ({
   nameProps,
   customTitleProps,
   boxStyle,
-  onTap
+  onTap,
 }: LMMemberListItemProps) => {
+  //creating profile picture props as per customization
+  const updatedProfilePictureProps = profilePictureProps
+    ? profilePictureProps
+    : {
+        fallbackText: user.name,
+        size: 50,
+        imageUrl: user.imageUrl,
+      };
+  //creating user name props as per customization
+  const updatedNameProps = nameProps
+    ? nameProps
+    : {
+        text: user.name,
+      };
+  //creating custom title props as per customization
+  const updatedCustomTitleProps = customTitleProps
+    ? customTitleProps
+    : {
+        text: user.customTitle,
+      };
+
   return (
-    <TouchableOpacity onPress={() => onTap ? onTap(user) : null}>
-    <View style={StyleSheet.flatten([styles.container, boxStyle])}>
-      {/* avatar view */}
-      <LMProfilePicture
-        fallbackText={profilePictureProps?.fallbackText ? profilePictureProps.fallbackText : user.name }
-        fallbackTextBoxStyle={profilePictureProps?.fallbackTextBoxStyle}
-        fallbackTextStyle={profilePictureProps?.fallbackTextStyle}
-        size={profilePictureProps?.size ? profilePictureProps.size : 50}
-        onTap={profilePictureProps?.onTap}
-        imageUrl={profilePictureProps?.imageUrl}
-        profilePictureStyle={profilePictureProps?.profilePictureStyle}
-      />
-      {/* member name */}
-      <LMText
-        text={nameProps?.text ? nameProps.text : user.name}
-        textStyle={StyleSheet.flatten([styles.memberName, nameProps?.textStyle])}
-        selectable={nameProps?.selectable}
-        maxLines={nameProps?.maxLines}
-      />
-      {/* member title */}
-      {user.customTitle && (
-        <>
-          <LMIcon
-            assetPath={require('../../assets/images/single_dot3x.png')}
-            type="png"
-            iconStyle={styles.dotImageSize}
-          />
-          <LMText
-            text={customTitleProps?.text ? customTitleProps.text : user.customTitle}
-            textStyle={StyleSheet.flatten([
-              styles.memberTitleText,
-              customTitleProps?.textStyle,
-            ])}
-            selectable={customTitleProps?.selectable}
-            maxLines={customTitleProps?.maxLines}
-          />
-        </>
-      )}
-    </View>
+    <TouchableOpacity onPress={() => (onTap ? onTap(user) : null)}>
+      <View style={StyleSheet.flatten([styles.container, boxStyle])}>
+        {/* avatar view */}
+        <LMProfilePicture {...updatedProfilePictureProps} />
+        {/* member name */}
+        <LMText
+          {...updatedNameProps}
+          textStyle={StyleSheet.flatten([
+            styles.memberName,
+            nameProps?.textStyle,
+          ])}
+        />
+        {/* member title */}
+        {user.customTitle && (
+          <>
+            <LMIcon
+              assetPath={require('../../assets/images/single_dot3x.png')}
+              type="png"
+              width={styles.dotImageSize.width}
+              height={styles.dotImageSize.height}
+              iconStyle={styles.dotImageSize}
+            />
+            <LMText
+              {...updatedCustomTitleProps}
+              textStyle={StyleSheet.flatten([
+                styles.memberTitleText,
+                customTitleProps?.textStyle,
+              ])}
+            />
+          </>
+        )}
+      </View>
     </TouchableOpacity>
   );
 };
@@ -70,7 +84,7 @@ const styles = StyleSheet.create({
     width: layout.normalize(6),
     height: layout.normalize(6),
     marginHorizontal: 5,
-    resizeMode:'contain'
+    resizeMode: 'contain',
   },
   memberName: {
     fontWeight: '500',
