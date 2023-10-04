@@ -9,3 +9,10 @@ export const MEDIA_FETCH_ERROR = 'An error occured while fetching the media'
 
 // default maximum number of lines to be visible of the post content
 export const MAX_DEFAULT_POST_CONTENT_LINES = 3
+
+// default maximum number of lines to be visible in post comments
+export const MAX_DEFAULT_COMMENT_LINES = 3
+
+// comment levels
+export const PARENT_LEVEL_COMMENT = 0
+export const CHILD_LEVELCOMMENT = 1

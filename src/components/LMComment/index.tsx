@@ -7,6 +7,7 @@ import LMButton from '../../base/LMButton';
 import LMInputText from '../../base/LMInputText';
 import {timeStamp} from '../../utils';
 import LMIcon from '../../base/LMIcon';
+import {PARENT_LEVEL_COMMENT} from '../../constants/strings';
 
 const LMComment = ({
   likeIconButton,
@@ -15,6 +16,14 @@ const LMComment = ({
   onTapViewMore,
   commentMaxLines,
   menuIcon,
+  commentUserNameStyle,
+  commentContentProps,
+  showMoreProps,
+  replyTextProps,
+  repliesCountTextStyle,
+  timeStampStyle,
+  replyInputFieldProps,
+  viewMoreRepliesProps,
 }: LMCommentProps) => {
   const MAX_LINES = commentMaxLines ? commentMaxLines : 3;
   const [showText, setShowText] = useState(false);
@@ -42,16 +51,42 @@ const LMComment = ({
     }
   }, [showText, showMoreButton]);
 
+  //creating content props as per customization
+  const updatedContentProps = commentContentProps
+    ? commentContentProps
+    : {
+        text: comment.text,
+        onTextLayout: (e: any) => onTextLayout(e),
+        maxLines: numberOfLines,
+      };
+
+  //creating show more props as per customization
+  const updatedShowMoreProps = showMoreProps
+    ? showMoreProps
+    : {
+        text: showText ? '' : 'See More',
+      };
+  //creating reply input field props as per customization
+  const updatedReplyInputFieldProps = replyInputFieldProps
+    ? replyInputFieldProps
+    : {
+        placeholderText: 'Reply',
+        inputTextStyle: {
+          marginLeft: 30,
+          borderBottomWidth: 1,
+          borderBottomColor: 'grey',
+        },
+      };
   return (
     <View
       style={
-        comment.level === 0 && {
+        comment.level === PARENT_LEVEL_COMMENT && {
           paddingHorizontal: 10,
           width: layout.window.width,
         }
       }>
       {/* commented user name */}
-      <LMText text={'comment.user.name'} />
+      <LMText text={'comment.user.name'} textStyle={commentUserNameStyle} />
       <View
         style={{
           flexDirection: 'row',
@@ -60,18 +95,14 @@ const LMComment = ({
         }}>
         <View style={{width: '85%'}}>
           {/* comment content text */}
-          <LMText
-            text={comment.text}
-            maxLines={numberOfLines}
-            onTextLayout={e => onTextLayout(e)}
-          />
+          <LMText {...updatedContentProps} />
           {/* show more button section */}
           {showMoreButton && (
             <TouchableOpacity
               disabled={showText ? true : false}
               onPress={() => setShowText(showText => !showText)}
               accessibilityRole="button">
-              <LMText text={showText ? '' : 'See More'} />
+              <LMText {...updatedShowMoreProps} />
             </TouchableOpacity>
           )}
         </View>
@@ -108,18 +139,27 @@ const LMComment = ({
           <LMButton
             onTap={() => likeTextButton?.onTap()}
             text={{
-              text: comment.likesCount > 1 ? `${comment.likesCount} Likes` : `${comment.likesCount} Like`,
+              text:
+                comment.likesCount > 1
+                  ? `${comment.likesCount} Likes`
+                  : `${comment.likesCount} Like`,
               textStyle: {fontSize: 13, marginLeft: 5},
             }}
             buttonStyle={{borderWidth: 0}}
           />
           {/* reply section */}
-          {comment.level === 0 && (
+          {comment.level === PARENT_LEVEL_COMMENT && (
             <>
               <LMText text=" | " />
               {/* this opens the input text to reply */}
               <LMButton
-                text={{text: 'Reply', textStyle: {fontSize: 13}}}
+                text={{
+                  text: replyTextProps ? replyTextProps.text : 'Reply',
+                  textStyle: StyleSheet.flatten([
+                    {fontSize: 13},
+                    replyTextProps?.textStyle,
+                  ]),
+                }}
                 onTap={() => {
                   setShowReplyInput(!showReplyInput), setShowReplies(true);
                 }}
@@ -141,7 +181,16 @@ const LMComment = ({
                         setShowReplyInput(false);
                       }
                     }}
-                    text={{text: comment.repliesCount > 1 ? `${comment.replies} Replies` : `${comment.replies} Reply`, textStyle: {fontSize: 13}}}
+                    text={{
+                      text:
+                        comment.repliesCount > 1
+                          ? `${comment.replies} Replies`
+                          : `${comment.replies} Reply`,
+                      textStyle: StyleSheet.flatten([
+                        {fontSize: 13},
+                        repliesCountTextStyle,
+                      ]),
+                    }}
                     buttonStyle={{borderWidth: 0}}
                   />
                 </>
@@ -150,19 +199,13 @@ const LMComment = ({
           )}
         </View>
         {/* posted time stamp */}
-        <LMText text={`${timeStamp(Number(comment.createdAt))}`} />
+        <LMText
+          text={`${timeStamp(Number(comment.createdAt))}`}
+          textStyle={timeStampStyle}
+        />
       </View>
       {/* text input field for reply */}
-      {showReplyInput && (
-        <LMInputText
-          placeholderText="Reply"
-          inputTextStyle={{
-            marginLeft: 30,
-            borderBottomWidth: 1,
-            borderBottomColor: 'grey',
-          }}
-        />
-      )}
+      {showReplyInput && <LMInputText {...updatedReplyInputFieldProps} />}
       {/* replies section */}
       {(showReplies || showReplyInput) && (
         <View style={{marginLeft: 30}}>
@@ -174,7 +217,12 @@ const LMComment = ({
             ListFooterComponent={
               <LMButton
                 onTap={() => onTapViewMore}
-                text={{text: 'View more replies'}}
+                text={{
+                  text: viewMoreRepliesProps?.text
+                    ? viewMoreRepliesProps.text
+                    : 'View more replies',
+                  textStyle: viewMoreRepliesProps?.textStyle,
+                }}
                 buttonStyle={{
                   borderWidth: 0,
                   alignSelf: 'flex-start',
