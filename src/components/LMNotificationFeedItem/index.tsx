@@ -23,6 +23,12 @@ const LMNotificationFeedItem = ({
   onTap,
   menuIcon,
 }: LMNotificationFeedItemProps) => {
+  // storing the attachments if present
+  let activityAttachments = activity.activityEntityData?.attachments;
+  // storing the value of attachment type of the attachment if present
+  let activityAttachmentType = activityAttachments
+    ? activityAttachments[0].attachmentType
+    : '';
   //creating profile picture props as per customization
   const updatedProfilePictureProps = userProfilePicture
     ? userProfilePicture
@@ -44,12 +50,10 @@ const LMNotificationFeedItem = ({
           {/* profile picture section */}
           <LMProfilePicture {...updatedProfilePictureProps} />
           {/* handles the gallery and document icon on profile picture */}
-          {activity.activityEntityData?.attachments &&
-          // show gallery icon
-            (activity.activityEntityData.attachments[0].attachmentType ===
-              IMAGE_ATTACHMENT_TYPE ||
-            activity.activityEntityData.attachments[0].attachmentType ===
-              VIDEO_ATTACHMENT_TYPE ? (
+          {activityAttachments &&
+            // show gallery icon
+            (activityAttachmentType === IMAGE_ATTACHMENT_TYPE ||
+            activityAttachmentType === VIDEO_ATTACHMENT_TYPE ? (
               <LMIcon
                 assetPath={require('../../assets/images/notification_image3x.png')}
                 type="png"
@@ -57,9 +61,8 @@ const LMNotificationFeedItem = ({
                 height={35}
                 width={35}
               />
-              // show document icon
-            ) : activity.activityEntityData.attachments[0].attachmentType ===
-              DOCUMENT_ATTACHMENT_TYPE ? (
+            ) : // show document icon
+            activityAttachmentType === DOCUMENT_ATTACHMENT_TYPE ? (
               <LMIcon
                 assetPath={require('../../assets/images/notification_doc3x.png')}
                 type="png"
