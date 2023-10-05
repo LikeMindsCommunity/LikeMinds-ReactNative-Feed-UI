@@ -19,9 +19,8 @@ const LMImage = ({
 }: LMImageProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-
   return (
-    <View style={StyleSheet.flatten([boxStyle, defaultStyles.imageContainer])}>
+    <View style={StyleSheet.flatten([defaultStyles.imageContainer, boxStyle])}>
       {/* this renders the loader until the image renders */}
       {loading ? (
         <View style={[defaultStyles.imageStyle, defaultStyles.loaderView]}>

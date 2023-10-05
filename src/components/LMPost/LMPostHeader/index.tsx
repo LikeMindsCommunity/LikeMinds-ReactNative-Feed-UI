@@ -24,7 +24,8 @@ const LMPostHeader = ({
   isPinned,
   menuIcon,
   postMenu,
-  onTap
+  onTap,
+  showMenuIcon,
 }: LMPostHeaderProps) => {
   const [modalPosition, setModalPosition] = useState(postMenu?.modalPosition);
   const [showPostMenuModal, setShowPostMenuModal] = useState(
@@ -91,7 +92,7 @@ const LMPostHeader = ({
           {/* author subHeading */}
           <View style={styles.alignRow}>
             <LMText
-              text={`${timeStamp(Number(createdAt?.text))} ago`}
+              text={`${timeStamp(Number(createdAt?.text))}`}
               selectable={createdAt?.selectable}
               maxLines={createdAt?.maxLines}
               textStyle={StyleSheet.flatten([
@@ -146,13 +147,17 @@ const LMPostHeader = ({
         {/* menu icon section */}
         <TouchableOpacity onPress={onThreedotsClick}>
           <>
-            {menuIcon ? (
-              menuIcon
-            ) : (
+            {showMenuIcon && (
               <LMIcon
-                assetPath={require('../../../assets/images/three_dots3x.png')}
+                assetPath={menuIcon?.assetPath ? menuIcon.assetPath : require('../../../assets/images/three_dots3x.png')}
                 type="png"
                 iconStyle={styles.iconSize}
+                iconUrl={menuIcon?.iconUrl}
+                color={menuIcon?.color}
+                width={menuIcon?.width}
+                height={menuIcon?.height}
+                boxFit={menuIcon?.boxFit}
+                boxStyle={menuIcon?.boxStyle}
               />
             )}
           </>

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import {LMLinkPreviewProps} from './types';
-import STYLES from '../../../constants/constants'
+import STYLES from '../../../constants/constants';
 
 const LMLinkPreview = ({
   attachments,
@@ -19,13 +19,19 @@ const LMLinkPreview = ({
   linkTitleStyle,
   linkDescriptionStyle,
   linkUrlStyle,
+  showDescription,
+  showImage,
+  showTitle,
 }: LMLinkPreviewProps) => {
-  const previewAttachmentData = attachments[0].attachmentMeta.ogTags
+  const previewAttachmentData = attachments[0].attachmentMeta.ogTags;
   return (
     <TouchableOpacity
       style={styles.postMedia}
       onPress={() => {
-        Linking.openURL(previewAttachmentData?.url ? previewAttachmentData.url : ''), onTap;
+        Linking.openURL(
+          previewAttachmentData?.url ? previewAttachmentData.url : '',
+        ),
+          onTap;
       }}>
       {/* link preview image */}
       <View
@@ -34,16 +40,32 @@ const LMLinkPreview = ({
           linkPreviewBoxStyle,
         ])}>
         <Image
-          source={
-            attachments && {uri: previewAttachmentData?.image}
-          }
-          style={StyleSheet.flatten([styles.previewImage, linkImageStyle])}
+          source={attachments && {uri: previewAttachmentData?.image}}
+          style={StyleSheet.flatten([styles.previewImage, linkImageStyle, {
+            display:
+              showImage != undefined
+                ? showImage
+                  ? 'flex'
+                  : 'none'
+                : 'flex',
+          }])}
         />
         {/* link preview data */}
         <View style={styles.previewDetailView}>
           {/* preview title */}
           <Text
-            style={StyleSheet.flatten([styles.previewTitle, linkTitleStyle])}>
+            style={StyleSheet.flatten([
+              styles.previewTitle,
+              linkTitleStyle,
+              {
+                display:
+                  showTitle != undefined
+                    ? showTitle
+                      ? 'flex'
+                      : 'none'
+                    : 'flex',
+              },
+            ])}>
             {previewAttachmentData?.title}
           </Text>
           {/* preview description */}
@@ -51,6 +73,14 @@ const LMLinkPreview = ({
             style={StyleSheet.flatten([
               styles.previewDescription,
               linkDescriptionStyle,
+              {
+                display:
+                  showDescription != undefined
+                    ? showDescription
+                      ? 'flex'
+                      : 'none'
+                    : 'flex',
+              },
             ])}>
             {previewAttachmentData?.description}
           </Text>
@@ -102,12 +132,12 @@ const styles = StyleSheet.create({
   previewDescription: {
     color: STYLES.$COLORS.TEXT_COLOR,
     paddingVertical: 2,
-    opacity: 0.8
+    opacity: 0.8,
   },
   previewLink: {
     color: STYLES.$COLORS.TEXT_COLOR,
     fontSize: 12,
-    opacity:0.7
+    opacity: 0.7,
   },
   previewDetailView: {
     paddingHorizontal: 10,
