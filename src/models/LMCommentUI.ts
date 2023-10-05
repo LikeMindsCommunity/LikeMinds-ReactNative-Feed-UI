@@ -5,7 +5,7 @@ interface LMCommentUI {
     isEdited: boolean;
     isLiked: boolean;
     text: string;
-    userId?: string;
+    userId: string;
     level: number
     likesCount: number;
     repliesCount: number
@@ -17,8 +17,8 @@ interface LMCommentUI {
     parentComment?: LMCommentUI,
     parentId?: string,
     alreadySeenFullContent?: boolean,
-    fromCommentLiked?: boolean,
-    fromCommentEdited?: boolean,
+    fromCommentLiked: boolean,
+    fromCommentEdited: boolean,
     uuid: string,
-    tempId: string
+    tempId?: string
 }
