@@ -1,6 +1,7 @@
 {
-  "name": "ReactNativeFeedUI",
-  "version": "0.0.1",
+  "name": "React-Native Feed UI",
+  "versionName": "1.0.0",
+  "versionCode": "1",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -10,8 +11,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "@shopify/flash-list": "1.6.1",
     "react": "18.2.0",
-    "react-native": "0.72.4"
+    "react-native": "0.72.4",
+    "react-native-swiper-flatlist": "3.2.3",
+    "react-native-video": "5.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -21,6 +25,7 @@
     "@react-native/metro-config": "^0.72.11",
     "@tsconfig/react-native": "^3.0.0",
     "@types/react": "^18.0.24",
+    "@types/react-native-video": "5.0.15",
     "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^29.2.1",
     "eslint": "^8.19.0",
