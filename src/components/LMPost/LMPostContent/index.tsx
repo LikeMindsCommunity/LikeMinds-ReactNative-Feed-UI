@@ -43,15 +43,14 @@ const LMPostContent = ({
   const renderLinks = () => {
     return linkData?.map(item => {
       return (
-        <>
+        <View key={Math.random()}>
           {item.attachmentMeta.ogTags.url && (
             <LMText
-              key={item.attachmentMeta.ogTags.url}
               text={item.attachmentMeta.ogTags.url}
               textStyle={StyleSheet.flatten([styles.linkText, linkStyle])}
             />
           )}
-        </>
+        </View>
       );
     });
   };
