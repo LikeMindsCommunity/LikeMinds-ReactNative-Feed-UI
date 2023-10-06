@@ -17,15 +17,15 @@ const LMPost = ({
 }: LMPostProps) => {
   //creating header props as per customization
   const updatedHeaderProps = {
-    user: post.user,
+    post: post,
     profilePicture: {
       fallbackText: post.user.name,
       fallbackTextStyle: headerProps?.profilePicture?.fallbackTextStyle,
       imageUrl: post.user.imageUrl,
-      onTap: headerProps?.profilePicture.onTap,
-      size: headerProps?.profilePicture.size,
-      fallbackTextBoxStyle: headerProps?.profilePicture.fallbackTextBoxStyle,
-      profilePictureStyle: headerProps?.profilePicture.profilePictureStyle,
+      onTap: headerProps?.profilePicture?.onTap,
+      size: headerProps?.profilePicture?.size,
+      fallbackTextBoxStyle: headerProps?.profilePicture?.fallbackTextBoxStyle,
+      profilePictureStyle: headerProps?.profilePicture?.profilePictureStyle,
     },
     postMenu: {
       menuItems: post.menuItems,
@@ -63,6 +63,7 @@ const LMPost = ({
     isPinned: post.isPinned,
     showMenuIcon: headerProps?.showMenuIcon,
     pinIcon: {
+      type: headerProps?.pinIcon?.type ? headerProps.pinIcon.type : 'png',
       iconUrl: headerProps?.pinIcon?.iconUrl,
       assetPath: headerProps?.pinIcon?.assetPath,
       color: headerProps?.pinIcon?.color,
@@ -73,6 +74,7 @@ const LMPost = ({
       boxFit: headerProps?.pinIcon?.boxFit,
     },
     menuIcon: {
+      type: headerProps?.menuIcon?.type ? headerProps.menuIcon.type : 'png',
       iconUrl: headerProps?.menuIcon?.iconUrl,
       assetPath: headerProps?.menuIcon?.assetPath,
       color: headerProps?.menuIcon?.color,
@@ -382,8 +384,6 @@ const LMPost = ({
       {/* post header */}
       <LMPostHeader
         {...updatedHeaderProps}
-        pinIcon={{type: 'png'}}
-        menuIcon={{type: 'png'}}
       />
       {/* post content */}
       <LMPostContent {...updatedContentProps} />

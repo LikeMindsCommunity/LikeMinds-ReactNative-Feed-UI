@@ -10,18 +10,16 @@ import LMText from '../../../base/LMText';
 import LMIcon from '../../../base/LMIcon';
 
 const LMPostHeader = ({
-  user,
+  post,
   profilePicture,
   titleText,
   createdAt,
-  isEdited,
   showMemberStateLabel,
   memberState,
   memberStateTextStyle,
   memberStateViewStyle,
   postHeaderViewStyle,
   pinIcon,
-  isPinned,
   menuIcon,
   postMenu,
   onTap,
@@ -47,101 +45,109 @@ const LMPostHeader = ({
   return (
     <View style={StyleSheet.flatten([styles.postHeader, postHeaderViewStyle])}>
       {/* author detail section */}
-      <TouchableOpacity onPress={() => onTap(user)}>
-      <View style={styles.alignRow}>
-        <LMProfilePicture
-          fallbackText={profilePicture.fallbackText}
-          imageUrl={profilePicture.imageUrl}
-          onTap={profilePicture.onTap}
-          size={profilePicture.size}
-          fallbackTextStyle={profilePicture.fallbackTextStyle}
-          fallbackTextBoxStyle={profilePicture.fallbackTextBoxStyle}
-          profilePictureStyle={profilePicture.profilePictureStyle}
-        />
-        {/* author details */}
-        <View style={{marginLeft: 10}}>
-          {/* author heading */}
-          <View style={styles.alignRow}>
-            <LMText
-              text={titleText?.text ? titleText.text : ''}
-              maxLines={titleText?.maxLines}
-              selectable={titleText?.selectable}
-              textStyle={StyleSheet.flatten([
-                styles.postAuthorName,
-                titleText?.textStyle,
-              ])}
-            />
-            {/* member state label view */}
-            {showMemberStateLabel && memberState === 1 && (
-              <View
-                style={StyleSheet.flatten([
-                  styles.labelView,
-                  memberStateViewStyle,
-                ])}>
-                <LMText
-                  text="Admin"
-                  textStyle={StyleSheet.flatten([
-                    styles.labelText,
-                    memberStateTextStyle,
-                  ])}
-                />
-              </View>
-            )}
-          </View>
+      <TouchableOpacity onPress={() => onTap(post.user)}>
+        <View style={styles.alignRow}>
+          <LMProfilePicture
+            fallbackText={post.user.name}
+            imageUrl={post.user.imageUrl}
+            onTap={profilePicture?.onTap}
+            size={profilePicture?.size}
+            fallbackTextStyle={profilePicture?.fallbackTextStyle}
+            fallbackTextBoxStyle={profilePicture?.fallbackTextBoxStyle}
+            profilePictureStyle={profilePicture?.profilePictureStyle}
+          />
+          {/* author details */}
+          <View style={{marginLeft: 10}}>
+            {/* author heading */}
+            <View style={styles.alignRow}>
+              <LMText
+                text={titleText?.text ? titleText.text : ''}
+                maxLines={titleText?.maxLines}
+                selectable={titleText?.selectable}
+                textStyle={StyleSheet.flatten([
+                  styles.postAuthorName,
+                  titleText?.textStyle,
+                ])}
+              />
+              {/* member state label view */}
+              {showMemberStateLabel && memberState === 1 && (
+                <View
+                  style={StyleSheet.flatten([
+                    styles.labelView,
+                    memberStateViewStyle,
+                  ])}>
+                  <LMText
+                    text="Admin"
+                    textStyle={StyleSheet.flatten([
+                      styles.labelText,
+                      memberStateTextStyle,
+                    ])}
+                  />
+                </View>
+              )}
+            </View>
 
-          {/* author subHeading */}
-          <View style={styles.alignRow}>
-            <LMText
-              text={`${timeStamp(Number(createdAt?.text))}`}
-              selectable={createdAt?.selectable}
-              maxLines={createdAt?.maxLines}
-              textStyle={StyleSheet.flatten([
-                styles.postedDetail,
-                createdAt?.textStyle,
-              ])}
-            />
-            {/* checks if the post is edited or not */}
-            {isEdited && (
-              <>
-                <LMIcon
-                  assetPath={require('../../../assets/images/single_dot3x.png')}
-                  type="png"
-                  width={styles.dotImageSize.width}
-                  height={styles.dotImageSize.height}
-                  iconStyle={styles.dotImageSize}
-                />
-                <LMText
-                  text="Edited"
-                  textStyle={StyleSheet.flatten([
-                    styles.postedDetail,
-                    createdAt?.textStyle,
-                  ])}
-                />
-              </>
-            )}
+            {/* author subHeading */}
+            <View style={styles.alignRow}>
+              <LMText
+                text={`${timeStamp(Number(createdAt?.text))}`}
+                selectable={createdAt?.selectable}
+                maxLines={createdAt?.maxLines}
+                textStyle={StyleSheet.flatten([
+                  styles.postedDetail,
+                  createdAt?.textStyle,
+                ])}
+              />
+              {/* checks if the post is edited or not */}
+              {post.isEdited && (
+                <>
+                  <LMIcon
+                    assetPath={require('../../../assets/images/single_dot3x.png')}
+                    type="png"
+                    width={styles.dotImageSize.width}
+                    height={styles.dotImageSize.height}
+                    iconStyle={styles.dotImageSize}
+                  />
+                  <LMText
+                    text="Edited"
+                    textStyle={StyleSheet.flatten([
+                      styles.postedDetail,
+                      createdAt?.textStyle,
+                    ])}
+                  />
+                </>
+              )}
+            </View>
           </View>
         </View>
-      </View>
       </TouchableOpacity>
 
       {/* Top right action buttons */}
       <View
         style={[
           styles.topRightView,
-          isPinned && {justifyContent: 'space-between'},
+          post.isPinned && {justifyContent: 'space-between'},
         ]}>
         {/* pin icon section */}
-        {isPinned && (
+        {post.isPinned && (
           <>
-            {pinIcon ? (
-              pinIcon
-            ) : (
+            {
               <LMIcon
-                assetPath={require('../../../assets/images/pin_icon3x.png')}
+                assetPath={
+                  pinIcon?.assetPath
+                    ? pinIcon.assetPath
+                    : require('../../../assets/images/pin_icon3x.png')
+                }
                 type="png"
                 iconStyle={styles.iconSize}
+                iconUrl={pinIcon?.iconUrl}
+                color={pinIcon?.color}
+                width={pinIcon?.width}
+                height={pinIcon?.height}
+                boxFit={pinIcon?.boxFit}
+                boxStyle={pinIcon?.boxStyle}
               />
-            )}
+            }
           </>
         )}
         {/* menu icon section */}
@@ -149,7 +155,11 @@ const LMPostHeader = ({
           <>
             {showMenuIcon && (
               <LMIcon
-                assetPath={menuIcon?.assetPath ? menuIcon.assetPath : require('../../../assets/images/three_dots3x.png')}
+                assetPath={
+                  menuIcon?.assetPath
+                    ? menuIcon.assetPath
+                    : require('../../../assets/images/three_dots3x.png')
+                }
                 type="png"
                 iconStyle={styles.iconSize}
                 iconUrl={menuIcon?.iconUrl}
@@ -166,7 +176,7 @@ const LMPostHeader = ({
 
       {/* menu list modal */}
       <LMPostMenu
-        menuItems={postMenu.menuItems}
+        menuItems={post.menuItems}
         onSelected={postMenu.onSelected}
         modalPosition={modalPosition}
         modalVisible={showPostMenuModal}
