@@ -1,10 +1,12 @@
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import LMPostHeader from '../LMPostHeader';
 import LMPostContent from '../LMPostContent';
 import LMPostMedia from '../LMPostMedia';
 import LMPostFooter from '../LMPostFooter';
 import {LMPostProps} from './types';
+import layout from '../../../utils/layout';
+import STYLES from '../../../constants/constants';
 
 const LMPost = ({
   post,
@@ -26,7 +28,7 @@ const LMPost = ({
           modalVisible: false,
           onCloseModal: () => {},
         },
-        onTap: () => {}
+        onTap: () => {},
       };
 
   //creating footer props as per customization
@@ -52,7 +54,7 @@ const LMPost = ({
         attachments: post.attachments,
       };
   return (
-    <View>
+    <View style={styles.mainContainer}>
       {/* post header */}
       <LMPostHeader {...updatedHeaderProps} />
       {/* post content */}
@@ -64,5 +66,14 @@ const LMPost = ({
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    width: layout.window.width,
+    backgroundColor: STYLES.$BACKGROUND_COLORS.LIGHT,
+    marginBottom: 10,
+    paddingTop: 10,
+  },
+});
 
 export default LMPost;
