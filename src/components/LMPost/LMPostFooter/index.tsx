@@ -1,5 +1,5 @@
 import {View, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import STYLES from '../../../constants/constants';
 import layout from '../../../utils/layout';
 import LMButton from '../../../base/LMButton';
@@ -19,6 +19,18 @@ const LMPostFooter = ({
   shareButton,
   footerBoxStyle,
 }: LMPostFooterProps) => {
+  const [liked, setLiked] = useState(isLiked);
+  const [likeCount, setLikeCount] = useState(likesCount);
+  // handling like state and likes count locally
+  const likesCountHandler = () => {
+    likeIconButton?.onTap();
+    setLiked(!liked);
+    if (liked) {
+      setLikeCount(likeCount - 1);
+    } else {
+      setLikeCount(likeCount + 1);
+    }
+  };
   return (
     <View style={StyleSheet.flatten([styles.postFooter, footerBoxStyle])}>
       {/* like and comment view */}
@@ -27,8 +39,7 @@ const LMPostFooter = ({
         <View style={styles.alignRow}>
           {/* like icon button */}
           <LMButton
-            onTap={likeIconButton?.onTap ? likeIconButton.onTap : () => {}}
-            text={likeIconButton?.text}
+            onTap={likesCountHandler}
             icon={{
               assetPath: likeIconButton?.icon?.assetPath
                 ? likeIconButton.icon.assetPath
@@ -37,14 +48,18 @@ const LMPostFooter = ({
               iconUrl: likeIconButton?.icon?.iconUrl,
               iconStyle: likeIconButton?.icon?.iconStyle,
               color: likeIconButton?.icon?.color,
-              height: likeIconButton?.icon?.height,
-              width: likeIconButton?.icon?.width,
+              height: likeIconButton?.icon?.height
+                ? likeIconButton.icon.height
+                : 20.5,
+              width: likeIconButton?.icon?.width
+                ? likeIconButton.icon.width
+                : 20.5,
               boxFit: likeIconButton?.icon?.boxFit,
               boxStyle: likeIconButton?.icon?.boxStyle,
             }}
             placement={likeIconButton?.placement}
             isActive={
-              likeIconButton?.isActive ? likeIconButton.isActive : isLiked
+              likeIconButton?.isActive ? likeIconButton.isActive : liked
             }
             activeIcon={{
               assetPath: likeIconButton?.activeIcon?.assetPath
@@ -54,12 +69,15 @@ const LMPostFooter = ({
               iconUrl: likeIconButton?.activeIcon?.iconUrl,
               iconStyle: likeIconButton?.activeIcon?.iconStyle,
               color: likeIconButton?.activeIcon?.color,
-              height: likeIconButton?.activeIcon?.height,
-              width: likeIconButton?.activeIcon?.width,
+              height: likeIconButton?.activeIcon?.height
+                ? likeIconButton.activeIcon.height
+                : 20.5,
+              width: likeIconButton?.activeIcon?.width
+                ? likeIconButton.activeIcon.width
+                : 20.5,
               boxFit: likeIconButton?.activeIcon?.boxFit,
               boxStyle: likeIconButton?.activeIcon?.boxStyle,
             }}
-            activeText={likeIconButton?.activeText}
             buttonStyle={
               likeIconButton?.buttonStyle
                 ? likeIconButton.buttonStyle
@@ -74,17 +92,21 @@ const LMPostFooter = ({
           <LMButton
             onTap={likeTextButton?.onTap ? likeTextButton.onTap : () => {}}
             text={{
-              text: likesCount
-                ? likesCount > 1
-                  ? `${likesCount} Likes`
-                  : `${likesCount} Like`
+              text: likeCount
+                ? likeCount > 1
+                  ? `${likeCount} Likes`
+                  : `${likeCount} Like`
                 : 'Like',
-              textStyle: likeTextButton?.text?.textStyle,
+              textStyle: likeTextButton?.text?.textStyle
+                ? likeTextButton.text.textStyle
+                : {
+                    fontSize: 14.5,
+                    fontWeight: '400',
+                    color: '#504B4B',
+                  },
             }}
-            icon={likeTextButton?.icon}
             placement={likeTextButton?.placement}
             isActive={likeTextButton?.isActive}
-            activeIcon={likeTextButton?.activeIcon}
             activeText={likeTextButton?.activeText}
             buttonStyle={
               likeTextButton?.buttonStyle
@@ -93,6 +115,7 @@ const LMPostFooter = ({
                     borderWidth: 0,
                     alignItems: 'center',
                     justifyContent: 'space-evenly',
+                    marginLeft: 7,
                   }
             }
           />
@@ -109,7 +132,14 @@ const LMPostFooter = ({
                     ? `${commentsCount} Comments`
                     : `${commentsCount} Comment`
                   : `Add Comment`,
-              textStyle: commentButton?.text?.textStyle,
+              textStyle: commentButton?.text?.textStyle
+                ? commentButton.text.textStyle
+                : {
+                    marginLeft: 5,
+                    fontSize: 14.5,
+                    fontWeight: '400',
+                    color: '#504B4B',
+                  },
             }}
             icon={{
               assetPath: commentButton?.icon?.assetPath
@@ -119,8 +149,10 @@ const LMPostFooter = ({
               iconUrl: commentButton?.icon?.iconUrl,
               iconStyle: commentButton?.icon?.iconStyle,
               color: commentButton?.icon?.color,
-              height: commentButton?.icon?.height,
-              width: commentButton?.icon?.width,
+              height: commentButton?.icon?.height
+                ? commentButton.icon.height
+                : 20,
+              width: commentButton?.icon?.width ? commentButton.icon.width : 20,
               boxFit: commentButton?.icon?.boxFit,
               boxStyle: commentButton?.icon?.boxStyle,
             }}
@@ -134,7 +166,6 @@ const LMPostFooter = ({
                 : {
                     borderWidth: 0,
                     alignItems: 'center',
-                    justifyContent: 'space-evenly',
                   }
             }
           />
@@ -161,8 +192,8 @@ const LMPostFooter = ({
               iconUrl: saveButton?.icon?.iconUrl,
               iconStyle: saveButton?.icon?.iconStyle,
               color: saveButton?.icon?.color,
-              height: saveButton?.icon?.height,
-              width: saveButton?.icon?.width,
+              height: saveButton?.icon?.height ? saveButton.icon.height : 18,
+              width: saveButton?.icon?.width ? saveButton.icon.width : 18,
               boxFit: saveButton?.icon?.boxFit,
               boxStyle: saveButton?.icon?.boxStyle,
             }}
@@ -176,8 +207,12 @@ const LMPostFooter = ({
               iconUrl: saveButton?.activeIcon?.iconUrl,
               iconStyle: saveButton?.activeIcon?.iconStyle,
               color: saveButton?.activeIcon?.color,
-              height: saveButton?.activeIcon?.height,
-              width: saveButton?.activeIcon?.width,
+              height: saveButton?.activeIcon?.height
+                ? saveButton.activeIcon.height
+                : 18,
+              width: saveButton?.activeIcon?.width
+                ? saveButton.activeIcon.width
+                : 18,
               boxFit: saveButton?.activeIcon?.boxFit,
               boxStyle: saveButton?.activeIcon?.boxStyle,
             }}
@@ -203,8 +238,8 @@ const LMPostFooter = ({
               iconUrl: shareButton?.icon?.iconUrl,
               iconStyle: shareButton?.icon?.iconStyle,
               color: shareButton?.icon?.color,
-              height: shareButton?.icon?.height,
-              width: shareButton?.icon?.width,
+              height: shareButton?.icon?.height ? shareButton.icon.height : 18,
+              width: shareButton?.icon?.width ? shareButton.icon.width : 18,
               boxFit: shareButton?.icon?.boxFit,
               boxStyle: shareButton?.icon?.boxStyle,
             }}

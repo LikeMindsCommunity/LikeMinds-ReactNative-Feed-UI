@@ -1,8 +1,9 @@
 import { TextStyle, ViewStyle } from "react-native";
 
 export interface LMPostMenuProps {
+  postId: string,
   menuItems: Array<LMMenuItemsUI>, // list of menu items of post
-  onSelected: (itemId?: number) => void, // callback function executed on click of each item
+  onSelected: (postId: string, itemId?: number) => void, // callback function executed on click of each item
   modalVisible: boolean, // this represents the visibility of the modal
   onCloseModal: () => void, // callback function that closes the modal
   modalPosition: any, // position of the modal

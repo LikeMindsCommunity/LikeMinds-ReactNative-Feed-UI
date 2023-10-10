@@ -33,6 +33,7 @@ const LMPostHeader = ({
   // this function closes the menu list modal
   const closePostMenuModal = () => {
     postMenu?.onCloseModal();
+    setShowPostMenuModal(false);
   };
 
   // this function is executed on the click of menu icon & handles the position and visibility of the modal
@@ -57,7 +58,7 @@ const LMPostHeader = ({
             profilePictureStyle={profilePicture?.profilePictureStyle}
           />
           {/* author details */}
-          <View style={{marginLeft: 10}}>
+          <View style={{marginLeft: 12}}>
             {/* author heading */}
             <View style={styles.alignRow}>
               <LMText
@@ -142,8 +143,8 @@ const LMPostHeader = ({
                 iconStyle={styles.iconSize}
                 iconUrl={pinIcon?.iconUrl}
                 color={pinIcon?.color}
-                width={pinIcon?.width}
-                height={pinIcon?.height}
+                width={pinIcon?.width ? pinIcon.width : 20}
+                height={pinIcon?.height ? pinIcon.height : 20}
                 boxFit={pinIcon?.boxFit}
                 boxStyle={pinIcon?.boxStyle}
               />
@@ -164,8 +165,8 @@ const LMPostHeader = ({
                 iconStyle={styles.iconSize}
                 iconUrl={menuIcon?.iconUrl}
                 color={menuIcon?.color}
-                width={menuIcon?.width}
-                height={menuIcon?.height}
+                width={menuIcon?.width ? menuIcon.width : 20}
+                height={menuIcon?.height ? menuIcon.height : 20}
                 boxFit={menuIcon?.boxFit}
                 boxStyle={menuIcon?.boxStyle}
               />
@@ -176,6 +177,7 @@ const LMPostHeader = ({
 
       {/* menu list modal */}
       <LMPostMenu
+        postId={post.id}
         menuItems={post.menuItems}
         onSelected={postMenu.onSelected}
         modalPosition={modalPosition}
@@ -195,19 +197,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   alignRow: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   postAuthorName: {
-    color: STYLES.$COLORS.BLACK,
-    fontSize: 18,
-    fontWeight: '400',
+    color: '#222020',
+    fontSize: 16.5,
+    fontWeight: '500',
+    lineHeight: 20,
   },
   postedDetail: {
-    color: STYLES.$COLORS.BLACK,
+    color: '#0F1E3D66',
     fontSize: 14,
+    fontWeight: '400',
   },
   labelText: {
     color: STYLES.$COLORS.WHITE,
@@ -235,7 +240,6 @@ const styles = StyleSheet.create({
   topRightView: {
     width: '20%',
     flexDirection: 'row',
-    marginTop: 5,
     justifyContent: 'flex-end',
   },
 });

@@ -14,6 +14,7 @@ import layout from '../../../utils/layout';
 import LMText from '../../../base/LMText';
 
 const LMPostMenu = ({
+  postId,
   menuItems,
   onSelected,
   modalVisible,
@@ -23,7 +24,7 @@ const LMPostMenu = ({
   menuViewStyle,
   backdropColor,
 }: LMPostMenuProps) => {
-  return (
+   return (
     <Modal
       visible={modalVisible}
       animationType="fade"
@@ -58,7 +59,7 @@ const LMPostMenu = ({
                 <TouchableOpacity
                   key={index}
                   onPress={() => {
-                    onSelected(item.id), onCloseModal();
+                    onSelected(postId, item.id), onCloseModal();
                   }}>
                   <LMText
                     text={item.title}

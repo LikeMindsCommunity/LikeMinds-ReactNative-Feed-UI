@@ -56,7 +56,7 @@ const LMPostContent = ({
   };
 
   return (
-    <View style={StyleSheet.flatten([postContentViewStyle])}>
+    <View style={StyleSheet.flatten([postContentViewStyle, {paddingHorizontal:16, paddingTop: 15}])}>
       {/* post content text */}
       <LMText
         text={text}
@@ -96,11 +96,16 @@ const LMPostContent = ({
 
 const styles = StyleSheet.create({
   contentText: {
-    fontSize: 15,
-    color: STYLES.$COLORS.TEXT_COLOR,
+    fontSize: 16,
+    fontWeight:'400',
+    color: '#666666',
+    lineHeight:20
   },
   linkText: {
+    fontSize: 16,
+    fontWeight:'400',
     color: '#007AFF',
+    lineHeight:20
   },
 });
 

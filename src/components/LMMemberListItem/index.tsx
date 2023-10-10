@@ -16,24 +16,24 @@ const LMMemberListItem = ({
   onTap,
 }: LMMemberListItemProps) => {
   //creating profile picture props as per customization
-  const updatedProfilePictureProps = profilePictureProps
-    ? profilePictureProps
-    : {
+  const updatedProfilePictureProps = {
         fallbackText: user.name,
-        size: 50,
+        size: profilePictureProps?.size? profilePictureProps.size : 50,
         imageUrl: user.imageUrl,
+        onTap: profilePictureProps?.onTap,
+        fallbackTextStyle: profilePictureProps?.fallbackTextStyle,
+        fallbackTextBoxStyle: profilePictureProps?.fallbackTextBoxStyle,
+        profilePictureStyle: profilePictureProps?.profilePictureStyle,
       };
   //creating user name props as per customization
-  const updatedNameProps = nameProps
-    ? nameProps
-    : {
+  const updatedNameProps =  {
         text: user.name,
+        textStyle: nameProps?.textStyle,
       };
   //creating custom title props as per customization
-  const updatedCustomTitleProps = customTitleProps
-    ? customTitleProps
-    : {
+  const updatedCustomTitleProps =  {
         text: user.customTitle,
+        textStyle: customTitleProps?.textStyle
       };
 
   return (
