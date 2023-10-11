@@ -127,7 +127,7 @@ const LMPostMedia = ({
   return (
     <View
       style={StyleSheet.flatten([
-        {paddingBottom: 10, paddingTop: 15},
+        {paddingBottom: 5, paddingTop: 15},
         postMediaStyle,
       ])}>
       {attachments?.length > 1 ? (

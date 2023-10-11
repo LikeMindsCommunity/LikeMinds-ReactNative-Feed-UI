@@ -108,9 +108,9 @@ const LMPost = ({
       {/* post header */}
       <LMPostHeader {...updatedHeaderProps} />
       {/* post content */}
-      <LMPostContent {...updatedContentProps} />
+      {post.text && <LMPostContent {...updatedContentProps} />}
       {/* post media */}
-      <LMPostMedia {...updatedMediaProps} />
+      {post.attachments.length > 0 && <LMPostMedia {...updatedMediaProps} />}
       {/* post footer */}
       <LMPostFooter {...updatedFooterProps} />
     </View>

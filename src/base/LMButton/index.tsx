@@ -107,6 +107,7 @@ const defaultStyles = StyleSheet.create({
     borderColor: STYLES.$COLORS.BLACK,
     borderWidth: 1,
     justifyContent: 'center',
+    alignItems:'center',
     paddingVertical: 5,
     borderRadius: 5,
   },
