@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@shopify/flash-list": "1.6.1",
+    "@svanboxel/visibility-sensor-react-native": "^1.0.2",
     "react": "18.2.0",
     "react-native": "0.72.4",
     "react-native-swiper-flatlist": "3.2.3",
