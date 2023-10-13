@@ -14,7 +14,6 @@ import layout from '../../../utils/layout';
 import STYLES from '../../../constants/constants';
 import {MEDIA_FETCH_ERROR} from '../../../constants/strings';
 import LMButton from '../../../base/LMButton';
-import VisibilitySensor from '@svanboxel/visibility-sensor-react-native';
 
 const LMVideo = ({
   videoUrl,
@@ -38,7 +37,6 @@ const LMVideo = ({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [playingStatus, setPlayingStatus] = useState(true);
-  const [paused, setpaused] = useState(true);
   const [viewController, setViewController] = useState(showControls);
 
   // this throw error and ask for currentVideoUrl if auto play is set true
@@ -78,53 +76,45 @@ const LMVideo = ({
       ) : null}
 
       {/* this renders the video */}
-      <VisibilitySensor
-        onChange={isVisible => {
-          return (
-            console.log(isVisible),
-            isVisible ? setpaused(false) : setpaused(true)
-          );
-        }}>
-        <TouchableWithoutFeedback onPress={() => setViewController(true)}>
-          <Video
-            source={{uri: videoUrl}}
-            key={videoUrl}
-            onReadyForDisplay={() => setLoading(false)}
-            onError={() => setError(true)}
-            repeat={looping ? looping : true}
-            resizeMode={boxFit ? boxFit : defaultStyles.videoStyle.resizeMode}
-            playWhenInactive={false}
-            playInBackground={false}
-            style={StyleSheet.flatten([
-              videoStyle,
-              {
-                width: width ? width : defaultStyles.videoStyle.width,
-                height: height ? height : defaultStyles.videoStyle.height,
-                aspectRatio: aspectRatio ? aspectRatio : undefined,
-              },
-            ])}
-            paused={
-              autoPlay
-                ? currentVideoUrl === videoUrl
-                  ? false
-                  : true
-                : playingStatus
-            } // handles the auto play/pause functionality
-            muted={
-              autoPlay
-                ? currentVideoUrl === videoUrl
-                  ? false
-                  : true
-                : playingStatus
+      <TouchableWithoutFeedback onPress={() => setViewController(true)}>
+        <Video
+          source={{uri: videoUrl}}
+          key={videoUrl}
+          onReadyForDisplay={() => setLoading(false)}
+          onError={() => setError(true)}
+          repeat={looping ? looping : true}
+          resizeMode={boxFit ? boxFit : defaultStyles.videoStyle.resizeMode}
+          playWhenInactive={false}
+          playInBackground={false}
+          style={StyleSheet.flatten([
+            videoStyle,
+            {
+              width: width ? width : defaultStyles.videoStyle.width,
+              height: height ? height : defaultStyles.videoStyle.height,
+              aspectRatio: aspectRatio ? aspectRatio : undefined,
+            },
+          ])}
+          paused={
+            autoPlay
+              ? currentVideoUrl === videoUrl
                 ? false
                 : true
-            } // this handles the mute of the video according to the video being played
-          />
-        </TouchableWithoutFeedback>
-      </VisibilitySensor>
-      {/* this renders the cancel button */}
+              : playingStatus
+          } // handles the auto play/pause functionality
+          muted={
+            autoPlay
+              ? currentVideoUrl === videoUrl
+                ? false
+                : true
+              : playingStatus
+              ? false
+              : true
+          } // this handles the mute of the video according to the video being played
+        />
+      </TouchableWithoutFeedback>
+       {/* this renders the cancel button */}
       {showCancel && (
-        <View style={{position: 'absolute', right: 15, top: 15, zIndex: 7000}}>
+        <View style={{position: 'absolute', right: 15, top: 15, zIndex:7000}}>
           <LMButton
             onTap={onCancel ? () => onCancel(videoUrl) : () => {}}
             buttonStyle={{
