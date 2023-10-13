@@ -10,7 +10,8 @@ import React from 'react';
 import layout from '../../../utils/layout';
 import {LMDocumentProps} from './types';
 import LMIcon from '../../../base/LMIcon';
-import STYLES from '../../../constants/constants'
+import STYLES from '../../../constants/constants';
+import LMButton from '../../../base/LMButton';
 
 const LMDocument = ({
   attachments,
@@ -23,143 +24,161 @@ const LMDocument = ({
   documentDetailStyle,
   documentViewStyle,
   defaultIconSize,
+  showCancel,
+  onCancel,
 }: LMDocumentProps) => {
   return (
     <View>
       {attachments.map((item, index) => (
         // document View
-        <TouchableOpacity
-          onPress={() => {
-            Linking.openURL(item?.attachmentMeta?.url ? item?.attachmentMeta?.url : '');
-            onTap;
-          }}
-          key={index}
-          style={styles.postMedia}>
-          <View style={StyleSheet.flatten([styles.docView, documentViewStyle])}>
-            {/* checks if there is any custom pdf icon is present or not */}
-            {documentIcon ? (
-              <LMIcon
-                type={documentIcon?.type}
-                iconUrl={documentIcon?.iconUrl}
-                assetPath={documentIcon?.assetPath}
-                iconStyle={documentIcon?.iconStyle}
-                color={documentIcon?.color}
-                height={documentIcon?.height}
-                width={documentIcon?.width}
-                boxFit={documentIcon?.boxFit}
-                boxStyle={documentIcon?.boxStyle}
-              />
-            ) : (
-              <Image
-                source={require('../../../assets/images/pdf_icon3x.png')}
-                resizeMode={'contain'}
-                style={StyleSheet.flatten({
-                  width: defaultIconSize
-                    ? defaultIconSize
-                    : styles.pdfIcon.width,
-                  height: defaultIconSize
-                    ? defaultIconSize
-                    : styles.pdfIcon.height,
-                })}
-              />
-            )}
-            {/* document detail view */}
-            <View style={{marginLeft: 5}}>
-              {/* document title */}
-              <Text
-                style={StyleSheet.flatten([
-                  styles.docTitle,
-                  documentTitleStyle,
-                ])}>
-                {item?.attachmentMeta?.name}
-              </Text>
-              <View style={styles.alignRow}>
-                {/* document page count text */}
+        <View key={Math.random()}>
+          <TouchableOpacity
+            onPress={() => {
+              Linking.openURL(
+                item?.attachmentMeta?.url ? item?.attachmentMeta?.url : '',
+              );
+              onTap;
+            }}
+            key={index}
+            style={styles.postMedia}>
+            <View
+              style={StyleSheet.flatten([styles.docView, documentViewStyle])}>
+              {/* checks if there is any custom pdf icon is present or not */}
+              {documentIcon ? (
+                <LMIcon
+                  type={documentIcon?.type}
+                  iconUrl={documentIcon?.iconUrl}
+                  assetPath={documentIcon?.assetPath}
+                  iconStyle={documentIcon?.iconStyle}
+                  color={documentIcon?.color}
+                  height={documentIcon?.height}
+                  width={documentIcon?.width}
+                  boxFit={documentIcon?.boxFit}
+                  boxStyle={documentIcon?.boxStyle}
+                />
+              ) : (
+                <Image
+                  source={require('../../../assets/images/pdf_icon3x.png')}
+                  resizeMode={'contain'}
+                  style={StyleSheet.flatten({
+                    width: defaultIconSize
+                      ? defaultIconSize
+                      : styles.pdfIcon.width,
+                    height: defaultIconSize
+                      ? defaultIconSize
+                      : styles.pdfIcon.height,
+                  })}
+                />
+              )}
+              {/* document detail view */}
+              <View style={{marginLeft: 5, width:'72%'}}>
+                {/* document title */}
                 <Text
                   style={StyleSheet.flatten([
-                    styles.docDetail,
-                    documentDetailStyle,
-                    {
-                      display:
-                      showPageCount != undefined
-                      ? showPageCount
-                      ? 'flex'
-                      : 'none'
-                      : 'flex',
-                    },
+                    styles.docTitle,
+                    documentTitleStyle,
                   ])}>
+                  {item?.attachmentMeta?.name}
+                </Text>
+                <View style={styles.alignRow}>
+                  {/* document page count text */}
+                  <Text
+                    style={StyleSheet.flatten([
+                      styles.docDetail,
+                      documentDetailStyle,
+                      {
+                        display:
+                          showPageCount != undefined
+                            ? showPageCount
+                              ? 'flex'
+                              : 'none'
+                            : 'flex',
+                      },
+                    ])}>
+                    {/* // todo: remove static data */}2 Pages
+                  </Text>
+                  <Image
+                    source={require('../../../assets/images/single_dot3x.png')}
+                    resizeMode={'contain'}
+                    style={StyleSheet.flatten([
+                      styles.dotImageSize,
+                      {
+                        display:
+                          showPageCount != undefined
+                            ? showPageCount &&
+                              (showDocumentFormat || showDocumentSize)
+                              ? 'flex'
+                              : 'none'
+                            : 'flex',
+                      },
+                    ])}
+                  />
+                  {/* document size text */}
+                  <Text
+                    style={StyleSheet.flatten([
+                      styles.docDetail,
+                      documentDetailStyle,
+                      {
+                        display:
+                          showDocumentSize != undefined
+                            ? showDocumentSize
+                              ? 'flex'
+                              : 'none'
+                            : 'flex',
+                      },
+                    ])}>
                     {/* // todo: remove static data */}
-                  2 Pages
-                </Text>
-                <Image
-                  source={require('../../../assets/images/single_dot3x.png')}
-                  resizeMode={'contain'}
-                  style={StyleSheet.flatten([
-                    styles.dotImageSize,
-                    {
-                      display:
-                        showPageCount != undefined
-                          ? showPageCount &&
-                            (showDocumentFormat || showDocumentSize)
-                            ? 'flex'
-                            : 'none'
-                          : 'flex',
-                    },
-                  ])}
-                />
-                {/* document size text */}
-                <Text
-                  style={StyleSheet.flatten([
-                    styles.docDetail,
-                    documentDetailStyle,
-                    {
-                      display:
-                        showDocumentSize != undefined
-                          ? showDocumentSize
-                            ? 'flex'
-                            : 'none'
-                          : 'flex',
-                    },
-                  ])}>
-                     {/* // todo: remove static data */}
-                  278 Kb
-                </Text>
-                <Image
-                  source={require('../../../assets/images/single_dot3x.png')}
-                  resizeMode={'contain'}
-                  style={StyleSheet.flatten([
-                    styles.dotImageSize,
-                    {
-                      display:
-                        (showDocumentSize && showDocumentFormat) != undefined
-                          ? showDocumentSize && showDocumentFormat
-                            ? 'flex'
-                            : 'none'
-                          : 'flex',
-                    },
-                  ])}
-                />
-                {/* document format text */}
-                <Text
-                  style={StyleSheet.flatten([
-                    styles.docDetail,
-                    documentDetailStyle,
-                    {
-                      textTransform: 'uppercase',
-                      display:
-                        showDocumentFormat != undefined
-                          ? showDocumentFormat
-                            ? 'flex'
-                            : 'none'
-                          : 'flex',
-                    },
-                  ])}>
-                  {item?.attachmentMeta?.format}
-                </Text>
+                    278 Kb
+                  </Text>
+                  <Image
+                    source={require('../../../assets/images/single_dot3x.png')}
+                    resizeMode={'contain'}
+                    style={StyleSheet.flatten([
+                      styles.dotImageSize,
+                      {
+                        display:
+                          (showDocumentSize && showDocumentFormat) != undefined
+                            ? showDocumentSize && showDocumentFormat
+                              ? 'flex'
+                              : 'none'
+                            : 'flex',
+                      },
+                    ])}
+                  />
+                  {/* document format text */}
+                  <Text
+                    style={StyleSheet.flatten([
+                      styles.docDetail,
+                      documentDetailStyle,
+                      {
+                        textTransform: 'uppercase',
+                        display:
+                          showDocumentFormat != undefined
+                            ? showDocumentFormat
+                              ? 'flex'
+                              : 'none'
+                            : 'flex',
+                      },
+                    ])}>
+                    {item?.attachmentMeta?.format}
+                  </Text>
+                </View>
               </View>
+              {/* this renders the cancel button */}
+              {showCancel && (
+                <LMButton
+                onTap={onCancel ? () => onCancel(index) : () => {}}
+                buttonStyle={{
+                  marginLeft: 12,
+                  borderWidth: 0,
+                  marginTop: 8
+                }}
+                icon={{assetPath: require('../../../assets/images/crossCircle_icon3x.png'), type:'png', height:22, width:22}}
+              />
+              )}
             </View>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
       ))}
     </View>
   );
@@ -176,7 +195,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     borderRadius: 5,
     paddingVertical: 12,
-    paddingHorizontal: 15,
+    paddingHorizontal: 5,
     marginVertical: 5,
   },
   pdfIcon: {
@@ -189,12 +208,12 @@ const styles = StyleSheet.create({
   },
   docTitle: {
     color: STYLES.$COLORS.TEXT_COLOR,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '500',
   },
   docDetail: {
     color: STYLES.$COLORS.TEXT_COLOR,
-    fontSize: 14,
+    fontSize: 13,
   },
   dotImageSize: {
     width: layout.normalize(6),

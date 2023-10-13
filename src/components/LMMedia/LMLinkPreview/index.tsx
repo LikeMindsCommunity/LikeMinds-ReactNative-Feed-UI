@@ -9,6 +9,7 @@ import {
 import React from 'react';
 import {LMLinkPreviewProps} from './types';
 import STYLES from '../../../constants/constants';
+import LMButton from '../../../base/LMButton';
 
 const LMLinkPreview = ({
   attachments,
@@ -22,6 +23,8 @@ const LMLinkPreview = ({
   showDescription,
   showImage,
   showTitle,
+  showCancel,
+  onCancel,
 }: LMLinkPreviewProps) => {
   const previewAttachmentData = attachments[0].attachmentMeta.ogTags;
   return (
@@ -40,15 +43,15 @@ const LMLinkPreview = ({
           linkPreviewBoxStyle,
         ])}>
         <Image
-          source={attachments && {uri: previewAttachmentData?.image}}
-          style={StyleSheet.flatten([styles.previewImage, linkImageStyle, {
-            display:
-              showImage != undefined
-                ? showImage
-                  ? 'flex'
-                  : 'none'
-                : 'flex',
-          }])}
+          source={(attachments && previewAttachmentData?.image) ? {uri: previewAttachmentData?.image} : require('../../../assets/images/crossCircle_icon3x.png')}
+          style={StyleSheet.flatten([
+            styles.previewImage,
+            linkImageStyle,
+            {
+              display:
+                showImage != undefined ? (showImage ? 'flex' : 'none') : 'flex',
+            },
+          ])}
         />
         {/* link preview data */}
         <View style={styles.previewDetailView}>
@@ -101,6 +104,24 @@ const LMLinkPreview = ({
             {previewAttachmentData?.url}
           </Text>
         </View>
+        {/* this renders the cancel button */}
+        {showCancel && (
+          <View style={{position: 'absolute', right: 15, top: 15}}>
+            <LMButton
+              onTap={onCancel ? () => onCancel() : () => {}}
+              buttonStyle={{
+                borderWidth: 0,
+                backgroundColor: 'transparent',
+              }}
+              icon={{
+                assetPath: require('../../../assets/images/crossCircle_icon3x.png'),
+                type: 'png',
+                height: 22,
+                width: 22,
+              }}
+            />
+          </View>
+        )}
       </View>
     </TouchableOpacity>
   );

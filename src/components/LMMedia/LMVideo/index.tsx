@@ -11,8 +11,9 @@ import Video from 'react-native-video';
 import {LMVideoProps} from './types';
 import LMLoader from '../../../base/LMLoader';
 import layout from '../../../utils/layout';
-import STYLES from '../../../constants/constants'
-import { MEDIA_FETCH_ERROR } from '../../../constants/strings';
+import STYLES from '../../../constants/constants';
+import {MEDIA_FETCH_ERROR} from '../../../constants/strings';
+import LMButton from '../../../base/LMButton';
 
 const LMVideo = ({
   videoUrl,
@@ -30,6 +31,8 @@ const LMVideo = ({
   playButton,
   errorWidget,
   currentVideoUrl,
+  showCancel,
+  onCancel,
 }: LMVideoProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -109,6 +112,24 @@ const LMVideo = ({
           } // this handles the mute of the video according to the video being played
         />
       </TouchableWithoutFeedback>
+       {/* this renders the cancel button */}
+      {showCancel && (
+        <View style={{position: 'absolute', right: 15, top: 15, zIndex:7000}}>
+          <LMButton
+            onTap={onCancel ? () => onCancel(videoUrl) : () => {}}
+            buttonStyle={{
+              borderWidth: 0,
+              backgroundColor: 'transparent',
+            }}
+            icon={{
+              assetPath: require('../../../assets/images/crossCircle_icon3x.png'),
+              type: 'png',
+              height: 22,
+              width: 22,
+            }}
+          />
+        </View>
+      )}
 
       {/* this renders the controls view */}
       {viewController && (

@@ -12,4 +12,6 @@ export interface LMLinkPreviewProps {
   showDescription?: boolean; // this represents if the link description has to be displayed in the preview or not
   showImage?: boolean; // this represents if the link image has to be displayed in the preview or not
   showTitle?: boolean // this represents if the link title has to be displayed in the preview or not
+  showCancel?: boolean; // this represents the visibility of cancel button
+  onCancel?: () => void // callback function that executes on click of cancel button
 }

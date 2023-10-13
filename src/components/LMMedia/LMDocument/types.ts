@@ -12,4 +12,6 @@ export interface LMDocumentProps {
   documentDetailStyle?: TextStyle; // this represents the style of the description text of the document
   documentViewStyle?: ViewStyle; // this represents the style of the document view
   onTap?: () => void; // this represents the function to be executed on click over the document
+  showCancel?: boolean; // this represents the visibility of cancel button
+  onCancel?: (index: number) => void // callback function that executes on click of cancel button
 }

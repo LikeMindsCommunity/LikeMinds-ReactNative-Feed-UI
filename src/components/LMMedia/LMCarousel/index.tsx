@@ -16,6 +16,8 @@ const LMCarousel = ({
   inactiveIndicatorStyle,
   imageItem,
   videoItem,
+  showCancel,
+  onCancel
 }: LMCarouselProps) => {
   return (
     <SwiperFlatList
@@ -39,7 +41,7 @@ const LMCarousel = ({
         {backgroundColor: STYLES.$COLORS.LIGHT_GREY},
         inactiveIndicatorStyle,
       ])}
-      renderItem={({item}) => (
+      renderItem={({item, index}) => (
         <>
           {/* this section render image */}
           {item?.attachmentType === IMAGE_ATTACHMENT_TYPE && (
@@ -53,6 +55,8 @@ const LMCarousel = ({
               aspectRatio={imageItem?.aspectRatio}
               loaderWidget={imageItem?.loaderWidget}
               errorWidget={imageItem?.errorWidget}
+              showCancel={imageItem?.showCancel ? imageItem?.showCancel : showCancel}
+              onCancel={onCancel ? () => onCancel(index) : () => {imageItem?.onCancel}}
             />
           )}
           {/* this section render video */}
@@ -73,6 +77,8 @@ const LMCarousel = ({
               pauseButton={videoItem?.pauseButton}
               autoPlay={videoItem?.autoPlay}
               currentVideoUrl={videoItem?.currentVideoUrl}
+              showCancel={videoItem?.showCancel ? videoItem?.showCancel : showCancel}
+              onCancel={onCancel ? () => onCancel(index) : () => {imageItem?.onCancel}}
             />
           )}
         </>

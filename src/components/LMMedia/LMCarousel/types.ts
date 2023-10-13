@@ -9,5 +9,7 @@ export interface LMCarouselProps {
   activeIndicatorStyle?: ViewStyle; // this represents the style for the active indicator of pagination
   inactiveIndicatorStyle?: ViewStyle; // this represents the style for the inactive indicator of pagination
   imageItem?: LMImageProps; // this represents the props for LMImage component
-  videoItem?: LMVideoProps; // this represents the props for LMVideo component
+  videoItem?: LMVideoProps; // this represents the props for LMVideo component,
+  showCancel?: boolean; // this represents the visibility of cancel button
+  onCancel?: (index: number) => void // callback function that executes on click of cancel button
 }

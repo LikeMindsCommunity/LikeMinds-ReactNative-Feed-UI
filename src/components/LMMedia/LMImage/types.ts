@@ -11,4 +11,6 @@ export interface LMImageProps {
   aspectRatio?: 0 | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | 0.6 | 0.7 | 0.8 | 0.9 | 1; // ratio of the image between 0 to 1
   loaderWidget?: ReactNode; // this represents the loader component
   errorWidget?: ReactNode; // this represents the error component
+  showCancel?: boolean; // this represents the visibility of cancel button
+  onCancel?: (index: any) => void // callback function that executes on click of cancel button
 }
