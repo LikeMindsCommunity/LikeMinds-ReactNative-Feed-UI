@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
   Image,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {forwardRef, useEffect, useState} from 'react';
 import Video from 'react-native-video';
 import {LMVideoProps} from './types';
 import LMLoader from '../../../base/LMLoader';
@@ -15,29 +15,35 @@ import STYLES from '../../../constants/constants';
 import {MEDIA_FETCH_ERROR} from '../../../constants/strings';
 import LMButton from '../../../base/LMButton';
 
-const LMVideo = ({
-  videoUrl,
-  height,
-  width,
-  videoStyle,
-  boxFit,
-  boxStyle,
-  aspectRatio,
-  showControls,
-  autoPlay,
-  looping,
-  loaderWidget,
-  pauseButton,
-  playButton,
-  errorWidget,
-  currentVideoUrl,
-  showCancel,
-  onCancel,
-}: LMVideoProps) => {
+const LMVideo = forwardRef((
+  {
+    videoUrl,
+    height,
+    width,
+    videoStyle,
+    boxFit,
+    boxStyle,
+    aspectRatio,
+    showControls,
+    autoPlay,
+    looping,
+    loaderWidget,
+    pauseButton,
+    playButton,
+    errorWidget,
+    currentVideoUrl,
+    showCancel,
+    onCancel,
+  }: LMVideoProps,
+  ref
+) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [playingStatus, setPlayingStatus] = useState(true);
   const [viewController, setViewController] = useState(showControls);
+  // let current = ref?.current
+  // console.log('b',current)
+  // console.log('d',videoUrl)
 
   // this throw error and ask for currentVideoUrl if auto play is set true
   if (autoPlay && !currentVideoUrl) {
@@ -47,16 +53,16 @@ const LMVideo = ({
   }
 
   // this handles the visibility of the player controls
-  useEffect(() => {
-    if (viewController) {
-      setTimeout(() => {
-        setViewController(false);
-      }, 3000);
-    }
-  }, [viewController]);
+  // useEffect(() => {
+  //   if (viewController) {
+  //     setTimeout(() => {
+  //       setViewController(false);
+  //     }, 3000);
+  //   }
+  // }, [viewController]);
 
   return (
-    <View style={StyleSheet.flatten([boxStyle, defaultStyles.videoContainer])}>
+    <View style={StyleSheet.flatten([defaultStyles.videoContainer, boxStyle])}>
       {/* this renders the loader until the first picture of video is displayed */}
       {loading ? (
         <View style={[defaultStyles.videoStyle, defaultStyles.loaderView]}>
@@ -78,6 +84,7 @@ const LMVideo = ({
       {/* this renders the video */}
       <TouchableWithoutFeedback onPress={() => setViewController(true)}>
         <Video
+        ref={() => ref} 
           source={{uri: videoUrl}}
           key={videoUrl}
           onReadyForDisplay={() => setLoading(false)}
@@ -107,14 +114,14 @@ const LMVideo = ({
                 ? false
                 : true
               : playingStatus
-              ? false
-              : true
+              ? true
+              : false
           } // this handles the mute of the video according to the video being played
         />
       </TouchableWithoutFeedback>
-       {/* this renders the cancel button */}
+      {/* this renders the cancel button */}
       {showCancel && (
-        <View style={{position: 'absolute', right: 15, top: 15, zIndex:7000}}>
+        <View style={{position: 'absolute', right: 15, top: 15, zIndex: 7000}}>
           <LMButton
             onTap={onCancel ? () => onCancel(videoUrl) : () => {}}
             buttonStyle={{
@@ -133,7 +140,7 @@ const LMVideo = ({
 
       {/* this renders the controls view */}
       {viewController && (
-        <TouchableOpacity
+        <TouchableOpacity activeOpacity={0.8}
           onPress={() => setViewController(false)}
           style={[
             defaultStyles.videoStyle,
@@ -143,7 +150,7 @@ const LMVideo = ({
               alignItems: 'center',
             },
           ]}>
-          <TouchableOpacity
+          <TouchableOpacity activeOpacity={0.8}
             style={{zIndex: 5000}}
             onPress={() => {
               setPlayingStatus(!playingStatus);
@@ -173,7 +180,7 @@ const LMVideo = ({
       )}
     </View>
   );
-};
+});
 
 const defaultStyles = StyleSheet.create({
   videoContainer: {

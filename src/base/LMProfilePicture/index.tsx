@@ -14,7 +14,7 @@ const LMProfilePicture = ({
   profilePictureStyle,
 }: LMProfilePictureProps) => {
   return (
-    <TouchableOpacity
+    <TouchableOpacity activeOpacity={0.8}
       disabled={onTap ? false : true}
       onPress={() => (onTap ? onTap() : null)}>
       {imageUrl ? (

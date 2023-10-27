@@ -7,6 +7,7 @@ interface LMUserUI {
     sdkClientInfo: LMSDKClientInfoUI;
     uuid: string;
     isGuest: boolean;
-    isDeleted: boolean;
+    updatedAt: number;
     customTitle: string;
+    organisationName: string | null
 }

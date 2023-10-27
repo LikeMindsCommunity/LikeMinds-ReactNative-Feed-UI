@@ -8,7 +8,7 @@ import STYLES from '../../constants/constants';
 import LMIcon from '../../base/LMIcon';
 
 const LMMemberListItem = ({
-  user,
+  likes,
   profilePictureProps,
   nameProps,
   customTitleProps,
@@ -17,9 +17,9 @@ const LMMemberListItem = ({
 }: LMMemberListItemProps) => {
   //creating profile picture props as per customization
   const updatedProfilePictureProps = {
-        fallbackText: user.name,
+        fallbackText: likes.user.name,
         size: profilePictureProps?.size? profilePictureProps.size : 50,
-        imageUrl: user.imageUrl,
+        imageUrl: likes.user.imageUrl,
         onTap: profilePictureProps?.onTap,
         fallbackTextStyle: profilePictureProps?.fallbackTextStyle,
         fallbackTextBoxStyle: profilePictureProps?.fallbackTextBoxStyle,
@@ -27,17 +27,17 @@ const LMMemberListItem = ({
       };
   //creating user name props as per customization
   const updatedNameProps =  {
-        text: user.name,
+        text: likes.user.name,
         textStyle: nameProps?.textStyle,
       };
   //creating custom title props as per customization
   const updatedCustomTitleProps =  {
-        text: user.customTitle,
+        text: likes.user.customTitle,
         textStyle: customTitleProps?.textStyle
       };
 
   return (
-    <TouchableOpacity onPress={() => (onTap ? onTap(user) : null)}>
+    <TouchableOpacity activeOpacity={0.8} onPress={() => (onTap ? onTap(likes.user) : null)}>
       <View style={StyleSheet.flatten([styles.container, boxStyle])}>
         {/* avatar view */}
         <LMProfilePicture {...updatedProfilePictureProps} />
@@ -50,7 +50,7 @@ const LMMemberListItem = ({
           ])}
         />
         {/* member title */}
-        {user.customTitle && (
+        {likes.user.customTitle && (
           <>
             <LMIcon
               assetPath={require('../../assets/images/single_dot3x.png')}

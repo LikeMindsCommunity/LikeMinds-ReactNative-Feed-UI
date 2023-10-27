@@ -1,5 +1,5 @@
-import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import React, {forwardRef} from 'react';
 import LMPostHeader from '../LMPostHeader';
 import LMPostContent from '../LMPostContent';
 import LMPostMedia from '../LMPostMedia';
@@ -7,20 +7,18 @@ import LMPostFooter from '../LMPostFooter';
 import {LMPostProps} from './types';
 import layout from '../../../utils/layout';
 import STYLES from '../../../constants/constants';
+import {LINK_ATTACHMENT_TYPE} from '../../../constants/strings';
 
-const LMPost = ({
-  post,
-  headerProps,
-  contentProps,
-  mediaProps,
-  footerProps,
-}: LMPostProps) => {
+const LMPost = forwardRef(function LMPost(
+  {post, headerProps, contentProps, mediaProps, footerProps}: LMPostProps,
+  ref,
+) {
   //creating header props as per customization
   const updatedHeaderProps = {
     post: post,
     profilePicture: {
-      fallbackText: post.user.name,
-      imageUrl: post.user.imageUrl,
+      fallbackText: post?.user?.name,
+      imageUrl: post?.user?.imageUrl,
       size: headerProps?.profilePicture?.size,
       onTap: headerProps?.profilePicture?.onTap,
       fallbackTextStyle: headerProps?.profilePicture?.fallbackTextStyle,
@@ -28,8 +26,8 @@ const LMPost = ({
       profilePictureStyle: headerProps?.profilePicture?.profilePictureStyle,
     },
     postMenu: {
-      postId: post.id,
-      menuItems: post.menuItems,
+      postId: post?.id,
+      menuItems: post?.menuItems,
       onSelected: headerProps?.postMenu.onSelected
         ? headerProps.postMenu.onSelected
         : () => {},
@@ -48,20 +46,20 @@ const LMPost = ({
     },
     onTap: headerProps?.onTap ? headerProps.onTap : () => {},
     createdAt: {
-      text: `${post.createdAt}`,
+      text: `${post?.createdAt}`,
       textStyle: headerProps?.createdAt?.textStyle,
     },
     titleText: {
-      text: post.user.name,
+      text: post?.user?.name,
       textStyle: headerProps?.titleText?.textStyle,
     },
-    isEdited: post.isEdited,
+    isEdited: post?.isEdited,
     showMemberStateLabel: headerProps?.showMemberStateLabel,
     memberState: headerProps?.memberState,
     memberStateViewStyle: headerProps?.memberStateViewStyle,
     memberStateTextStyle: headerProps?.memberStateTextStyle,
     postHeaderViewStyle: headerProps?.postHeaderViewStyle,
-    isPinned: post.isPinned,
+    isPinned: post?.isPinned,
     showMenuIcon: headerProps?.showMenuIcon,
     pinIcon: headerProps?.pinIcon,
     menuIcon: headerProps?.menuIcon,
@@ -69,10 +67,10 @@ const LMPost = ({
 
   //creating footer props as per customization
   const updatedFooterProps = {
-    isLiked: post.isLiked,
-    isSaved: post.isSaved,
-    likesCount: post.likesCount,
-    commentsCount: post.commentsCount,
+    isLiked: footerProps?.isLiked ? footerProps.isLiked : post?.isLiked,
+    isSaved: post?.isSaved,
+    likesCount: post?.likesCount,
+    commentsCount: post?.commentsCount,
     showBookMarkIcon: footerProps?.showBookMarkIcon,
     showShareIcon: footerProps?.showShareIcon,
     footerBoxStyle: footerProps?.footerBoxStyle,
@@ -85,8 +83,8 @@ const LMPost = ({
 
   //creating post content props as per customization
   const updatedContentProps = {
-    text: post.text,
-    linkData: post.attachments,
+    text: post?.text,
+    linkData: post?.attachments,
     textStyle: contentProps?.textStyle,
     linkStyle: contentProps?.linkStyle,
     visibleLines: contentProps?.visibleLines,
@@ -95,7 +93,7 @@ const LMPost = ({
   };
   //creating post media props as per customization
   const updatedMediaProps = {
-    attachments: post.attachments,
+    attachments: post?.attachments ? post?.attachments : [],
     postMediaStyle: mediaProps?.postMediaStyle,
     imageProps: mediaProps?.imageProps,
     videoProps: mediaProps?.videoProps,
@@ -108,14 +106,21 @@ const LMPost = ({
       {/* post header */}
       <LMPostHeader {...updatedHeaderProps} />
       {/* post content */}
-      {post.text && <LMPostContent {...updatedContentProps} />}
+      {(post?.text ||
+        post?.attachments?.find(
+          item => item?.attachmentType === LINK_ATTACHMENT_TYPE,
+        )?.attachmentType === LINK_ATTACHMENT_TYPE) && (
+        <LMPostContent {...updatedContentProps} />
+      )}
       {/* post media */}
-      {post.attachments.length > 0 && <LMPostMedia {...updatedMediaProps} />}
+      {post?.attachments && post?.attachments.length > 0 && 
+      <LMPostMedia {...updatedMediaProps} ref={ref} />
+      }
       {/* post footer */}
-      <LMPostFooter {...updatedFooterProps} />
+      <LMPostFooter {...updatedFooterProps}  />
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   mainContainer: {

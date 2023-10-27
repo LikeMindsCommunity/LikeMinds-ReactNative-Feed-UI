@@ -99,7 +99,7 @@ const LMCommentItem = ({
           <LMText {...updatedContentProps} />
           {/* show more button section */}
           {showMoreButton && (
-            <TouchableOpacity
+            <TouchableOpacity activeOpacity={0.8} hitSlop={{top:10, bottom:10, left:10, right:10}}
               disabled={showText ? true : false}
               onPress={() => setShowText(showText => !showText)}
               accessibilityRole="button">

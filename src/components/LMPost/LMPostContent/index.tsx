@@ -1,9 +1,9 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Linking, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import {LMPostContentProps} from './types';
-import STYLES from '../../../constants/constants';
 import {MAX_DEFAULT_POST_CONTENT_LINES} from '../../../constants/strings';
 import LMText from '../../../base/LMText';
+import { DETECT_LINK_REGEX } from '../../../constants/regex';
 
 const LMPostContent = ({
   text,
@@ -39,42 +39,50 @@ const LMPostContent = ({
     }
   }, [showText, showMoreButton]);
 
-  // this renders the attached link's urls
-  const renderLinks = () => {
-    return linkData?.map(item => {
-      return (
-        <View key={Math.random()}>
-          {item.attachmentMeta.ogTags.url && (
-            <LMText
-              text={item.attachmentMeta.ogTags.url}
-              textStyle={StyleSheet.flatten([styles.linkText, linkStyle])}
-            />
-          )}
-        </View>
-      );
+  
+  // this renders the text with highlighted link's urls
+  const highlightLinks = (text: string) => {
+    const regex = DETECT_LINK_REGEX;
+    const parts = text.split(' ');
+
+    return parts?.map((part, index) => {
+      if (regex.test(part)) {
+        return (
+          <Text
+            key={index}
+            style={StyleSheet.flatten([styles.linkText, linkStyle])}
+            onPress={() => Linking.openURL(part)}>
+            {part}{" "}
+          </Text>
+        );
+      } else {
+        return (
+          <LMText
+            textStyle={StyleSheet.flatten([styles.contentText, textStyle])}
+            key={index}
+            text={`${part}${' '}`}
+          />
+        );
+      }
     });
   };
 
   return (
-    <View style={StyleSheet.flatten([postContentViewStyle, {paddingHorizontal:16, paddingTop: 15}])}>
+    <View
+      style={StyleSheet.flatten([
+        postContentViewStyle,
+        {paddingHorizontal: 16, paddingTop: 15},
+      ])}>
       {/* post content text */}
-      <LMText
-        text={text}
-        maxLines={numberOfLines}
-        textStyle={StyleSheet.flatten([styles.contentText, textStyle])}
-        onTextLayout={e => onTextLayout(e)}
-      />
-      {/* link urls section */}
-      {showMoreButton ? (
-        showText ? (
-          <>{renderLinks()}</>
-        ) : null
-      ) : (
-        <>{renderLinks()}</>
-      )}
+      <Text
+        numberOfLines={numberOfLines}
+        key={Math.random()}
+        onTextLayout={e => onTextLayout(e)}>
+        {highlightLinks(text)}
+      </Text>
       {/* show more button section */}
       {showMoreButton && (
-        <TouchableOpacity
+        <TouchableOpacity activeOpacity={0.8} hitSlop={{top:10, bottom:10, left:10, right:10}}
           disabled={showText ? true : false}
           onPress={() => setShowText(showText => !showText)}
           accessibilityRole="button">
@@ -84,9 +92,9 @@ const LMPostContent = ({
                 ? ''
                 : showMoreText?.text
                 ? showMoreText.text
-                : 'Show More'
+                : 'See More'
             }
-            textStyle={StyleSheet.flatten([showMoreText?.textStyle])}
+            textStyle={StyleSheet.flatten([styles.showMoreText,showMoreText?.textStyle])}
           />
         </TouchableOpacity>
       )}
@@ -97,16 +105,19 @@ const LMPostContent = ({
 const styles = StyleSheet.create({
   contentText: {
     fontSize: 16,
-    fontWeight:'400',
+    fontWeight: '400',
     color: '#666666',
-    lineHeight:20
+    lineHeight: 20,
   },
   linkText: {
     fontSize: 16,
-    fontWeight:'400',
+    fontWeight: '400',
     color: '#007AFF',
-    lineHeight:20
+    lineHeight: 20,
   },
+  showMoreText: {
+    color: '#9B9B9B'
+  }
 });
 
 export default LMPostContent;

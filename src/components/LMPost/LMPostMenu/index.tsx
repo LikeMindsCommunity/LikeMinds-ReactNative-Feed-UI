@@ -24,7 +24,7 @@ const LMPostMenu = ({
   menuViewStyle,
   backdropColor,
 }: LMPostMenuProps) => {
-   return (
+  return (
     <Modal
       visible={modalVisible}
       animationType="fade"
@@ -47,16 +47,16 @@ const LMPostMenu = ({
               top:
                 modalPosition.y > layout.window.height / 2
                   ? Platform.OS === 'ios'
-                    ? modalPosition.y - 150
+                    ? menuItems.length > 1 ? modalPosition.y -110 : modalPosition.y - 65
                     : modalPosition.y - 15
                   : modalPosition.y - 10,
             },
           ])}>
           {/* Menu List Items */}
           {menuItems &&
-            menuItems.map((item, index) => {
+            menuItems?.map((item, index) => {
               return (
-                <TouchableOpacity
+                <TouchableOpacity activeOpacity={0.8}
                   key={index}
                   onPress={() => {
                     onSelected(postId, item.id), onCloseModal();
@@ -89,6 +89,10 @@ const styles = StyleSheet.create({
     minWidth: '55%',
     position: 'absolute',
     right: 15,
+    shadowOffset: {width:2, height: 2},
+    shadowColor: 'black',
+    shadowOpacity: 0.2,
+    borderRadius:5,
   },
   listText: {
     fontSize: 16,

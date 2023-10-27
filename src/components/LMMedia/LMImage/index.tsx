@@ -47,7 +47,7 @@ const LMImage = ({
       />
       {/* this renders the cancel button */}
       {showCancel && (
-                <View style={{position:'absolute', right:15, top:20}}>
+                <View style={{position:'absolute', right:15, top:20, zIndex:2000}}>
                   <LMButton
                 onTap={onCancel ? () => onCancel(imageUrl) : () => {}}
                 buttonStyle={{
@@ -60,7 +60,7 @@ const LMImage = ({
               )}
       {/* this renders the error whenever the media is not fetched */}
       {error ? (
-        <View style={[defaultStyles.imageStyle, defaultStyles.errorView]}>
+        <View style={StyleSheet.flatten([defaultStyles.imageStyle, defaultStyles.errorView, imageStyle])}>
           {errorWidget ? (
             errorWidget
           ) : (

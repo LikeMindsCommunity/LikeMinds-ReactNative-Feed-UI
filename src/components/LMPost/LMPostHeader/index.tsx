@@ -46,11 +46,11 @@ const LMPostHeader = ({
   return (
     <View style={StyleSheet.flatten([styles.postHeader, postHeaderViewStyle])}>
       {/* author detail section */}
-      <TouchableOpacity onPress={() => onTap(post.user)}>
+      <TouchableOpacity activeOpacity={0.8} onPress={() => onTap(post?.user)}>
         <View style={styles.alignRow}>
           <LMProfilePicture
-            fallbackText={post.user.name}
-            imageUrl={post.user.imageUrl}
+            fallbackText={post?.user?.name}
+            imageUrl={post?.user?.imageUrl}
             onTap={profilePicture?.onTap}
             size={profilePicture?.size}
             fallbackTextStyle={profilePicture?.fallbackTextStyle}
@@ -64,7 +64,7 @@ const LMPostHeader = ({
               <LMText
                 text={titleText?.text ? titleText.text : ''}
                 maxLines={titleText?.maxLines}
-                selectable={titleText?.selectable}
+                selectable={false}
                 textStyle={StyleSheet.flatten([
                   styles.postAuthorName,
                   titleText?.textStyle,
@@ -91,8 +91,8 @@ const LMPostHeader = ({
             {/* author subHeading */}
             <View style={styles.alignRow}>
               <LMText
-                text={`${timeStamp(Number(createdAt?.text))}`}
-                selectable={createdAt?.selectable}
+                text={timeStamp(Number(createdAt?.text)) === undefined ? 'now' : `${timeStamp(Number(createdAt?.text))}`}
+                selectable={false}
                 maxLines={createdAt?.maxLines}
                 textStyle={StyleSheet.flatten([
                   styles.postedDetail,
@@ -100,7 +100,7 @@ const LMPostHeader = ({
                 ])}
               />
               {/* checks if the post is edited or not */}
-              {post.isEdited && (
+              {post?.isEdited && (
                 <>
                   <LMIcon
                     assetPath={require('../../../assets/images/single_dot3x.png')}
@@ -108,6 +108,7 @@ const LMPostHeader = ({
                     width={styles.dotImageSize.width}
                     height={styles.dotImageSize.height}
                     iconStyle={styles.dotImageSize}
+                    color='#0F1E3D66'
                   />
                   <LMText
                     text="Edited"
@@ -127,10 +128,10 @@ const LMPostHeader = ({
       <View
         style={[
           styles.topRightView,
-          post.isPinned && {justifyContent: 'space-between'},
+          post?.isPinned && {justifyContent: 'space-between'},
         ]}>
         {/* pin icon section */}
-        {post.isPinned && (
+        {post?.isPinned && (
           <>
             {
               <LMIcon
@@ -152,7 +153,7 @@ const LMPostHeader = ({
           </>
         )}
         {/* menu icon section */}
-        <TouchableOpacity onPress={onThreedotsClick}>
+        <TouchableOpacity activeOpacity={0.8} onPress={onThreedotsClick} hitSlop={{top:10, bottom:10, left:10, right:10}}>
           <>
             {showMenuIcon && (
               <LMIcon
@@ -177,15 +178,15 @@ const LMPostHeader = ({
 
       {/* menu list modal */}
       <LMPostMenu
-        postId={post.id}
-        menuItems={post.menuItems}
-        onSelected={postMenu.onSelected}
+        postId={post?.id}
+        menuItems={post?.menuItems}
+        onSelected={postMenu?.onSelected}
         modalPosition={modalPosition}
         modalVisible={showPostMenuModal}
         onCloseModal={closePostMenuModal}
-        menuItemTextStyle={postMenu.menuItemTextStyle}
-        menuViewStyle={postMenu.menuViewStyle}
-        backdropColor={postMenu.backdropColor}
+        menuItemTextStyle={postMenu?.menuItemTextStyle}
+        menuViewStyle={postMenu?.menuViewStyle}
+        backdropColor={postMenu?.backdropColor}
       />
     </View>
   );
@@ -232,13 +233,13 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   dotImageSize: {
-    width: layout.normalize(6),
-    height: layout.normalize(6),
+    width: layout.normalize(5),
+    height: layout.normalize(5),
     marginHorizontal: 5,
     resizeMode: 'contain',
   },
   topRightView: {
-    width: '20%',
+    width: '16%',
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },

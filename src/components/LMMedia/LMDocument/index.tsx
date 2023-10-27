@@ -6,12 +6,13 @@ import {
   Image,
   Linking,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import layout from '../../../utils/layout';
 import {LMDocumentProps} from './types';
 import LMIcon from '../../../base/LMIcon';
 import STYLES from '../../../constants/constants';
 import LMButton from '../../../base/LMButton';
+import LMText from '../../../base/LMText';
 
 const LMDocument = ({
   attachments,
@@ -26,13 +27,36 @@ const LMDocument = ({
   defaultIconSize,
   showCancel,
   onCancel,
+  showMoreText=true
 }: LMDocumentProps) => {
+  function formatBytes(bytes: any, decimals = 2) {
+    if (!+bytes) return '0 Bytes';
+
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+  }
+  const [showFullList, setShowFullList] = useState(false);
+
+  // Define the number of items to display initially
+  const initialItemCount = 2;
+
+  // Use data.slice to limit the items displayed
+  const displayedData = showMoreText ?  showFullList
+    ? attachments
+    : attachments.slice(0, initialItemCount) : attachments;
+
   return (
     <View>
-      {attachments.map((item, index) => (
+      {displayedData?.map((item, index) => (
         // document View
         <View key={Math.random()}>
           <TouchableOpacity
+            activeOpacity={0.8}
             onPress={() => {
               Linking.openURL(
                 item?.attachmentMeta?.url ? item?.attachmentMeta?.url : '',
@@ -71,9 +95,16 @@ const LMDocument = ({
                 />
               )}
               {/* document detail view */}
-              <View style={{marginLeft: 5, width:'72%'}}>
+              <View
+                style={{
+                  marginLeft: 12,
+                  width: showCancel ? '72%' : '90%',
+                  height: 36,
+                }}>
                 {/* document title */}
                 <Text
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
                   style={StyleSheet.flatten([
                     styles.docTitle,
                     documentTitleStyle,
@@ -82,37 +113,41 @@ const LMDocument = ({
                 </Text>
                 <View style={styles.alignRow}>
                   {/* document page count text */}
-                  <Text
-                    style={StyleSheet.flatten([
-                      styles.docDetail,
-                      documentDetailStyle,
-                      {
-                        display:
-                          showPageCount != undefined
-                            ? showPageCount
-                              ? 'flex'
-                              : 'none'
-                            : 'flex',
-                      },
-                    ])}>
-                    {/* // todo: remove static data */}2 Pages
-                  </Text>
-                  <Image
-                    source={require('../../../assets/images/single_dot3x.png')}
-                    resizeMode={'contain'}
-                    style={StyleSheet.flatten([
-                      styles.dotImageSize,
-                      {
-                        display:
-                          showPageCount != undefined
-                            ? showPageCount &&
-                              (showDocumentFormat || showDocumentSize)
-                              ? 'flex'
-                              : 'none'
-                            : 'flex',
-                      },
-                    ])}
-                  />
+                  {item?.attachmentMeta?.pageCount ? (
+                    <>
+                      <Text
+                        style={StyleSheet.flatten([
+                          styles.docDetail,
+                          documentDetailStyle,
+                          {
+                            display:
+                              showPageCount != undefined
+                                ? showPageCount
+                                  ? 'flex'
+                                  : 'none'
+                                : 'flex',
+                          },
+                        ])}>
+                        {item?.attachmentMeta?.pageCount}
+                      </Text>
+                      <Image
+                        source={require('../../../assets/images/single_dot3x.png')}
+                        resizeMode={'contain'}
+                        style={StyleSheet.flatten([
+                          styles.dotImageSize,
+                          {
+                            display:
+                              showPageCount != undefined
+                                ? showPageCount &&
+                                  (showDocumentFormat || showDocumentSize)
+                                  ? 'flex'
+                                  : 'none'
+                                : 'flex',
+                          },
+                        ])}
+                      />
+                    </>
+                  ) : null}
                   {/* document size text */}
                   <Text
                     style={StyleSheet.flatten([
@@ -127,8 +162,7 @@ const LMDocument = ({
                             : 'flex',
                       },
                     ])}>
-                    {/* // todo: remove static data */}
-                    278 Kb
+                    {formatBytes(item.attachmentMeta.size)}
                   </Text>
                   <Image
                     source={require('../../../assets/images/single_dot3x.png')}
@@ -160,26 +194,43 @@ const LMDocument = ({
                             : 'flex',
                       },
                     ])}>
-                    {item?.attachmentMeta?.format}
+                    PDF
                   </Text>
                 </View>
               </View>
               {/* this renders the cancel button */}
               {showCancel && (
                 <LMButton
-                onTap={onCancel ? () => onCancel(index) : () => {}}
-                buttonStyle={{
-                  marginLeft: 12,
-                  borderWidth: 0,
-                  marginTop: 8
-                }}
-                icon={{assetPath: require('../../../assets/images/crossCircle_icon3x.png'), type:'png', height:22, width:22}}
-              />
+                  onTap={onCancel ? () => onCancel(index) : () => {}}
+                  buttonStyle={{
+                    marginLeft: 30,
+                    borderWidth: 0,
+                  }}
+                  icon={{
+                    assetPath: require('../../../assets/images/crossCircle_icon3x.png'),
+                    type: 'png',
+                    height: 22,
+                    width: 22,
+                  }}
+                />
               )}
             </View>
           </TouchableOpacity>
         </View>
       ))}
+      {showMoreText && attachments.length > 2 && !showFullList && (
+        <TouchableOpacity
+          activeOpacity={0.8}
+          hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
+          onPress={() => setShowFullList(true)}
+          style={{paddingHorizontal: 15, marginTop: 8}}
+          accessibilityRole="button">
+          <LMText
+            text={`+ ${attachments.length - 2} More`}
+            textStyle={StyleSheet.flatten([styles.showMoreText])}
+          />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -194,31 +245,37 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginHorizontal: 15,
     borderRadius: 5,
-    paddingVertical: 12,
-    paddingHorizontal: 5,
+    paddingHorizontal: 15,
     marginVertical: 5,
+    height: 70,
+    alignItems: 'center',
   },
   pdfIcon: {
-    width: 50,
-    height: 50,
+    width: 28,
+    height: 36,
   },
   alignRow: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   docTitle: {
-    color: STYLES.$COLORS.TEXT_COLOR,
+    color: '#666666',
     fontSize: 16,
     fontWeight: '500',
   },
   docDetail: {
-    color: STYLES.$COLORS.TEXT_COLOR,
+    color: '#666666',
     fontSize: 13,
   },
   dotImageSize: {
-    width: layout.normalize(6),
-    height: layout.normalize(6),
+    width: layout.normalize(5),
+    height: layout.normalize(5),
     marginHorizontal: 5,
+    tintColor: '#666666',
+  },
+  showMoreText: {
+    fontSize: 16,
+    color: STYLES.$COLORS.THEME,
   },
 });
 

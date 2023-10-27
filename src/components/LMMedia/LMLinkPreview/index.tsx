@@ -10,6 +10,8 @@ import React from 'react';
 import {LMLinkPreviewProps} from './types';
 import STYLES from '../../../constants/constants';
 import LMButton from '../../../base/LMButton';
+import LMImage from '../LMImage';
+import layout from '../../../utils/layout';
 
 const LMLinkPreview = ({
   attachments,
@@ -26,9 +28,9 @@ const LMLinkPreview = ({
   showCancel,
   onCancel,
 }: LMLinkPreviewProps) => {
-  const previewAttachmentData = attachments[0].attachmentMeta.ogTags;
+  const previewAttachmentData = attachments[0].attachmentMeta?.ogTags;
   return (
-    <TouchableOpacity
+    <TouchableOpacity activeOpacity={0.8}
       style={styles.postMedia}
       onPress={() => {
         Linking.openURL(
@@ -42,17 +44,26 @@ const LMLinkPreview = ({
           styles.previewContainer,
           linkPreviewBoxStyle,
         ])}>
-        <Image
-          source={(attachments && previewAttachmentData?.image) ? {uri: previewAttachmentData?.image} : require('../../../assets/images/crossCircle_icon3x.png')}
-          style={StyleSheet.flatten([
-            styles.previewImage,
-            linkImageStyle,
-            {
-              display:
-                showImage != undefined ? (showImage ? 'flex' : 'none') : 'flex',
-            },
-          ])}
-        />
+        {attachments && previewAttachmentData?.image && (
+          <LMImage
+            imageUrl={previewAttachmentData?.image}
+            imageStyle={StyleSheet.flatten([
+              styles.previewImage,
+              linkImageStyle,
+              {
+                display:
+                  showImage != undefined
+                    ? showImage
+                      ? 'flex'
+                      : 'none'
+                    : 'flex',
+              },
+            ])}
+            height={220}
+            boxStyle={{borderRadius:8, width:'100%'}}
+            boxFit='contain'
+          />
+        )}
         {/* link preview data */}
         <View style={styles.previewDetailView}>
           {/* preview title */}
@@ -67,6 +78,7 @@ const LMLinkPreview = ({
                       ? 'flex'
                       : 'none'
                     : 'flex',
+                width: showCancel ? '92%' : '100%',
               },
             ])}>
             {previewAttachmentData?.title}
@@ -99,6 +111,7 @@ const LMLinkPreview = ({
                       ? 'flex'
                       : 'none'
                     : 'flex',
+                    textTransform:'lowercase'
               },
             ])}>
             {previewAttachmentData?.url}
@@ -106,7 +119,7 @@ const LMLinkPreview = ({
         </View>
         {/* this renders the cancel button */}
         {showCancel && (
-          <View style={{position: 'absolute', right: 15, top: 15}}>
+          <View style={{position: 'absolute', right: 12, top: 8}}>
             <LMButton
               onTap={onCancel ? () => onCancel() : () => {}}
               buttonStyle={{
@@ -143,7 +156,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 220,
     borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
+    borderTopRightRadius: 7
   },
   previewTitle: {
     fontWeight: '500',

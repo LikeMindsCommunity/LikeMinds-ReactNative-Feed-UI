@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import LMText from '../LMText';
 import LMIcon from '../LMIcon';
 import {LMButtonProps} from './types';
-import STYLES from '../../constants/constants'
+import STYLES from '../../constants/constants';
 
 const LMButton = ({
   text,
@@ -25,15 +25,19 @@ const LMButton = ({
   };
   return (
     <TouchableOpacity
+      hitSlop={{top: 10, bottom: 10}}
+      style={StyleSheet.flatten([defaultStyles.buttonViewStyle, buttonStyle])}
+      activeOpacity={0.8}
       onPress={() => {
         onTap(), activeStateHandler();
       }}>
       {/* button view */}
       <View
         style={StyleSheet.flatten([
-          defaultStyles.buttonViewStyle,
-          buttonStyle,
-          {flexDirection: placement === 'end' ? 'row-reverse' : 'row'},
+          {
+            flexDirection: placement === 'end' ? 'row-reverse' : 'row',
+            alignItems: 'center',
+          },
         ])}>
         {/* icon view */}
         {icon ? (
@@ -107,7 +111,7 @@ const defaultStyles = StyleSheet.create({
     borderColor: STYLES.$COLORS.BLACK,
     borderWidth: 1,
     justifyContent: 'center',
-    alignItems:'center',
+    alignItems: 'center',
     paddingVertical: 5,
     borderRadius: 5,
   },
