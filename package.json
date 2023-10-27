@@ -25,7 +25,6 @@
     "@tsconfig/react-native": "^3.0.0",
     "@types/react": "^18.0.24",
     "@types/react-test-renderer": "^18.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.8.0",
     "babel-jest": "29.2.1",
     "eslint": "^8.51.0",
     "eslint-plugin-react-native": "^4.1.0",
