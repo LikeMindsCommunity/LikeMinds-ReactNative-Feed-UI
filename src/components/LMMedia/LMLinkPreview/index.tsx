@@ -34,7 +34,7 @@ const LMLinkPreview = ({
       style={styles.postMedia}
       onPress={() => {
         Linking.openURL(
-          previewAttachmentData?.url ? previewAttachmentData.url : '',
+          previewAttachmentData?.url ? previewAttachmentData.url.includes('https://') ? previewAttachmentData.url : `https://${previewAttachmentData.url}` : '',
         ),
           onTap;
       }}>

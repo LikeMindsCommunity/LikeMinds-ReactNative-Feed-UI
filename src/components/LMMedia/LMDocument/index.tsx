@@ -13,6 +13,8 @@ import LMIcon from '../../../base/LMIcon';
 import STYLES from '../../../constants/constants';
 import LMButton from '../../../base/LMButton';
 import LMText from '../../../base/LMText';
+import { formatBytes } from '../../../utils';
+import { MIN_DOCUMENT_ITEM } from '../../../constants/strings';
 
 const LMDocument = ({
   attachments,
@@ -27,28 +29,19 @@ const LMDocument = ({
   defaultIconSize,
   showCancel,
   onCancel,
-  showMoreText=true
+  showMoreText = true,
 }: LMDocumentProps) => {
-  function formatBytes(bytes: any, decimals = 2) {
-    if (!+bytes) return '0 Bytes';
-
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
-  }
   const [showFullList, setShowFullList] = useState(false);
 
   // Define the number of items to display initially
-  const initialItemCount = 2;
+  const initialItemCount = MIN_DOCUMENT_ITEM;
 
   // Use data.slice to limit the items displayed
-  const displayedData = showMoreText ?  showFullList
-    ? attachments
-    : attachments.slice(0, initialItemCount) : attachments;
+  const displayedData = showMoreText
+    ? showFullList
+      ? attachments
+      : attachments.slice(0, initialItemCount)
+    : attachments;
 
   return (
     <View>
@@ -218,6 +211,7 @@ const LMDocument = ({
           </TouchableOpacity>
         </View>
       ))}
+      {/* this renders the show more button */}
       {showMoreText && attachments.length > 2 && !showFullList && (
         <TouchableOpacity
           activeOpacity={0.8}

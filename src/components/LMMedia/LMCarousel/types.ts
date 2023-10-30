@@ -11,5 +11,5 @@ export interface LMCarouselProps {
   imageItem?: LMImageProps; // this represents the props for LMImage component
   videoItem?: LMVideoProps; // this represents the props for LMVideo component,
   showCancel?: boolean; // this represents the visibility of cancel button
-  onCancel?: (index: number) => void // callback function that executes on click of cancel button
+  onCancel?: (index: number) => void // callback function that executes on click of cancel button,
 }

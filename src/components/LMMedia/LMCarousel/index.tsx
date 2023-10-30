@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import {LMCarouselProps} from './types';
 import LMImage from '../LMImage';
@@ -17,7 +17,7 @@ const LMCarousel = ({
   imageItem,
   videoItem,
   showCancel,
-  onCancel
+  onCancel,
 }: LMCarouselProps) => {
   return (
     <SwiperFlatList

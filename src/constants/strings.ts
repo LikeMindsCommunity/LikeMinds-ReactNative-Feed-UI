@@ -16,3 +16,6 @@ export const MAX_DEFAULT_COMMENT_LINES = 3
 // comment levels
 export const PARENT_LEVEL_COMMENT = 0
 export const CHILD_LEVEL_COMMENT = 1
+
+// min document count to display
+export const MIN_DOCUMENT_ITEM = 2

@@ -51,7 +51,7 @@ const LMPostContent = ({
           <Text
             key={index}
             style={StyleSheet.flatten([styles.linkText, linkStyle])}
-            onPress={() => Linking.openURL(part)}>
+            onPress={() => Linking.openURL(part.includes('https://') ? part : `https://${part}`)}>
             {part}{" "}
           </Text>
         );
