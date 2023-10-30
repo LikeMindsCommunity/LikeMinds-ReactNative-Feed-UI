@@ -41,9 +41,6 @@ const LMVideo = forwardRef((
   const [error, setError] = useState(false);
   const [playingStatus, setPlayingStatus] = useState(true);
   const [viewController, setViewController] = useState(showControls);
-  // let current = ref?.current
-  // console.log('b',current)
-  // console.log('d',videoUrl)
 
   // this throw error and ask for currentVideoUrl if auto play is set true
   if (autoPlay && !currentVideoUrl) {
@@ -51,15 +48,6 @@ const LMVideo = forwardRef((
       `Property 'currentVideoUrl' is missing in type '{ videoUrl: string; autoPlay: true; }' but required in type 'LMVideoProps'.`,
     );
   }
-
-  // this handles the visibility of the player controls
-  // useEffect(() => {
-  //   if (viewController) {
-  //     setTimeout(() => {
-  //       setViewController(false);
-  //     }, 3000);
-  //   }
-  // }, [viewController]);
 
   return (
     <View style={StyleSheet.flatten([defaultStyles.videoContainer, boxStyle])}>

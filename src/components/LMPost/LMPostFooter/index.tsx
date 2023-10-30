@@ -66,26 +66,6 @@ const LMPostFooter = ({
               boxStyle: likeIconButton?.icon?.boxStyle,
             }}
             placement={likeIconButton?.placement}
-            // isActive={
-            //    liked
-            // }
-            // activeIcon={{
-            //   assetPath: likeIconButton?.activeIcon?.assetPath
-            //     ? likeIconButton.activeIcon.assetPath
-            //     : require('../../../assets/images/heart_red_icon3x.png'),
-            //   type: 'png',
-            //   iconUrl: likeIconButton?.activeIcon?.iconUrl,
-            //   iconStyle: likeIconButton?.activeIcon?.iconStyle,
-            //   color: likeIconButton?.activeIcon?.color,
-            //   height: likeIconButton?.activeIcon?.height
-            //     ? likeIconButton.activeIcon.height
-            //     : 20.5,
-            //   width: likeIconButton?.activeIcon?.width
-            //     ? likeIconButton.activeIcon.width
-            //     : 20.5,
-            //   boxFit: likeIconButton?.activeIcon?.boxFit,
-            //   boxStyle: likeIconButton?.activeIcon?.boxStyle,
-            // }}
             buttonStyle={
               likeIconButton?.buttonStyle
                 ? likeIconButton.buttonStyle
@@ -118,14 +98,10 @@ const LMPostFooter = ({
                     fontWeight: '400',
                     color: '#504B4B',
                     textAlign:'left',
-                    // marginLeft:5,
                     width:55,
-                    // backgroundColor:'red'
                   },
             }}
             placement={likeTextButton?.placement}
-            // isActive={likeTextButton?.isActive}
-            // activeText={likeTextButton?.activeText}
             buttonStyle={
               likeTextButton?.buttonStyle
                 ? likeTextButton.buttonStyle
