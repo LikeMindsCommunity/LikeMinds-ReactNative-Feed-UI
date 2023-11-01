@@ -210,6 +210,23 @@ const LMPostMedia = forwardRef(
                   defaultIconSize={documentProps?.defaultIconSize}
                 />
               )}
+              {attachments?.every(
+                item => item?.attachmentType === LINK_ATTACHMENT_TYPE,
+              ) && (
+                <LMLinkPreview
+                  attachments={attachments}
+                  onTap={linkPreviewProps?.onTap}
+                  showLinkUrl={linkPreviewProps?.showLinkUrl}
+                  linkPreviewBoxStyle={linkPreviewProps?.linkPreviewBoxStyle}
+                  linkImageStyle={linkPreviewProps?.linkImageStyle}
+                  linkTitleStyle={linkPreviewProps?.linkTitleStyle}
+                  linkDescriptionStyle={linkPreviewProps?.linkDescriptionStyle}
+                  linkUrlStyle={linkPreviewProps?.linkUrlStyle}
+                  showDescription={linkPreviewProps?.showDescription}
+                  showImage={linkPreviewProps?.showImage}
+                  showTitle={linkPreviewProps?.showTitle}
+                />
+              )}
             </>
           )
         ) : (
