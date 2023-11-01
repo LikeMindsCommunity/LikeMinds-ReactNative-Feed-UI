@@ -43,10 +43,10 @@ const LMPostContent = ({
   // this renders the text with highlighted link's urls
   const highlightLinks = (text: string) => {
     const regex = DETECT_LINK_REGEX;
-    const parts = text.split(' ');
+    const parts = text.replace(/\n/g, ' \n').split(' ');
 
     return parts?.map((part, index) => {
-      if (regex.test(part)) {
+      if (regex.test(part.trim())) {
         return (
           <Text
             key={index}

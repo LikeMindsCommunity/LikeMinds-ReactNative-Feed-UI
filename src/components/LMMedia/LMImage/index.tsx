@@ -26,7 +26,7 @@ const LMImage = ({
     <View style={StyleSheet.flatten([defaultStyles.imageContainer, boxStyle])}>
       {/* this renders the loader until the image renders */}
       {loading ? (
-        <View style={[defaultStyles.imageStyle, defaultStyles.loaderView]}>
+        <View style={[defaultStyles.imageStyle, defaultStyles.loaderView, imageStyle]}>
           {loaderWidget ? loaderWidget : <LMLoader />}
         </View>
       ) : null}
