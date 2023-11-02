@@ -119,7 +119,7 @@ const LMLinkPreview = ({
         </View>
         {/* this renders the cancel button */}
         {showCancel && (
-          <View style={{position: 'absolute', right: 12, top: 8}}>
+          <View style={styles.cancelButtonView}>
             <LMButton
               onTap={onCancel ? () => onCancel() : () => {}}
               buttonStyle={{
@@ -177,6 +177,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 15,
   },
+  cancelButtonView: {
+    position: 'absolute',
+    right: 10,
+    top: 10
+  }
 });
 
 export default LMLinkPreview;

@@ -47,7 +47,7 @@ const LMImage = ({
       />
       {/* this renders the cancel button */}
       {showCancel && (
-                <View style={{position:'absolute', right:15, top:20, zIndex:2000}}>
+                <View style={defaultStyles.cancelButtonView}>
                   <LMButton
                 onTap={onCancel ? () => onCancel(imageUrl) : () => {}}
                 buttonStyle={{
@@ -98,6 +98,12 @@ const defaultStyles = StyleSheet.create({
   errorText: {
     color: STYLES.$COLORS.RED,
   },
+  cancelButtonView: {
+    position:'absolute',
+    right:15,
+    top:15,
+    zIndex:2000
+  }
 });
 
 export default LMImage;
