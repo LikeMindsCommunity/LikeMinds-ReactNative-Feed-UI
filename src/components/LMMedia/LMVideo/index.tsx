@@ -104,8 +104,8 @@ const LMVideo = forwardRef(
                   ? false
                   : true
                 : playingStatus
-                ? true
-                : false
+                  ? true
+                  : false
             } // this handles the mute of the video according to the video being played
           />
         </TouchableWithoutFeedback>
