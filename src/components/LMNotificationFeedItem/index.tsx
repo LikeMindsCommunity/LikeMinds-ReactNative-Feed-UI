@@ -44,7 +44,10 @@ const LMNotificationFeedItem = ({
         boxStyle,
         {backgroundColor: activity.isRead ? '' : STYLES.$COLORS.LIGHT_GREY},
       ])}>
-      <TouchableOpacity activeOpacity={0.8} onPress={onTap} style={{flexDirection: 'row'}}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={onTap}
+        style={{flexDirection: 'row'}}>
         {/* profile avatar view */}
         <View>
           {/* profile picture section */}
@@ -86,7 +89,10 @@ const LMNotificationFeedItem = ({
         </View>
       </TouchableOpacity>
       {/* menu icon section */}
-      <TouchableOpacity activeOpacity={0.8} hitSlop={{top:10, bottom:10, left:10, right:10}} onPress={onMenuTap}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
+        onPress={onMenuTap}>
         <>
           {menuIcon ? (
             menuIcon

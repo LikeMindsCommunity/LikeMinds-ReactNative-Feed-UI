@@ -1,17 +1,9 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  Linking,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Linking} from 'react-native';
 import React from 'react';
 import {LMLinkPreviewProps} from './types';
 import STYLES from '../../../constants/constants';
 import LMButton from '../../../base/LMButton';
 import LMImage from '../LMImage';
-import layout from '../../../utils/layout';
 
 const LMLinkPreview = ({
   attachments,
@@ -30,11 +22,16 @@ const LMLinkPreview = ({
 }: LMLinkPreviewProps) => {
   const previewAttachmentData = attachments[0].attachmentMeta?.ogTags;
   return (
-    <TouchableOpacity activeOpacity={0.8}
+    <TouchableOpacity
+      activeOpacity={0.8}
       style={styles.postMedia}
       onPress={() => {
         Linking.openURL(
-          previewAttachmentData?.url ? previewAttachmentData.url.includes('https://') ? previewAttachmentData.url : `https://${previewAttachmentData.url}` : '',
+          previewAttachmentData?.url
+            ? previewAttachmentData.url.includes('https://')
+              ? previewAttachmentData.url
+              : `https://${previewAttachmentData.url}`
+            : '',
         ),
           onTap;
       }}>
@@ -60,8 +57,8 @@ const LMLinkPreview = ({
               },
             ])}
             height={220}
-            boxStyle={{borderRadius:8, width:'100%'}}
-            boxFit='contain'
+            boxStyle={{borderRadius: 8, width: '100%'}}
+            boxFit="contain"
           />
         )}
         {/* link preview data */}
@@ -111,7 +108,7 @@ const LMLinkPreview = ({
                       ? 'flex'
                       : 'none'
                     : 'flex',
-                    textTransform:'lowercase'
+                textTransform: 'lowercase',
               },
             ])}>
             {previewAttachmentData?.url}
@@ -156,7 +153,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 220,
     borderTopLeftRadius: 7,
-    borderTopRightRadius: 7
+    borderTopRightRadius: 7,
   },
   previewTitle: {
     fontWeight: '500',
@@ -180,8 +177,8 @@ const styles = StyleSheet.create({
   cancelButtonView: {
     position: 'absolute',
     right: 10,
-    top: 10
-  }
+    top: 10,
+  },
 });
 
 export default LMLinkPreview;

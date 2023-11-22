@@ -1,4 +1,4 @@
-import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import LMText from '../LMText';
 import LMIcon from '../LMIcon';
@@ -14,6 +14,7 @@ const LMButton = ({
   activeIcon,
   activeText,
   buttonStyle,
+  clickDisable = false,
 }: LMButtonProps) => {
   const [active, setActive] = useState(isActive);
 
@@ -25,10 +26,11 @@ const LMButton = ({
   };
   return (
     <TouchableOpacity
+      disabled={clickDisable}
       hitSlop={{top: 10, bottom: 10}}
       style={StyleSheet.flatten([defaultStyles.buttonViewStyle, buttonStyle])}
       activeOpacity={0.8}
-      onPress={(event) => {
+      onPress={event => {
         onTap(event), activeStateHandler();
       }}>
       {/* button view */}

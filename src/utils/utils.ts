@@ -1,6 +1,6 @@
 // this function gives the initial characters of a text
 export const getNameInitials = (name: string) => {
-  var names = name?.split(' '),
+  let names = name?.split(' '),
     initials = names?.[0].substring(0, 1).toUpperCase();
 
   if (names?.length > 1) {
@@ -13,9 +13,9 @@ export const getNameInitials = (name: string) => {
 export const timeStamp = (value: number) => {
   let currentDate = Number(new Date());
   let postedDate = Number(new Date(value));
-  var difference = currentDate - postedDate;
+  let difference = currentDate - postedDate;
   //  calculating the seconds, minutes, hours, days, months, years in the time difference betwen the posted time and current time
-  var seconds = Math.floor(difference / 1000),
+  let seconds = Math.floor(difference / 1000),
     minutes = Math.floor(seconds / 60),
     hours = Math.floor(minutes / 60),
     days = Math.floor(hours / 24),

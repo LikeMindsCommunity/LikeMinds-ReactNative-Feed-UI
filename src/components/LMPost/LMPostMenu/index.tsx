@@ -1,6 +1,4 @@
 import {
-  View,
-  Text,
   StyleSheet,
   Modal,
   Pressable,
@@ -47,7 +45,9 @@ const LMPostMenu = ({
               top:
                 modalPosition.y > layout.window.height / 2
                   ? Platform.OS === 'ios'
-                    ? menuItems.length > 1 ? modalPosition.y -110 : modalPosition.y - 65
+                    ? menuItems.length > 1
+                      ? modalPosition.y - 110
+                      : modalPosition.y - 65
                     : modalPosition.y - 15
                   : modalPosition.y - 10,
             },
@@ -56,7 +56,8 @@ const LMPostMenu = ({
           {menuItems &&
             menuItems?.map((item, index) => {
               return (
-                <TouchableOpacity activeOpacity={0.8}
+                <TouchableOpacity
+                  activeOpacity={0.8}
                   key={index}
                   onPress={() => {
                     onSelected(postId, item.id), onCloseModal();
@@ -89,10 +90,10 @@ const styles = StyleSheet.create({
     minWidth: '55%',
     position: 'absolute',
     right: 15,
-    shadowOffset: {width:2, height: 2},
+    shadowOffset: {width: 2, height: 2},
     shadowColor: 'black',
     shadowOpacity: 0.2,
-    borderRadius:5,
+    borderRadius: 5,
   },
   listText: {
     fontSize: 16,

@@ -1,9 +1,15 @@
 import {StyleSheet, Text} from 'react-native';
 import React from 'react';
 import {LMTextProps} from './types';
-import STYLES from '../../constants/constants'
+import STYLES from '../../constants/constants';
 
-const LMText = ({text, maxLines, textStyle, selectable, onTextLayout}: LMTextProps) => {
+const LMText = ({
+  text,
+  maxLines,
+  textStyle,
+  selectable,
+  onTextLayout,
+}: LMTextProps) => {
   return (
     // this renders the text component
     <Text

@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import STYLES from '../../../constants/constants';
 import layout from '../../../utils/layout';
@@ -91,7 +91,11 @@ const LMPostHeader = ({
             {/* author subHeading */}
             <View style={styles.alignRow}>
               <LMText
-                text={timeStamp(Number(createdAt?.text)) === undefined ? 'now' : `${timeStamp(Number(createdAt?.text))}`}
+                text={
+                  timeStamp(Number(createdAt?.text)) === undefined
+                    ? 'now'
+                    : `${timeStamp(Number(createdAt?.text))}`
+                }
                 selectable={false}
                 maxLines={createdAt?.maxLines}
                 textStyle={StyleSheet.flatten([
@@ -108,7 +112,7 @@ const LMPostHeader = ({
                     width={styles.dotImageSize.width}
                     height={styles.dotImageSize.height}
                     iconStyle={styles.dotImageSize}
-                    color='#0F1E3D66'
+                    color="#0F1E3D66"
                   />
                   <LMText
                     text="Edited"
@@ -153,7 +157,10 @@ const LMPostHeader = ({
           </>
         )}
         {/* menu icon section */}
-        <TouchableOpacity activeOpacity={0.8} onPress={onThreedotsClick} hitSlop={{top:10, bottom:10, left:10, right:10}}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={onThreedotsClick}
+          hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
           <>
             {showMenuIcon && (
               <LMIcon

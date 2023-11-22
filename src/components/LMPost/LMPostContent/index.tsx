@@ -3,11 +3,10 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {LMPostContentProps} from './types';
 import {MAX_DEFAULT_POST_CONTENT_LINES} from '../../../constants/strings';
 import LMText from '../../../base/LMText';
-import { DETECT_LINK_REGEX } from '../../../constants/regex';
+import {DETECT_LINK_REGEX} from '../../../constants/regex';
 
 const LMPostContent = ({
   text,
-  linkData,
   textStyle,
   linkStyle,
   visibleLines,
@@ -39,7 +38,6 @@ const LMPostContent = ({
     }
   }, [showText, showMoreButton]);
 
-  
   // this renders the text with highlighted link's urls
   const highlightLinks = (text: string) => {
     const regex = DETECT_LINK_REGEX;
@@ -51,8 +49,12 @@ const LMPostContent = ({
           <Text
             key={index}
             style={StyleSheet.flatten([styles.linkText, linkStyle])}
-            onPress={() => Linking.openURL(part.includes('https://') ? part : `https://${part}`)}>
-            {part}{" "}
+            onPress={() =>
+              Linking.openURL(
+                part.includes('https://') ? part : `https://${part}`,
+              )
+            }>
+            {part}{' '}
           </Text>
         );
       } else {
@@ -82,7 +84,9 @@ const LMPostContent = ({
       </Text>
       {/* show more button section */}
       {showMoreButton && (
-        <TouchableOpacity activeOpacity={0.8} hitSlop={{top:10, bottom:10, left:10, right:10}}
+        <TouchableOpacity
+          activeOpacity={0.8}
+          hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
           disabled={showText ? true : false}
           onPress={() => setShowText(showText => !showText)}
           accessibilityRole="button">
@@ -94,7 +98,10 @@ const LMPostContent = ({
                 ? showMoreText.text
                 : 'See More'
             }
-            textStyle={StyleSheet.flatten([styles.showMoreText,showMoreText?.textStyle])}
+            textStyle={StyleSheet.flatten([
+              styles.showMoreText,
+              showMoreText?.textStyle,
+            ])}
           />
         </TouchableOpacity>
       )}
@@ -116,8 +123,8 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   showMoreText: {
-    color: '#9B9B9B'
-  }
+    color: '#9B9B9B',
+  },
 });
 
 export default LMPostContent;

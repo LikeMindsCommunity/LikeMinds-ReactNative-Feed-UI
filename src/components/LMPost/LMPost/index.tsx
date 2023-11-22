@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React, {forwardRef} from 'react';
 import LMPostHeader from '../LMPostHeader';
 import LMPostContent from '../LMPostContent';
@@ -113,11 +113,11 @@ const LMPost = forwardRef(function LMPost(
         <LMPostContent {...updatedContentProps} />
       )}
       {/* post media */}
-      {post?.attachments && post?.attachments.length > 0 && 
-      <LMPostMedia {...updatedMediaProps} ref={ref} />
-      }
+      {post?.attachments && post?.attachments.length > 0 && (
+        <LMPostMedia {...updatedMediaProps} ref={ref} />
+      )}
       {/* post footer */}
-      <LMPostFooter {...updatedFooterProps}  />
+      <LMPostFooter {...updatedFooterProps} />
     </View>
   );
 });

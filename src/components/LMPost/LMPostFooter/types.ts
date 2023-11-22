@@ -1,5 +1,5 @@
 import {ViewStyle} from 'react-native';
-import { LMButtonProps } from '../../../base/LMButton/types';
+import {LMButtonProps} from '../../../base/LMButton/types';
 
 export interface LMPostFooterProps {
   isLiked: boolean; // this represents the liked state of the post

@@ -1,4 +1,4 @@
-import {View, Text, Image, StyleSheet, ActivityIndicator, TouchableOpacity} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 import {LMImageProps} from './types';
 import LMLoader from '../../../base/LMLoader';
@@ -18,7 +18,7 @@ const LMImage = ({
   loaderWidget,
   errorWidget,
   showCancel,
-  onCancel
+  onCancel,
 }: LMImageProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -26,7 +26,12 @@ const LMImage = ({
     <View style={StyleSheet.flatten([defaultStyles.imageContainer, boxStyle])}>
       {/* this renders the loader until the image renders */}
       {loading ? (
-        <View style={[defaultStyles.imageStyle, defaultStyles.loaderView, imageStyle]}>
+        <View
+          style={[
+            defaultStyles.imageStyle,
+            defaultStyles.loaderView,
+            imageStyle,
+          ]}>
           {loaderWidget ? loaderWidget : <LMLoader />}
         </View>
       ) : null}
@@ -47,20 +52,30 @@ const LMImage = ({
       />
       {/* this renders the cancel button */}
       {showCancel && (
-                <View style={defaultStyles.cancelButtonView}>
-                  <LMButton
-                onTap={onCancel ? () => onCancel(imageUrl) : () => {}}
-                buttonStyle={{
-                 borderWidth:0,
-                 backgroundColor:'transparent'
-                }}
-                icon={{assetPath: require('../../../assets/images/crossCircle_icon3x.png'), type:'png', height:22, width:22}}
-              />
-                </View>
-              )}
+        <View style={defaultStyles.cancelButtonView}>
+          <LMButton
+            onTap={onCancel ? () => onCancel(imageUrl) : () => {}}
+            buttonStyle={{
+              borderWidth: 0,
+              backgroundColor: 'transparent',
+            }}
+            icon={{
+              assetPath: require('../../../assets/images/crossCircle_icon3x.png'),
+              type: 'png',
+              height: 22,
+              width: 22,
+            }}
+          />
+        </View>
+      )}
       {/* this renders the error whenever the media is not fetched */}
       {error ? (
-        <View style={StyleSheet.flatten([defaultStyles.imageStyle, defaultStyles.errorView, imageStyle])}>
+        <View
+          style={StyleSheet.flatten([
+            defaultStyles.imageStyle,
+            defaultStyles.errorView,
+            imageStyle,
+          ])}>
           {errorWidget ? (
             errorWidget
           ) : (
@@ -99,11 +114,11 @@ const defaultStyles = StyleSheet.create({
     color: STYLES.$COLORS.RED,
   },
   cancelButtonView: {
-    position:'absolute',
-    right:15,
-    top:15,
-    zIndex:2000
-  }
+    position: 'absolute',
+    right: 15,
+    top: 15,
+    zIndex: 2000,
+  },
 });
 
 export default LMImage;

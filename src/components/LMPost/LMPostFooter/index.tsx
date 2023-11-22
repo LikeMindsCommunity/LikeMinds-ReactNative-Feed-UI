@@ -24,7 +24,7 @@ const LMPostFooter = ({
   // handling like state and likes count locally
   useEffect(() => {
     setLiked(isLiked);
-    setLikeCount(likesCount)
+    setLikeCount(likesCount);
   }, [isLiked]);
   const likesCountHandler = () => {
     likeIconButton?.onTap();
@@ -87,18 +87,18 @@ const LMPostFooter = ({
             }
             text={{
               text: likeCount
-              ? likeCount > 1
-                ? `${likeCount} Likes`
-                : `${likeCount} Like`
-              : 'Like',
+                ? likeCount > 1
+                  ? `${likeCount} Likes`
+                  : `${likeCount} Like`
+                : 'Like',
               textStyle: likeTextButton?.text?.textStyle
                 ? likeTextButton.text.textStyle
                 : {
                     fontSize: 14.5,
                     fontWeight: '400',
                     color: '#504B4B',
-                    textAlign:'left',
-                    width:55,
+                    textAlign: 'left',
+                    width: 55,
                   },
             }}
             placement={likeTextButton?.placement}
@@ -160,7 +160,7 @@ const LMPostFooter = ({
                 : {
                     borderWidth: 0,
                     alignItems: 'center',
-                    marginLeft:5
+                    marginLeft: 5,
                   }
             }
           />

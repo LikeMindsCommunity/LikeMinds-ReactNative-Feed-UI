@@ -13,8 +13,8 @@ import LMIcon from '../../../base/LMIcon';
 import STYLES from '../../../constants/constants';
 import LMButton from '../../../base/LMButton';
 import LMText from '../../../base/LMText';
-import { formatBytes } from '../../../utils';
-import { MIN_DOCUMENT_ITEM } from '../../../constants/strings';
+import {formatBytes} from '../../../utils';
+import {MIN_DOCUMENT_ITEM} from '../../../constants/strings';
 
 const LMDocument = ({
   attachments,

@@ -9,6 +9,7 @@ import LMIcon from '../../base/LMIcon';
 import {PARENT_LEVEL_COMMENT} from '../../constants/strings';
 import LMPostMenu from '../LMPost/LMPostMenu';
 import LMLoader from '../../base/LMLoader';
+import {LMCommentUI} from '../../models';
 
 const LMCommentItem = ({
   likeIconButton,
@@ -308,7 +309,7 @@ const LMCommentItem = ({
                           },
                         }}
                         likeTextButton={{
-                          onTap: id => likeTextButton?.onTap(item?.id),
+                          onTap: () => likeTextButton?.onTap(item?.id),
                         }}
                         commentMenu={{
                           postId: item?.id,

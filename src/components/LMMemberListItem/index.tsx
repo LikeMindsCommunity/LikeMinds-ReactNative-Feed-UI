@@ -1,4 +1,4 @@
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import LMProfilePicture from '../../base/LMProfilePicture';
 import LMText from '../../base/LMText';
@@ -17,27 +17,29 @@ const LMMemberListItem = ({
 }: LMMemberListItemProps) => {
   //creating profile picture props as per customization
   const updatedProfilePictureProps = {
-        fallbackText: likes.user.name,
-        size: profilePictureProps?.size? profilePictureProps.size : 50,
-        imageUrl: likes.user.imageUrl,
-        onTap: profilePictureProps?.onTap,
-        fallbackTextStyle: profilePictureProps?.fallbackTextStyle,
-        fallbackTextBoxStyle: profilePictureProps?.fallbackTextBoxStyle,
-        profilePictureStyle: profilePictureProps?.profilePictureStyle,
-      };
+    fallbackText: likes.user.name,
+    size: profilePictureProps?.size ? profilePictureProps.size : 50,
+    imageUrl: likes.user.imageUrl,
+    onTap: profilePictureProps?.onTap,
+    fallbackTextStyle: profilePictureProps?.fallbackTextStyle,
+    fallbackTextBoxStyle: profilePictureProps?.fallbackTextBoxStyle,
+    profilePictureStyle: profilePictureProps?.profilePictureStyle,
+  };
   //creating user name props as per customization
-  const updatedNameProps =  {
-        text: likes.user.name,
-        textStyle: nameProps?.textStyle,
-      };
+  const updatedNameProps = {
+    text: likes.user.name,
+    textStyle: nameProps?.textStyle,
+  };
   //creating custom title props as per customization
-  const updatedCustomTitleProps =  {
-        text: likes.user.customTitle,
-        textStyle: customTitleProps?.textStyle
-      };
+  const updatedCustomTitleProps = {
+    text: likes.user.customTitle,
+    textStyle: customTitleProps?.textStyle,
+  };
 
   return (
-    <TouchableOpacity activeOpacity={0.8} onPress={() => (onTap ? onTap(likes.user) : null)}>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={() => (onTap ? onTap(likes.user) : null)}>
       <View style={StyleSheet.flatten([styles.container, boxStyle])}>
         {/* avatar view */}
         <LMProfilePicture {...updatedProfilePictureProps} />

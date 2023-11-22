@@ -6,5 +6,5 @@ export interface LMTextProps {
   maxLines?: number; // this defines the maximum lines to be displayed
   textStyle?: TextStyle; // this represents ths style of the text
   selectable?: boolean; // this represents the selection behaviour of the text
-  onTextLayout?: (event?:any) => void // callback function executed on change of text layout
+  onTextLayout?: (event?: any) => void; // callback function executed on change of text layout
 }
