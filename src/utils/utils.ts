@@ -31,41 +31,21 @@ export const timeStamp = (value: number) => {
   let createdDuration;
   // returns the greatest unit of time among years/months/days/hours/minutes/seconds
   if (years >= 1) {
-    if (years === 1) {
-      createdDuration = years + ' year';
-    } else {
-      createdDuration = years + ' years';
-    }
+    createdDuration = years + 'y';
   } else if (months >= 1) {
     if (months === 1) {
-      createdDuration = months + ' month';
+      createdDuration = months + 'mo';
     } else {
-      createdDuration = months + ' months';
+      createdDuration = months + 'mos';
     }
   } else if (days >= 1) {
-    if (days === 1) {
-      createdDuration = days + ' day';
-    } else {
-      createdDuration = days + ' days';
-    }
+    createdDuration = days + 'd';
   } else if (hours >= 1) {
-    if (hours === 1) {
-      createdDuration = hours + ' hour';
-    } else {
-      createdDuration = hours + ' hours';
-    }
+    createdDuration = hours + 'h';
   } else if (minutes >= 1) {
-    if (minutes === 1) {
-      createdDuration = minutes + ' minute';
-    } else {
-      createdDuration = minutes + ' minutes';
-    }
+    createdDuration = minutes + ' min';
   } else if (seconds >= 1) {
-    if (seconds === 1) {
-      createdDuration = seconds + ' second';
-    } else {
-      createdDuration = seconds + ' seconds';
-    }
+    createdDuration = seconds + 's';
   }
   return createdDuration;
 };

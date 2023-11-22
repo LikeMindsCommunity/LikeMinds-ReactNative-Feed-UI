@@ -1,7 +1,9 @@
-import {View, Text, TextInput, StyleSheet} from 'react-native';
-import React from 'react';
+import {View, TextInput, StyleSheet} from 'react-native';
+import React, {useEffect, useRef} from 'react';
 import {LMInputTextProps} from './types';
-import STYLES from '../../constants/constants'
+import STYLES from '../../constants/constants';
+import layout from '../../utils/layout';
+import LMButton from '../LMButton';
 
 const LMInputText = ({
   inputText,
@@ -13,25 +15,57 @@ const LMInputText = ({
   keyboardType,
   multilineField,
   secureText,
-  disabled
+  disabled,
+  rightIcon,
+  autoFocus,
 }: LMInputTextProps) => {
-  return (
-    <TextInput
-      onChangeText={enteredText => {
-        onType ? onType(enteredText) : null;
-      }}
-      style={StyleSheet.flatten([defaultStyles.textInput, inputTextStyle])}
-      value={inputText}
-      placeholderTextColor={
-        placeholderTextColor ? placeholderTextColor : STYLES.$COLORS.BLACK
+  const textInputRef = useRef<TextInput>(null);
+
+  useEffect(() => {
+    if (autoFocus) {
+      if (textInputRef.current) {
+        textInputRef.current.focus();
       }
-      placeholder={placeholderText}
-      autoCapitalize={autoCapitalize ? autoCapitalize : 'none'}
-      keyboardType={keyboardType ? keyboardType : 'default'}
-      multiline={multilineField ? multilineField : false}
-      secureTextEntry={secureText ? secureText : false}
-      editable={disabled ? disabled : true}
-    />
+    }
+  }, [autoFocus]);
+
+  return (
+    <View style={StyleSheet.flatten([defaultStyles.textInput, inputTextStyle])}>
+      {/* text input */}
+      <TextInput
+        ref={textInputRef}
+        onChangeText={enteredText => {
+          onType ? onType(enteredText) : null;
+        }}
+        autoFocus={autoFocus}
+        value={inputText}
+        placeholderTextColor={
+          placeholderTextColor ? placeholderTextColor : STYLES.$COLORS.BLACK
+        }
+        style={{width: rightIcon ? '90%' : '100%'}}
+        placeholder={placeholderText}
+        autoCapitalize={autoCapitalize ? autoCapitalize : 'none'}
+        keyboardType={keyboardType ? keyboardType : 'default'}
+        multiline={multilineField ? multilineField : false}
+        secureTextEntry={secureText ? secureText : false}
+        editable={disabled ? disabled : true}
+      />
+      {/* icon on right of text input */}
+      {rightIcon && (
+        <LMButton
+          {...rightIcon}
+          onTap={rightIcon.onTap}
+          text={rightIcon.text}
+          icon={{
+            type: 'png',
+            assetPath: rightIcon.icon?.assetPath,
+            ...rightIcon.icon,
+          }}
+          placement={rightIcon.placement}
+          buttonStyle={{borderWidth: 0}}
+        />
+      )}
+    </View>
   );
 };
 
@@ -46,6 +80,9 @@ const defaultStyles = StyleSheet.create({
     paddingVertical: 10,
     fontSize: 14,
     color: STYLES.$COLORS.BLACK,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: layout.window.width,
   },
 });
 
