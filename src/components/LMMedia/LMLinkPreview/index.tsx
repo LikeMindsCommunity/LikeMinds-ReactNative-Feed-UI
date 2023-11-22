@@ -33,7 +33,7 @@ const LMLinkPreview = ({
               : `https://${previewAttachmentData.url}`
             : '',
         ),
-        onTap;
+          onTap;
       }}>
       {/* link preview image */}
       <View

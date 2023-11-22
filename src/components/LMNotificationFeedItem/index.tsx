@@ -33,10 +33,10 @@ const LMNotificationFeedItem = ({
   const updatedProfilePictureProps = userProfilePicture
     ? userProfilePicture
     : {
-      fallbackText: activity.activityByUser.name,
-      size: 50,
-      imageUrl: activity.activityByUser.imageUrl,
-    };
+        fallbackText: activity.activityByUser.name,
+        size: 50,
+        imageUrl: activity.activityByUser.imageUrl,
+      };
   return (
     <View
       style={StyleSheet.flatten([
@@ -57,23 +57,23 @@ const LMNotificationFeedItem = ({
             // show gallery icon
             (activityAttachmentType === IMAGE_ATTACHMENT_TYPE ||
             activityAttachmentType === VIDEO_ATTACHMENT_TYPE ? (
-                <LMIcon
-                  assetPath={require('../../assets/images/notification_image3x.png')}
-                  type="png"
-                  boxStyle={{position: 'absolute', bottom: -10, right: -8}}
-                  height={35}
-                  width={35}
-                />
-              ) : // show document icon
-              activityAttachmentType === DOCUMENT_ATTACHMENT_TYPE ? (
-                <LMIcon
-                  assetPath={require('../../assets/images/notification_doc3x.png')}
-                  type="png"
-                  boxStyle={{position: 'absolute', bottom: -10, right: -8}}
-                  height={35}
-                  width={35}
-                />
-              ) : null)}
+              <LMIcon
+                assetPath={require('../../assets/images/notification_image3x.png')}
+                type="png"
+                boxStyle={{position: 'absolute', bottom: -10, right: -8}}
+                height={35}
+                width={35}
+              />
+            ) : // show document icon
+            activityAttachmentType === DOCUMENT_ATTACHMENT_TYPE ? (
+              <LMIcon
+                assetPath={require('../../assets/images/notification_doc3x.png')}
+                type="png"
+                boxStyle={{position: 'absolute', bottom: -10, right: -8}}
+                height={35}
+                width={35}
+              />
+            ) : null)}
         </View>
 
         {/* activity content text */}

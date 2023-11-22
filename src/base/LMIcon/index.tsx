@@ -28,8 +28,8 @@ const LMIcon = ({
               assetPath
                 ? assetPath
                 : {
-                  uri: iconUrl,
-                }
+                    uri: iconUrl,
+                  }
             }
             style={StyleSheet.flatten([
               iconStyle,

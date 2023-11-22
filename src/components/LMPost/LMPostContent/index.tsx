@@ -95,8 +95,8 @@ const LMPostContent = ({
               showText
                 ? ''
                 : showMoreText?.text
-                  ? showMoreText.text
-                  : 'See More'
+                ? showMoreText.text
+                : 'See More'
             }
             textStyle={StyleSheet.flatten([
               styles.showMoreText,

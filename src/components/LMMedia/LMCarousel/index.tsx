@@ -87,8 +87,8 @@ const LMCarousel = ({
                 onCancel
                   ? () => onCloseHandler(index)
                   : () => {
-                    imageItem?.onCancel;
-                  }
+                      imageItem?.onCancel;
+                    }
               }
             />
           )}
@@ -117,8 +117,8 @@ const LMCarousel = ({
                 onCancel
                   ? () => onCloseHandler(index)
                   : () => {
-                    videoItem?.onCancel;
-                  }
+                      videoItem?.onCancel;
+                    }
               }
             />
           )}

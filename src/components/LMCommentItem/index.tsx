@@ -67,18 +67,18 @@ const LMCommentItem = ({
   const updatedContentProps = commentContentProps
     ? commentContentProps
     : {
-      text: comment?.text,
-      onTextLayout: (event: any) => onTextLayout(event),
-      maxLines: numberOfLines,
-      textStyle: {color: '#222020'},
-    };
+        text: comment?.text,
+        onTextLayout: (event: any) => onTextLayout(event),
+        maxLines: numberOfLines,
+        textStyle: {color: '#222020'},
+      };
 
   //creating show more props as per customization
   const updatedShowMoreProps = showMoreProps
     ? showMoreProps
     : {
-      text: showText ? '' : 'See More',
-    };
+        text: showText ? '' : 'See More',
+      };
 
   const handleReplies = () => {
     setShowReplies(!showReplies);
@@ -185,8 +185,8 @@ const LMCommentItem = ({
                   ? likeIconButton.activeIcon.assetPath
                   : require('../../assets/images/heart_red_icon3x.png')
                 : likeIconButton?.icon?.assetPath
-                  ? likeIconButton.icon.assetPath
-                  : require('../../assets/images/heart_icon3x.png'),
+                ? likeIconButton.icon.assetPath
+                : require('../../assets/images/heart_icon3x.png'),
               type: 'png',
               iconUrl: likeIconButton?.icon?.iconUrl,
               iconStyle: likeIconButton?.icon?.iconStyle,
@@ -257,7 +257,7 @@ const LMCommentItem = ({
                     onTap={() => {
                       onTapReplies
                         ? (onTapReplies((data: any) => setRepliesArray(data)),
-                        handleReplies())
+                          handleReplies())
                         : handleReplies();
                     }}
                     text={{
@@ -341,12 +341,12 @@ const LMCommentItem = ({
                             onTap={
                               onTapViewMore
                                 ? () => {
-                                  setReplyPageNumber(replyPageNumber + 1);
-                                  onTapViewMore(
-                                    replyPageNumber,
-                                    (data: any) => setRepliesArray(data),
-                                  );
-                                }
+                                    setReplyPageNumber(replyPageNumber + 1);
+                                    onTapViewMore(
+                                      replyPageNumber,
+                                      (data: any) => setRepliesArray(data),
+                                    );
+                                  }
                                 : () => {}
                             }
                             text={{

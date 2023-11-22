@@ -50,8 +50,8 @@ const LMPostFooter = ({
                   ? likeIconButton.activeIcon.assetPath
                   : require('../../../assets/images/heart_red_icon3x.png')
                 : likeIconButton?.icon?.assetPath
-                  ? likeIconButton.icon.assetPath
-                  : require('../../../assets/images/heart_icon3x.png'),
+                ? likeIconButton.icon.assetPath
+                : require('../../../assets/images/heart_icon3x.png'),
               type: 'png',
               iconUrl: likeIconButton?.icon?.iconUrl,
               iconStyle: likeIconButton?.icon?.iconStyle,
@@ -70,10 +70,10 @@ const LMPostFooter = ({
               likeIconButton?.buttonStyle
                 ? likeIconButton.buttonStyle
                 : {
-                  borderWidth: 0,
-                  alignItems: 'center',
-                  justifyContent: 'space-evenly',
-                }
+                    borderWidth: 0,
+                    alignItems: 'center',
+                    justifyContent: 'space-evenly',
+                  }
             }
           />
           {/* like text button */}
@@ -94,23 +94,23 @@ const LMPostFooter = ({
               textStyle: likeTextButton?.text?.textStyle
                 ? likeTextButton.text.textStyle
                 : {
-                  fontSize: 14.5,
-                  fontWeight: '400',
-                  color: '#504B4B',
-                  textAlign: 'left',
-                  width: 55,
-                },
+                    fontSize: 14.5,
+                    fontWeight: '400',
+                    color: '#504B4B',
+                    textAlign: 'left',
+                    width: 55,
+                  },
             }}
             placement={likeTextButton?.placement}
             buttonStyle={
               likeTextButton?.buttonStyle
                 ? likeTextButton.buttonStyle
                 : {
-                  borderWidth: 0,
-                  alignItems: 'center',
-                  justifyContent: 'space-evenly',
-                  marginLeft: 8,
-                }
+                    borderWidth: 0,
+                    alignItems: 'center',
+                    justifyContent: 'space-evenly',
+                    marginLeft: 8,
+                  }
             }
           />
         </View>
@@ -129,11 +129,11 @@ const LMPostFooter = ({
               textStyle: commentButton?.text?.textStyle
                 ? commentButton.text.textStyle
                 : {
-                  marginLeft: 8,
-                  fontSize: 14.5,
-                  fontWeight: '400',
-                  color: '#504B4B',
-                },
+                    marginLeft: 8,
+                    fontSize: 14.5,
+                    fontWeight: '400',
+                    color: '#504B4B',
+                  },
             }}
             icon={{
               assetPath: commentButton?.icon?.assetPath
@@ -158,10 +158,10 @@ const LMPostFooter = ({
               commentButton?.buttonStyle
                 ? commentButton.buttonStyle
                 : {
-                  borderWidth: 0,
-                  alignItems: 'center',
-                  marginLeft: 5,
-                }
+                    borderWidth: 0,
+                    alignItems: 'center',
+                    marginLeft: 5,
+                  }
             }
           />
         </View>
