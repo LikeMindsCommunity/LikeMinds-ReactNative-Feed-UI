@@ -16,7 +16,7 @@ export interface LMCommentUI {
   updatedAt: number;
   createdAt: number;
   menuItems: Array<LMMenuItemsUI>;
-  replies: Array<LMCommentUI>;
+  replies?: Array<LMCommentUI>;
   parentComment?: LMCommentUI;
   parentId?: string;
   alreadySeenFullContent?: boolean;

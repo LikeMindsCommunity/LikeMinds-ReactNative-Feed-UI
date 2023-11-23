@@ -37,7 +37,9 @@ const LMPostHeader = ({
   };
 
   // this function is executed on the click of menu icon & handles the position and visibility of the modal
-  const onThreedotsClick = (event: any) => {
+  const onThreedotsClick = (event: {
+    nativeEvent: {pageX: number; pageY: number};
+  }) => {
     const {pageX, pageY} = event.nativeEvent;
     setShowPostMenuModal(true);
     setModalPosition({x: pageX, y: pageY});

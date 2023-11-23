@@ -2,6 +2,7 @@ import {TextStyle} from 'react-native';
 import {LMButtonProps} from '../../base/LMButton/types';
 import {LMTextProps} from '../../base/LMText/types';
 import {LMPostMenuProps} from '../LMPost/LMPostMenu/types';
+import {LMCommentUI} from '../../models';
 
 export interface LMCommentProps {
   comment: LMCommentUI; // comment data

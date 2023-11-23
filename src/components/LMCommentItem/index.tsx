@@ -1,4 +1,11 @@
-import {View, TouchableOpacity, StyleSheet, FlatList, Text} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  FlatList,
+  Text,
+  TextLayoutLine,
+} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import LMText from '../../base/LMText';
 import layout from '../../utils/layout';
@@ -47,7 +54,7 @@ const LMCommentItem = ({
 
   // this handles the show more functionality
   const onTextLayout = useCallback(
-    (event: any) => {
+    (event: {nativeEvent: {lines: string | TextLayoutLine[]}}) => {
       if (event.nativeEvent.lines.length > MAX_LINES && !showText) {
         setShowMoreButton(true);
         setNumberOfLines(MAX_LINES);
@@ -68,7 +75,9 @@ const LMCommentItem = ({
     ? commentContentProps
     : {
         text: comment?.text,
-        onTextLayout: (event: any) => onTextLayout(event),
+        onTextLayout: (event: {
+          nativeEvent: {lines: string | TextLayoutLine[]};
+        }) => onTextLayout(event),
         maxLines: numberOfLines,
         textStyle: {color: '#222020'},
       };
@@ -84,7 +93,9 @@ const LMCommentItem = ({
     setShowReplies(!showReplies);
   };
   // this function is executed on the click of menu icon & handles the position and visibility of the modal
-  const onThreedotsClick = (event: any) => {
+  const onThreedotsClick = (event: {
+    nativeEvent: {pageX: number; pageY: number};
+  }) => {
     const {pageX, pageY} = event.nativeEvent;
     setShowPostMenuModal(true);
     setModalPosition({x: pageX, y: pageY});

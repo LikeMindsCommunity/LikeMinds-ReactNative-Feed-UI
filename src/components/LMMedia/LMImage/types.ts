@@ -12,5 +12,5 @@ export interface LMImageProps {
   loaderWidget?: ReactNode; // this represents the loader component
   errorWidget?: ReactNode; // this represents the error component
   showCancel?: boolean; // this represents the visibility of cancel button
-  onCancel?: (index: any) => void; // callback function that executes on click of cancel button
+  onCancel?: (index: number) => void; // callback function that executes on click of cancel button
 }

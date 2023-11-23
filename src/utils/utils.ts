@@ -1,7 +1,7 @@
 // this function gives the initial characters of a text
 export const getNameInitials = (name: string) => {
-  let names = name?.split(' '),
-    initials = names?.[0].substring(0, 1).toUpperCase();
+  const names = name?.split(' ');
+  let initials = names?.[0].substring(0, 1).toUpperCase();
 
   if (names?.length > 1) {
     initials += names?.[names.length - 1].substring(0, 1).toUpperCase();
@@ -11,16 +11,16 @@ export const getNameInitials = (name: string) => {
 
 // this function calculates the post created time duration from present date
 export const timeStamp = (value: number) => {
-  let currentDate = Number(new Date());
-  let postedDate = Number(new Date(value));
-  let difference = currentDate - postedDate;
+  const currentDate = Number(new Date());
+  const postedDate = Number(new Date(value));
+  const difference = currentDate - postedDate;
   //  calculating the seconds, minutes, hours, days, months, years in the time difference betwen the posted time and current time
   let seconds = Math.floor(difference / 1000),
     minutes = Math.floor(seconds / 60),
     hours = Math.floor(minutes / 60),
     days = Math.floor(hours / 24),
-    months = Math.floor(days / 30),
-    years = Math.floor(days / 365);
+    months = Math.floor(days / 30);
+  const years = Math.floor(days / 365);
 
   seconds %= 60;
   minutes %= 60;
@@ -50,7 +50,7 @@ export const timeStamp = (value: number) => {
   return createdDuration;
 };
 
-export function formatBytes(bytes: any, decimals = 2) {
+export function formatBytes(bytes: number, decimals = 2) {
   if (!+bytes) return '0 Bytes';
 
   const k = 1024;

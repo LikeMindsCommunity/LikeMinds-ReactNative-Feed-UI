@@ -24,9 +24,9 @@ const LMNotificationFeedItem = ({
   menuIcon,
 }: LMNotificationFeedItemProps) => {
   // storing the attachments if present
-  let activityAttachments = activity.activityEntityData?.attachments;
+  const activityAttachments = activity.activityEntityData?.attachments;
   // storing the value of attachment type of the attachment if present
-  let activityAttachmentType = activityAttachments
+  const activityAttachmentType = activityAttachments
     ? activityAttachments[0].attachmentType
     : '';
   //creating profile picture props as per customization

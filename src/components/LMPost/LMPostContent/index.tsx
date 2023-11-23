@@ -1,4 +1,11 @@
-import {Linking, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Linking,
+  StyleSheet,
+  Text,
+  TextLayoutLine,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import {LMPostContentProps} from './types';
 import {MAX_DEFAULT_POST_CONTENT_LINES} from '../../../constants/strings';
@@ -22,7 +29,7 @@ const LMPostContent = ({
 
   // this handles the show more functionality
   const onTextLayout = useCallback(
-    (e: any) => {
+    (e: {nativeEvent: {lines: string | TextLayoutLine[]}}) => {
       if (e.nativeEvent.lines.length > MAX_LINES && !showText) {
         setShowMoreButton(true);
         setNumberOfLines(MAX_LINES);

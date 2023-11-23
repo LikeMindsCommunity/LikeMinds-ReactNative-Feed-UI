@@ -117,13 +117,13 @@ const LMPostMedia = forwardRef(
 
     // this functions gets the url of image and video for rendering in its components
     const getUrl = (type: number) => {
-      let url = attachments?.find(item => item?.attachmentType === type);
+      const url = attachments?.find(item => item?.attachmentType === type);
       return url?.attachmentMeta.url ? url?.attachmentMeta.url : '';
     };
 
     // this gets the required attachment type data to render in its component
     const getData = (type: number, type2?: number) => {
-      let data = attachments.filter(
+      const data = attachments.filter(
         item => item.attachmentType === type || item.attachmentType === type2,
       );
       return data;
