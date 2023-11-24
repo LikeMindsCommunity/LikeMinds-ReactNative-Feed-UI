@@ -89,11 +89,11 @@ const LMDocument = ({
               )}
               {/* document detail view */}
               <View
-                style={{
-                  marginLeft: 12,
-                  width: showCancel ? '72%' : '90%',
-                  height: 36,
-                }}>
+                style={
+                  showCancel
+                    ? styles.detailViewWithCancelOption
+                    : styles.documentDetailView
+                }>
                 {/* document title */}
                 <Text
                   ellipsizeMode="tail"
@@ -114,7 +114,7 @@ const LMDocument = ({
                           documentDetailStyle,
                           {
                             display:
-                              showPageCount != undefined
+                              showPageCount !== undefined
                                 ? showPageCount
                                   ? 'flex'
                                   : 'none'
@@ -130,7 +130,7 @@ const LMDocument = ({
                           styles.dotImageSize,
                           {
                             display:
-                              showPageCount != undefined
+                              showPageCount !== undefined
                                 ? showPageCount &&
                                   (showDocumentFormat || showDocumentSize)
                                   ? 'flex'
@@ -148,14 +148,16 @@ const LMDocument = ({
                       documentDetailStyle,
                       {
                         display:
-                          showDocumentSize != undefined
+                          showDocumentSize !== undefined
                             ? showDocumentSize
                               ? 'flex'
                               : 'none'
                             : 'flex',
                       },
                     ])}>
-                    {formatBytes(item.attachmentMeta.size)}
+                    {item.attachmentMeta.size
+                      ? formatBytes(item.attachmentMeta.size)
+                      : ''}
                   </Text>
                   <Image
                     source={require('../../../assets/images/single_dot3x.png')}
@@ -164,7 +166,7 @@ const LMDocument = ({
                       styles.dotImageSize,
                       {
                         display:
-                          (showDocumentSize && showDocumentFormat) != undefined
+                          (showDocumentSize && showDocumentFormat) !== undefined
                             ? showDocumentSize && showDocumentFormat
                               ? 'flex'
                               : 'none'
@@ -180,7 +182,7 @@ const LMDocument = ({
                       {
                         textTransform: 'uppercase',
                         display:
-                          showDocumentFormat != undefined
+                          showDocumentFormat !== undefined
                             ? showDocumentFormat
                               ? 'flex'
                               : 'none'
@@ -195,10 +197,7 @@ const LMDocument = ({
               {showCancel && (
                 <LMButton
                   onTap={onCancel ? () => onCancel(index) : () => {}}
-                  buttonStyle={{
-                    marginLeft: 30,
-                    borderWidth: 0,
-                  }}
+                  buttonStyle={styles.cancelButton}
                   icon={{
                     assetPath: require('../../../assets/images/crossCircle_icon3x.png'),
                     type: 'png',
@@ -217,7 +216,7 @@ const LMDocument = ({
           activeOpacity={0.8}
           hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
           onPress={() => setShowFullList(true)}
-          style={{paddingHorizontal: 15, marginTop: 8}}
+          style={styles.showMoreView}
           accessibilityRole="button">
           <LMText
             text={`+ ${attachments.length - 2} More`}
@@ -271,6 +270,21 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: STYLES.$COLORS.THEME,
   },
+  documentDetailView: {
+    marginLeft: 12,
+    width: '90%',
+    height: 36,
+  },
+  detailViewWithCancelOption: {
+    marginLeft: 12,
+    width: '72%',
+    height: 36,
+  },
+  cancelButton: {
+    marginLeft: 30,
+    borderWidth: 0,
+  },
+  showMoreView: {paddingHorizontal: 15, marginTop: 8},
 });
 
 export default LMDocument;

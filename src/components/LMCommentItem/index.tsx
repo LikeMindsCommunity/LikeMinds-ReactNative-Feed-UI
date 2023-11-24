@@ -60,7 +60,7 @@ const LMCommentItem = ({
         setNumberOfLines(MAX_LINES);
       }
     },
-    [showText],
+    [showText, MAX_LINES],
   );
 
   // this handles the visiblity of whole comment content and trimmed text upto maximum line
@@ -68,7 +68,7 @@ const LMCommentItem = ({
     if (showMoreButton) {
       setNumberOfLines(showText ? undefined : MAX_LINES);
     }
-  }, [showText, showMoreButton]);
+  }, [showText, showMoreButton, MAX_LINES]);
 
   //creating content props as per customization
   const updatedContentProps = commentContentProps
@@ -111,7 +111,7 @@ const LMCommentItem = ({
   useEffect(() => {
     setCommentIsLiked(comment?.isLiked);
     setCommentLikeCount(comment?.likesCount);
-  }, [comment?.isLiked]);
+  }, [comment?.isLiked, comment?.likesCount]);
 
   const likesCountHandler = () => {
     likeIconButton?.onTap(comment?.id);
@@ -126,13 +126,7 @@ const LMCommentItem = ({
   return (
     <View
       style={
-        comment?.level === PARENT_LEVEL_COMMENT && {
-          paddingHorizontal: 15,
-          width: layout.window.width,
-          backgroundColor: '#fff',
-          borderBottomWidth: 1,
-          borderBottomColor: '#D0D8E266',
-        }
+        comment?.level === PARENT_LEVEL_COMMENT && styles.parentLevelCommentView
       }>
       {/* commented user name */}
       <LMText
@@ -142,13 +136,8 @@ const LMCommentItem = ({
           commentUserNameStyle,
         ])}
       />
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}>
-        <View style={{width: '85%'}}>
+      <View style={styles.commentContentView}>
+        <View style={styles.commentTextView}>
           {/* comment content text */}
           <LMText {...updatedContentProps} />
           {/* show more button section */}
@@ -157,7 +146,7 @@ const LMCommentItem = ({
               activeOpacity={0.8}
               hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
               disabled={showText ? true : false}
-              onPress={() => setShowText(showText => !showText)}
+              onPress={() => setShowText(!showText)}
               accessibilityRole="button">
               <LMText {...updatedShowMoreProps} />
             </TouchableOpacity>
@@ -175,17 +164,10 @@ const LMCommentItem = ({
             width: 18,
             height: 18,
           }}
-          buttonStyle={{borderWidth: 0}}
+          buttonStyle={styles.threeDotButton}
         />
       </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingBottom: 12,
-          paddingTop: 6,
-          alignItems: 'center',
-        }}>
+      <View style={styles.commentFooterView}>
         <View style={styles.alignRow}>
           {/* like icon */}
           <LMButton
@@ -211,7 +193,7 @@ const LMCommentItem = ({
               boxFit: likeIconButton?.icon?.boxFit,
               boxStyle: likeIconButton?.icon?.boxStyle,
             }}
-            buttonStyle={{borderWidth: 0, marginRight: 4}}
+            buttonStyle={styles.likeIconButton}
           />
           {/* like text */}
           {commentLikeCount > 0 && (
@@ -224,16 +206,13 @@ const LMCommentItem = ({
                     : `${commentLikeCount} Like`,
                 textStyle: {fontSize: 13, marginLeft: 5, color: '#0F1E3D66'},
               }}
-              buttonStyle={{borderWidth: 0, marginRight: 4}}
+              buttonStyle={styles.likeTextButton}
             />
           )}
           {/* reply section */}
           {comment?.level === PARENT_LEVEL_COMMENT && (
             <>
-              <LMText
-                text=" | "
-                textStyle={{color: '#0F1E3D66', marginRight: 4}}
-              />
+              <LMText text=" | " textStyle={styles.replyTextStyle} />
               {/* this opens the input text to reply */}
               <LMButton
                 text={{
@@ -250,7 +229,7 @@ const LMCommentItem = ({
                 onTap={() => {
                   replyTextProps?.onTap();
                 }}
-                buttonStyle={{borderWidth: 0}}
+                buttonStyle={styles.replyTextButton}
               />
 
               {/* this shows all the replies of a comment */}
@@ -281,7 +260,7 @@ const LMCommentItem = ({
                         repliesCountTextStyle,
                       ]),
                     }}
-                    buttonStyle={{borderWidth: 0}}
+                    buttonStyle={styles.repliesCountTextButton}
                   />
                 </>
               )}
@@ -303,7 +282,7 @@ const LMCommentItem = ({
       </View>
       {/* replies section */}
       {showReplies && comment.repliesCount > 0 && (
-        <View style={{marginLeft: 30}}>
+        <View style={styles.repliesView}>
           {repliesArray && (
             <FlatList
               keyboardShouldPersistTaps={'handled'}
@@ -342,12 +321,7 @@ const LMCommentItem = ({
                   {repliesArray.length > 0 ? (
                     <>
                       {comment.repliesCount > repliesArray.length && (
-                        <View
-                          style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                          }}>
+                        <View style={styles.showMoreView}>
                           <LMButton
                             onTap={
                               onTapViewMore
@@ -366,26 +340,16 @@ const LMCommentItem = ({
                                 : 'View more replies',
                               textStyle: viewMoreRepliesProps?.textStyle,
                             }}
-                            buttonStyle={{
-                              borderWidth: 0,
-                              alignSelf: 'flex-start',
-                            }}
+                            buttonStyle={styles.viewMoreButton}
                           />
-                          <Text style={{fontSize: 12, color: '#9B9B9B'}}>
+                          <Text style={styles.commentPageNumberText}>
                             {repliesArray.length} of {comment.repliesCount}
                           </Text>
                         </View>
                       )}
                     </>
                   ) : (
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        margin: 10,
-                        marginBottom: 20,
-                      }}>
+                    <View style={styles.loaderView}>
                       <LMLoader size={10} />
                     </View>
                   )}
@@ -437,6 +401,50 @@ const styles = StyleSheet.create({
   defaultTimeStyle: {
     color: '#0F1E3D66',
     fontSize: 13,
+  },
+  parentLevelCommentView: {
+    paddingHorizontal: 15,
+    width: layout.window.width,
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#D0D8E266',
+  },
+  commentContentView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  commentTextView: {width: '85%'},
+  threeDotButton: {borderWidth: 0},
+  commentFooterView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 12,
+    paddingTop: 6,
+    alignItems: 'center',
+  },
+  likeTextButton: {borderWidth: 0, marginRight: 4},
+  likeIconButton: {borderWidth: 0, marginRight: 4},
+  replyTextStyle: {color: '#0F1E3D66', marginRight: 4},
+  replyTextButton: {borderWidth: 0},
+  repliesCountTextButton: {borderWidth: 0},
+  repliesView: {marginLeft: 30},
+  showMoreView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  commentPageNumberText: {fontSize: 12, color: '#9B9B9B'},
+  loaderView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 10,
+    marginBottom: 20,
+  },
+  viewMoreButton: {
+    borderWidth: 0,
+    alignSelf: 'flex-start',
   },
 });
 

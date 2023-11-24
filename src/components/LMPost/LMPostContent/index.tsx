@@ -35,7 +35,7 @@ const LMPostContent = ({
         setNumberOfLines(MAX_LINES);
       }
     },
-    [showText],
+    [showText, MAX_LINES],
   );
 
   // this handles the visiblity of whole post content and trimmed text upto maximum line
@@ -43,12 +43,12 @@ const LMPostContent = ({
     if (showMoreButton) {
       setNumberOfLines(showText ? undefined : MAX_LINES);
     }
-  }, [showText, showMoreButton]);
+  }, [showText, showMoreButton, MAX_LINES]);
 
   // this renders the text with highlighted link's urls
-  const highlightLinks = (text: string) => {
+  const highlightLinks = (linksText: string) => {
     const regex = DETECT_LINK_REGEX;
-    const parts = text.replace(/\n/g, ' \n').split(' ');
+    const parts = linksText.replace(/\n/g, ' \n').split(' ');
 
     return parts?.map((part, index) => {
       if (regex.test(part.trim())) {
@@ -95,7 +95,7 @@ const LMPostContent = ({
           activeOpacity={0.8}
           hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
           disabled={showText ? true : false}
-          onPress={() => setShowText(showText => !showText)}
+          onPress={() => setShowText(!showText)}
           accessibilityRole="button">
           <LMText
             text={

@@ -19,5 +19,5 @@ export interface LMVideoProps {
   autoPlay?: boolean; // this represents if the video should automatically play or not
   currentVideoUrl?: string; // this represents the url of the video that is currently in the viewport
   showCancel?: boolean; // this represents the visibility of cancel button
-  onCancel?: (index: number) => void; // callback function that executes on click of cancel button,
+  onCancel?: (index: string) => void; // callback function that executes on click of cancel button,
 }

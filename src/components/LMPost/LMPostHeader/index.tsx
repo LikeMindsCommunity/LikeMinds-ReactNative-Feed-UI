@@ -60,7 +60,7 @@ const LMPostHeader = ({
             profilePictureStyle={profilePicture?.profilePictureStyle}
           />
           {/* author details */}
-          <View style={{marginLeft: 12}}>
+          <View style={styles.autherDetailView}>
             {/* author heading */}
             <View style={styles.alignRow}>
               <LMText
@@ -134,7 +134,7 @@ const LMPostHeader = ({
       <View
         style={[
           styles.topRightView,
-          post?.isPinned && {justifyContent: 'space-between'},
+          post?.isPinned && styles.topRightViewIfPinned,
         ]}>
         {/* pin icon section */}
         {post?.isPinned && (
@@ -251,6 +251,14 @@ const styles = StyleSheet.create({
     width: '16%',
     flexDirection: 'row',
     justifyContent: 'flex-end',
+  },
+  topRightViewIfPinned: {
+    width: '16%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  autherDetailView: {
+    marginLeft: 12,
   },
 });
 

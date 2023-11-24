@@ -42,7 +42,11 @@ const LMInputText = ({
         placeholderTextColor={
           placeholderTextColor ? placeholderTextColor : STYLES.$COLORS.BLACK
         }
-        style={{width: rightIcon ? '90%' : '100%'}}
+        style={
+          rightIcon
+            ? defaultStyles.textInputWithRightIcon
+            : defaultStyles.textInputWithoutRightIcon
+        }
         placeholder={placeholderText}
         autoCapitalize={autoCapitalize ? autoCapitalize : 'none'}
         keyboardType={keyboardType ? keyboardType : 'default'}
@@ -62,7 +66,7 @@ const LMInputText = ({
             ...rightIcon.icon,
           }}
           placement={rightIcon.placement}
-          buttonStyle={{borderWidth: 0}}
+          buttonStyle={defaultStyles.rightIconButton}
         />
       )}
     </View>
@@ -83,6 +87,15 @@ const defaultStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: layout.window.width,
+  },
+  textInputWithRightIcon: {
+    width: '90%',
+  },
+  textInputWithoutRightIcon: {
+    width: '100%',
+  },
+  rightIconButton: {
+    borderWidth: 0,
   },
 });
 

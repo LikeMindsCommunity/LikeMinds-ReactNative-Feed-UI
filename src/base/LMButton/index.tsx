@@ -20,7 +20,7 @@ const LMButton = ({
 
   // this function handles the active state of the button
   const activeStateHandler = () => {
-    if (isActive != undefined) {
+    if (isActive !== undefined) {
       setActive(!active);
     }
   };
@@ -31,7 +31,8 @@ const LMButton = ({
       style={StyleSheet.flatten([defaultStyles.buttonViewStyle, buttonStyle])}
       activeOpacity={0.8}
       onPress={event => {
-        onTap(event), activeStateHandler();
+        onTap(event);
+        activeStateHandler();
       }}>
       {/* button view */}
       <View

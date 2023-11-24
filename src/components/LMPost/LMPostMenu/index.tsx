@@ -60,7 +60,8 @@ const LMPostMenu = ({
                   activeOpacity={0.8}
                   key={index}
                   onPress={() => {
-                    onSelected(postId, item.id), onCloseModal();
+                    onSelected(postId, item.id);
+                    onCloseModal();
                   }}>
                   <LMText
                     text={item.title}

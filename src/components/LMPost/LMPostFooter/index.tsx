@@ -25,7 +25,7 @@ const LMPostFooter = ({
   useEffect(() => {
     setLiked(isLiked);
     setLikeCount(likesCount);
-  }, [isLiked]);
+  }, [isLiked, likesCount]);
   const likesCountHandler = () => {
     likeIconButton?.onTap();
     setLiked(!liked);
@@ -69,11 +69,7 @@ const LMPostFooter = ({
             buttonStyle={
               likeIconButton?.buttonStyle
                 ? likeIconButton.buttonStyle
-                : {
-                    borderWidth: 0,
-                    alignItems: 'center',
-                    justifyContent: 'space-evenly',
-                  }
+                : styles.defaultLikeIconView
             }
           />
           {/* like text button */}
@@ -105,12 +101,7 @@ const LMPostFooter = ({
             buttonStyle={
               likeTextButton?.buttonStyle
                 ? likeTextButton.buttonStyle
-                : {
-                    borderWidth: 0,
-                    alignItems: 'center',
-                    justifyContent: 'space-evenly',
-                    marginLeft: 8,
-                  }
+                : styles.defaultLikeTextView
             }
           />
         </View>
@@ -125,7 +116,7 @@ const LMPostFooter = ({
                   ? commentsCount > 1
                     ? `${commentsCount} Comments`
                     : `${commentsCount} Comment`
-                  : `Add Comment`,
+                  : 'Add Comment',
               textStyle: commentButton?.text?.textStyle
                 ? commentButton.text.textStyle
                 : {
@@ -157,11 +148,7 @@ const LMPostFooter = ({
             buttonStyle={
               commentButton?.buttonStyle
                 ? commentButton.buttonStyle
-                : {
-                    borderWidth: 0,
-                    alignItems: 'center',
-                    marginLeft: 5,
-                  }
+                : styles.defaultCommentView
             }
           />
         </View>
@@ -215,7 +202,7 @@ const LMPostFooter = ({
             buttonStyle={
               saveButton?.buttonStyle
                 ? saveButton.buttonStyle
-                : {borderWidth: 0}
+                : styles.buttonWithoutBorder
             }
           />
         )}
@@ -245,7 +232,7 @@ const LMPostFooter = ({
             buttonStyle={
               shareButton?.buttonStyle
                 ? shareButton.buttonStyle
-                : {borderWidth: 0}
+                : styles.buttonWithoutBorder
             }
           />
         )}
@@ -284,6 +271,25 @@ const styles = StyleSheet.create({
   iconSize: {
     width: layout.normalize(19),
     height: layout.normalize(19),
+  },
+  defaultLikeIconView: {
+    borderWidth: 0,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+  },
+  defaultLikeTextView: {
+    borderWidth: 0,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    marginLeft: 8,
+  },
+  defaultCommentView: {
+    borderWidth: 0,
+    alignItems: 'center',
+    marginLeft: 5,
+  },
+  buttonWithoutBorder: {
+    borderWidth: 0,
   },
 });
 

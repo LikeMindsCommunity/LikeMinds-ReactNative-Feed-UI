@@ -32,8 +32,8 @@ const LMLinkPreview = ({
               ? previewAttachmentData.url
               : `https://${previewAttachmentData.url}`
             : '',
-        ),
-          onTap;
+        );
+        onTap;
       }}>
       {/* link preview image */}
       <View
@@ -49,7 +49,7 @@ const LMLinkPreview = ({
               linkImageStyle,
               {
                 display:
-                  showImage != undefined
+                  showImage !== undefined
                     ? showImage
                       ? 'flex'
                       : 'none'
@@ -57,7 +57,7 @@ const LMLinkPreview = ({
               },
             ])}
             height={220}
-            boxStyle={{borderRadius: 8, width: '100%'}}
+            boxStyle={styles.previewImageView}
             boxFit="contain"
           />
         )}
@@ -70,7 +70,7 @@ const LMLinkPreview = ({
               linkTitleStyle,
               {
                 display:
-                  showTitle != undefined
+                  showTitle !== undefined
                     ? showTitle
                       ? 'flex'
                       : 'none'
@@ -87,7 +87,7 @@ const LMLinkPreview = ({
               linkDescriptionStyle,
               {
                 display:
-                  showDescription != undefined
+                  showDescription !== undefined
                     ? showDescription
                       ? 'flex'
                       : 'none'
@@ -103,7 +103,7 @@ const LMLinkPreview = ({
               linkUrlStyle,
               {
                 display:
-                  showLinkUrl != undefined
+                  showLinkUrl !== undefined
                     ? showLinkUrl
                       ? 'flex'
                       : 'none'
@@ -119,10 +119,7 @@ const LMLinkPreview = ({
           <View style={styles.cancelButtonView}>
             <LMButton
               onTap={onCancel ? () => onCancel() : () => {}}
-              buttonStyle={{
-                borderWidth: 0,
-                backgroundColor: 'transparent',
-              }}
+              buttonStyle={styles.cancelButton}
               icon={{
                 assetPath: require('../../../assets/images/crossCircle_icon3x.png'),
                 type: 'png',
@@ -178,6 +175,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 10,
     top: 10,
+  },
+  previewImageView: {
+    borderRadius: 8,
+    width: '100%',
+  },
+  cancelButton: {
+    borderWidth: 0,
+    backgroundColor: 'transparent',
   },
 });
 

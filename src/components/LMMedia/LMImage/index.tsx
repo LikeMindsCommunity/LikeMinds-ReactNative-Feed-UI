@@ -55,10 +55,7 @@ const LMImage = ({
         <View style={defaultStyles.cancelButtonView}>
           <LMButton
             onTap={onCancel ? () => onCancel(imageUrl) : () => {}}
-            buttonStyle={{
-              borderWidth: 0,
-              backgroundColor: 'transparent',
-            }}
+            buttonStyle={defaultStyles.cancelButton}
             icon={{
               assetPath: require('../../../assets/images/crossCircle_icon3x.png'),
               type: 'png',
@@ -118,6 +115,10 @@ const defaultStyles = StyleSheet.create({
     right: 15,
     top: 15,
     zIndex: 2000,
+  },
+  cancelButton: {
+    borderWidth: 0,
+    backgroundColor: 'transparent',
   },
 });
 

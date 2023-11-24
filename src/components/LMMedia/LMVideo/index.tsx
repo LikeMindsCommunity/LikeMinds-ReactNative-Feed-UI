@@ -46,7 +46,7 @@ const LMVideo = forwardRef(
     // this throw error and ask for currentVideoUrl if auto play is set true
     if (autoPlay && !currentVideoUrl) {
       throw new Error(
-        `Property 'currentVideoUrl' is missing in type '{ videoUrl: string; autoPlay: true; }' but required in type 'LMVideoProps'.`,
+        "Property 'currentVideoUrl' is missing in type '{ videoUrl: string; autoPlay: true; }' but required in type 'LMVideoProps'.",
       );
     }
 
@@ -111,14 +111,10 @@ const LMVideo = forwardRef(
         </TouchableWithoutFeedback>
         {/* this renders the cancel button */}
         {showCancel && (
-          <View
-            style={{position: 'absolute', right: 15, top: 15, zIndex: 7000}}>
+          <View style={defaultStyles.cancelVideoView}>
             <LMButton
               onTap={onCancel ? () => onCancel(videoUrl) : () => {}}
-              buttonStyle={{
-                borderWidth: 0,
-                backgroundColor: 'transparent',
-              }}
+              buttonStyle={defaultStyles.cancelButtonStyle}
               icon={{
                 assetPath: require('../../../assets/images/crossCircle_icon3x.png'),
                 type: 'png',
@@ -136,15 +132,11 @@ const LMVideo = forwardRef(
             onPress={() => setViewController(false)}
             style={[
               defaultStyles.videoStyle,
-              {
-                position: 'absolute',
-                justifyContent: 'center',
-                alignItems: 'center',
-              },
+              defaultStyles.videoControllerView,
             ]}>
             <TouchableOpacity
               activeOpacity={0.8}
-              style={{zIndex: 5000}}
+              style={defaultStyles.controllerZIndex}
               onPress={() => {
                 setPlayingStatus(!playingStatus);
               }}>
@@ -156,7 +148,7 @@ const LMVideo = forwardRef(
                   ) : (
                     <Image
                       source={require('../../../assets/images/play_icon3x.png')}
-                      style={{width: 35, height: 35}}
+                      style={defaultStyles.playPauseIconSize}
                     />
                   )
                 ) : pauseButton ? (
@@ -164,7 +156,7 @@ const LMVideo = forwardRef(
                 ) : (
                   <Image
                     source={require('../../../assets/images/pause_icon3x.png')}
-                    style={{width: 35, height: 35}}
+                    style={defaultStyles.playPauseIconSize}
                   />
                 )}
               </>
@@ -202,6 +194,20 @@ const defaultStyles = StyleSheet.create({
   errorText: {
     color: STYLES.$COLORS.RED,
   },
+  cancelVideoView: {position: 'absolute', right: 15, top: 15, zIndex: 7000},
+  cancelButtonStyle: {
+    borderWidth: 0,
+    backgroundColor: 'transparent',
+  },
+  videoControllerView: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  controllerZIndex: {
+    zIndex: 5000,
+  },
+  playPauseIconSize: {width: 35, height: 35},
 });
 
 export default LMVideo;
