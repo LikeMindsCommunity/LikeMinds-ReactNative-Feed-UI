@@ -14,7 +14,7 @@ import {LMCommentProps} from './types';
 import LMButton from '../../base/LMButton';
 import {timeStamp} from '../../utils';
 import LMIcon from '../../base/LMIcon';
-import {PARENT_LEVEL_COMMENT} from '../../constants/strings';
+import {PARENT_LEVEL_COMMENT, VIEW_MORE_TEXT} from '../../constants/strings';
 import LMPostMenu from '../LMPost/LMPostMenu';
 import LMLoader from '../../base/LMLoader';
 import {LMCommentUI} from '../../models';
@@ -364,7 +364,7 @@ const LMCommentItem = ({
                             text={{
                               text: viewMoreRepliesProps?.text
                                 ? viewMoreRepliesProps.text
-                                : 'View more replies',
+                                : VIEW_MORE_TEXT,
                               textStyle: viewMoreRepliesProps?.textStyle,
                             }}
                             buttonStyle={styles.viewMoreButton}

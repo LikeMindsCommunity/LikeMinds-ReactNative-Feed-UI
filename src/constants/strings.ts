@@ -19,3 +19,6 @@ export const CHILD_LEVEL_COMMENT = 1;
 
 // min document count to display
 export const MIN_DOCUMENT_ITEM = 2;
+
+// view more text on pagination of replies of comment
+export const VIEW_MORE_TEXT = 'View more replies';
