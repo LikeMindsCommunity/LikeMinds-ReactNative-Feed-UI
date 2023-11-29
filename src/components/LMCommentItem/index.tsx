@@ -4,7 +4,6 @@ import {
   StyleSheet,
   FlatList,
   Text,
-  TextLayoutLine,
   TextLayoutEventData,
   NativeSyntheticEvent,
 } from 'react-native';
@@ -273,7 +272,7 @@ const LMCommentItem = ({
             </>
           )}
         </View>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={styles.rowAlignment}>
           {comment?.isEdited && (
             <>
               <LMText
@@ -474,6 +473,7 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     alignSelf: 'flex-start',
   },
+  rowAlignment: {flexDirection: 'row', alignItems: 'center'},
 });
 
 export default LMCommentItem;

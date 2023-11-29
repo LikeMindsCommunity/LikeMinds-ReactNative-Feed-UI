@@ -30,7 +30,7 @@ const LMPost = forwardRef(function LMPost(
       menuItems: post?.menuItems,
       onSelected: headerProps?.postMenu.onSelected
         ? headerProps.postMenu.onSelected
-        : () => {},
+        : () => null,
       modalPosition: headerProps?.postMenu.modalPosition
         ? headerProps?.postMenu.modalPosition
         : {x: 0, y: 0},
@@ -39,12 +39,12 @@ const LMPost = forwardRef(function LMPost(
         : false,
       onCloseModal: headerProps?.postMenu.onCloseModal
         ? headerProps.postMenu.onCloseModal
-        : () => {},
+        : () => null,
       menuItemTextStyle: headerProps?.postMenu.menuItemTextStyle,
       menuViewStyle: headerProps?.postMenu.menuViewStyle,
       backdropColor: headerProps?.postMenu.backdropColor,
     },
-    onTap: headerProps?.onTap ? headerProps.onTap : () => {},
+    onTap: headerProps?.onTap ? headerProps.onTap : () => null,
     createdAt: {
       text: `${post?.createdAt}`,
       textStyle: headerProps?.createdAt?.textStyle,

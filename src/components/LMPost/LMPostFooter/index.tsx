@@ -109,7 +109,7 @@ const LMPostFooter = ({
         {/* comment section */}
         <View style={StyleSheet.flatten([styles.alignRow])}>
           <LMButton
-            onTap={commentButton?.onTap ? commentButton.onTap : () => {}}
+            onTap={commentButton?.onTap ? commentButton.onTap : () => null}
             text={{
               text:
                 commentsCount > 0
@@ -164,7 +164,7 @@ const LMPostFooter = ({
         {/* save section */}
         {showBookMarkIcon && (
           <LMButton
-            onTap={saveButton?.onTap ? saveButton.onTap : () => {}}
+            onTap={saveButton?.onTap ? saveButton.onTap : () => null}
             text={saveButton?.text}
             icon={{
               assetPath: saveButton?.icon?.assetPath
@@ -210,7 +210,7 @@ const LMPostFooter = ({
         {/* share section */}
         {showShareIcon && (
           <LMButton
-            onTap={shareButton?.onTap ? shareButton.onTap : () => {}}
+            onTap={shareButton?.onTap ? shareButton.onTap : () => null}
             text={shareButton?.text}
             icon={{
               assetPath: shareButton?.icon?.assetPath

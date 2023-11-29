@@ -54,7 +54,7 @@ const LMImage = ({
       {showCancel && (
         <View style={defaultStyles.cancelButtonView}>
           <LMButton
-            onTap={onCancel ? () => onCancel(imageUrl) : () => {}}
+            onTap={onCancel ? () => onCancel(imageUrl) : () => null}
             buttonStyle={defaultStyles.cancelButton}
             icon={{
               assetPath: require('../../../assets/images/crossCircle_icon3x.png'),

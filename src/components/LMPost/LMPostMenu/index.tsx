@@ -37,7 +37,6 @@ const LMPostMenu = ({
         onPress={onCloseModal}>
         {/* Menu list View */}
         <Pressable
-          onPress={() => {}}
           style={StyleSheet.flatten([
             styles.modalContainer,
             menuViewStyle,

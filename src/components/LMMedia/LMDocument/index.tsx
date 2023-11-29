@@ -196,7 +196,7 @@ const LMDocument = ({
               {/* this renders the cancel button */}
               {showCancel && (
                 <LMButton
-                  onTap={onCancel ? () => onCancel(index) : () => {}}
+                  onTap={onCancel ? () => onCancel(index) : () => null}
                   buttonStyle={styles.cancelButton}
                   icon={{
                     assetPath: require('../../../assets/images/crossCircle_icon3x.png'),

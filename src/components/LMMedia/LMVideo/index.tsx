@@ -113,7 +113,7 @@ const LMVideo = forwardRef(
         {showCancel && (
           <View style={defaultStyles.cancelVideoView}>
             <LMButton
-              onTap={onCancel ? () => onCancel(videoUrl) : () => {}}
+              onTap={onCancel ? () => onCancel(videoUrl) : () => null}
               buttonStyle={defaultStyles.cancelButtonStyle}
               icon={{
                 assetPath: require('../../../assets/images/crossCircle_icon3x.png'),
