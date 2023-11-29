@@ -29,8 +29,8 @@ const LMPostContent = ({
 
   // this handles the show more functionality
   const onTextLayout = useCallback(
-    (e: {nativeEvent: {lines: string | TextLayoutLine[]}}) => {
-      if (e.nativeEvent.lines.length > MAX_LINES && !showText) {
+    (event: {nativeEvent: {lines: string | TextLayoutLine[]}}) => {
+      if (event.nativeEvent.lines.length > MAX_LINES && !showText) {
         setShowMoreButton(true);
         setNumberOfLines(MAX_LINES);
       }

@@ -11,5 +11,5 @@ export interface LMButtonProps {
   activeIcon?: LMIconProps; // this represents the icon to be displayed when the button is in active state
   activeText?: LMTextProps; // this represents the text to be displayed when the button is in active state
   buttonStyle?: ViewStyle; // this represents the style of the button
-  clickDisable?: boolean; // this represents if the button is disabled or not
+  isClickable?: boolean; // this represents if the button is disabled or not
 }

@@ -8,7 +8,10 @@ export interface LMCommentProps {
   comment: LMCommentUI; // comment data
   likeIconButton?: LMButtonProps; // custom like icon button
   likeTextButton?: LMButtonProps; // custom like text button
-  onTapViewMore?: (val: any, val2: any) => void; // callback function to be executed on click of view more replies
+  onTapViewMore?: (
+    page: number,
+    data: (repliesArray: Array<LMCommentUI>) => void,
+  ) => void; // callback function to be executed on click of view more replies
   commentMaxLines?: number; // maximun lines of comment to be shown
   menuIcon?: LMButtonProps; // custom menu icon button
   commentUserNameStyle?: TextStyle; // style for user name text
@@ -18,6 +21,6 @@ export interface LMCommentProps {
   repliesCountTextStyle?: TextStyle; // props for comment count text
   timeStampStyle?: TextStyle; // props for time stamp text
   viewMoreRepliesProps?: LMTextProps; // props for view more text
-  onTapReplies?: (val: any) => void; // callback function to be executed on click of replies
+  onTapReplies?: (data: (repliesArray: Array<LMCommentUI>) => void) => void; // callback function to be executed on click of replies
   commentMenu: LMPostMenuProps; // this represents the post menu props
 }

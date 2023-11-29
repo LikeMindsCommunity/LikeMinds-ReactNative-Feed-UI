@@ -14,7 +14,7 @@ const LMButton = ({
   activeIcon,
   activeText,
   buttonStyle,
-  clickDisable = false,
+  isClickable = false,
 }: LMButtonProps) => {
   const [active, setActive] = useState(isActive);
 
@@ -26,7 +26,7 @@ const LMButton = ({
   };
   return (
     <TouchableOpacity
-      disabled={clickDisable}
+      disabled={isClickable}
       hitSlop={{top: 10, bottom: 10}}
       style={StyleSheet.flatten([defaultStyles.buttonViewStyle, buttonStyle])}
       activeOpacity={0.8}

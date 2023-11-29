@@ -21,6 +21,7 @@ const LMInputText = ({
 }: LMInputTextProps) => {
   const textInputRef = useRef<TextInput>(null);
 
+  // this handles the autoFocus of textinput
   useEffect(() => {
     if (autoFocus) {
       if (textInputRef.current) {

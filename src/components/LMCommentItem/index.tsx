@@ -5,6 +5,8 @@ import {
   FlatList,
   Text,
   TextLayoutLine,
+  TextLayoutEventData,
+  NativeSyntheticEvent,
 } from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import LMText from '../../base/LMText';
@@ -43,7 +45,7 @@ const LMCommentItem = ({
   // const [showReplyInput, setShowReplyInput] = useState(false);
   const [commentIsLiked, setCommentIsLiked] = useState(comment?.isLiked);
   const [commentLikeCount, setCommentLikeCount] = useState(comment?.likesCount);
-  const [repliesArray, setRepliesArray] = useState([]);
+  const [repliesArray, setRepliesArray] = useState<LMCommentUI[]>([]);
   const [replyPageNumber, setReplyPageNumber] = useState(2);
   const [modalPosition, setModalPosition] = useState(
     commentMenu?.modalPosition,
@@ -54,7 +56,7 @@ const LMCommentItem = ({
 
   // this handles the show more functionality
   const onTextLayout = useCallback(
-    (event: {nativeEvent: {lines: string | TextLayoutLine[]}}) => {
+    (event: NativeSyntheticEvent<TextLayoutEventData>) => {
       if (event.nativeEvent.lines.length > MAX_LINES && !showText) {
         setShowMoreButton(true);
         setNumberOfLines(MAX_LINES);
@@ -75,9 +77,8 @@ const LMCommentItem = ({
     ? commentContentProps
     : {
         text: comment?.text,
-        onTextLayout: (event: {
-          nativeEvent: {lines: string | TextLayoutLine[]};
-        }) => onTextLayout(event),
+        onTextLayout: (event: NativeSyntheticEvent<TextLayoutEventData>) =>
+          onTextLayout(event),
         maxLines: numberOfLines,
         textStyle: {color: '#222020'},
       };
@@ -92,8 +93,9 @@ const LMCommentItem = ({
   const handleReplies = () => {
     setShowReplies(!showReplies);
   };
+
   // this function is executed on the click of menu icon & handles the position and visibility of the modal
-  const onThreedotsClick = (event: {
+  const onOverflowMenuClick = (event: {
     nativeEvent: {pageX: number; pageY: number};
   }) => {
     const {pageX, pageY} = event.nativeEvent;
@@ -108,11 +110,13 @@ const LMCommentItem = ({
     setShowPostMenuModal(false);
   };
 
+  // this sets the comment's like value and likeCount locally
   useEffect(() => {
     setCommentIsLiked(comment?.isLiked);
     setCommentLikeCount(comment?.likesCount);
   }, [comment?.isLiked, comment?.likesCount]);
 
+  // this handles the comment's like state and count locally
   const likesCountHandler = () => {
     likeIconButton?.onTap(comment?.id);
     setCommentIsLiked(!commentIsLiked);
@@ -154,7 +158,7 @@ const LMCommentItem = ({
         </View>
         {/* menu icon */}
         <LMButton
-          onTap={onThreedotsClick}
+          onTap={onOverflowMenuClick}
           icon={{
             assetPath: menuIcon?.icon?.assetPath
               ? menuIcon.icon.assetPath
@@ -246,7 +250,9 @@ const LMCommentItem = ({
                   <LMButton
                     onTap={() => {
                       onTapReplies
-                        ? (onTapReplies((data: any) => setRepliesArray(data)),
+                        ? (onTapReplies((data: Array<LMCommentUI>) =>
+                            setRepliesArray(data),
+                          ),
                           handleReplies())
                         : handleReplies();
                     }}
@@ -267,18 +273,39 @@ const LMCommentItem = ({
             </>
           )}
         </View>
-        {/* posted time stamp */}
-        <LMText
-          text={
-            timeStamp(Number(comment?.createdAt)) === undefined
-              ? 'now'
-              : `${timeStamp(Number(comment?.createdAt))}`
-          }
-          textStyle={StyleSheet.flatten([
-            styles.defaultTimeStyle,
-            timeStampStyle,
-          ])}
-        />
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          {comment?.isEdited && (
+            <>
+              <LMText
+                text="Edited"
+                textStyle={StyleSheet.flatten([
+                  styles.defaultTimeStyle,
+                  timeStampStyle,
+                ])}
+              />
+              <LMIcon
+                assetPath={require('../../assets/images/single_dot3x.png')}
+                type="png"
+                width={styles.dotImageSize.width}
+                height={styles.dotImageSize.height}
+                iconStyle={styles.dotImageSize}
+                color="#0F1E3D66"
+              />
+            </>
+          )}
+          {/* posted time stamp */}
+          <LMText
+            text={
+              timeStamp(Number(comment?.createdAt)) === undefined
+                ? 'now'
+                : `${timeStamp(Number(comment?.createdAt))}`
+            }
+            textStyle={StyleSheet.flatten([
+              styles.defaultTimeStyle,
+              timeStampStyle,
+            ])}
+          />
+        </View>
       </View>
       {/* replies section */}
       {showReplies && comment.repliesCount > 0 && (
@@ -329,10 +356,11 @@ const LMCommentItem = ({
                                     setReplyPageNumber(replyPageNumber + 1);
                                     onTapViewMore(
                                       replyPageNumber,
-                                      (data: any) => setRepliesArray(data),
+                                      (data: Array<LMCommentUI>) =>
+                                        setRepliesArray(data),
                                     );
                                   }
-                                : () => {}
+                                : () => null
                             }
                             text={{
                               text: viewMoreRepliesProps?.text
