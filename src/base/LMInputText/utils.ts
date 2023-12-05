@@ -631,7 +631,7 @@ function detectMentions(input: string) {
   const myArray = input.split(' ');
   const doesExists = myArray.includes('@');
 
-    /* It basically checks that for the below four conditions:
+  /* It basically checks that for the below four conditions:
      1. if '@' is at end preceded by a whitespace
      2. if input only contains '@'
      3. if '@' occurs at new line

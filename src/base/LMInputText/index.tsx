@@ -76,7 +76,7 @@ const LMInputText: FC<LMInputTextProps> = ({
    *
    * @param changedText
    */
-    /*
+  /*
    1. Firstly current length is compared to previous length to check for backspace event
    2. Iterating on the parts array and checking if the current cursor position is at end position of any object of the parts array and if it is, checking whether it is tagged user or a simple text
    3. If it is tagged user, making isFirst true which is used to handle cases where tagged user is at the beginning of the input followed by removing of that tagged member object from the parts array 
