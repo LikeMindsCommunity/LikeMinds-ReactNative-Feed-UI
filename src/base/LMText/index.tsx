@@ -2,6 +2,7 @@ import {StyleSheet, Text} from 'react-native';
 import React from 'react';
 import {LMTextProps} from './types';
 import STYLES from '../../constants/constants';
+import decode from '../../utils/decodeMentions';
 
 const LMText = ({
   text,
@@ -17,7 +18,7 @@ const LMText = ({
       numberOfLines={maxLines}
       onTextLayout={onTextLayout}
       style={StyleSheet.flatten([defaultStyles.textStyle, textStyle])}>
-      {text}
+      {decode(text, false)}
     </Text>
   );
 };
