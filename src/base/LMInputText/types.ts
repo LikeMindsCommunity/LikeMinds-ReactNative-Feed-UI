@@ -7,7 +7,7 @@ import type {
   TextStyle,
   ViewStyle,
 } from 'react-native';
-import { LMButtonProps } from '../LMButton/types';
+import {LMButtonProps} from '../LMButton/types';
 
 type Suggestion = {
   id: string;
@@ -100,7 +100,7 @@ type Part = {
 
 type LMInputTextProps = Omit<TextInputProps, 'onChange'> & {
   inputText: string; // this represents the text to be displayed on text input
-  onType: (value: string) => any;  // this represents a callback function that is called when the text input's text changes
+  onType: (value: string) => any; // this represents a callback function that is called when the text input's text changes
 
   partTypes?: PartType[];
 
@@ -148,4 +148,3 @@ export type {
   PartType,
   LMInputTextProps,
 };
-

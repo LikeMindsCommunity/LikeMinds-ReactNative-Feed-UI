@@ -1,5 +1,5 @@
-import React from "react";
-import { Alert, Linking, Text } from "react-native";
+import React from 'react';
+import {Alert, Linking, Text} from 'react-native';
 
 const REGEX_USER_SPLITTING = /(<<.+?\|route:\/\/[^>]+>>)/gu;
 const REGEX_USER_TAGGING =
@@ -127,4 +127,4 @@ const decode = (
   }
 };
 
-export default decode
+export default decode;

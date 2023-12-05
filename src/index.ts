@@ -35,7 +35,8 @@ import {
   LMSDKClientInfoUI,
   LMUserUI,
 } from './models';
-import { Suggestion,
+import {
+  Suggestion,
   MentionData,
   CharactersDiffChange,
   RegexMatchResult,
@@ -45,7 +46,8 @@ import { Suggestion,
   MentionPartType,
   PatternPartType,
   PartType,
-  LMInputTextProps  } from './base/LMInputText/types';
+  LMInputTextProps,
+} from './base/LMInputText/types';
 
 export {
   LMText,
@@ -91,5 +93,5 @@ export type {
   MentionPartType,
   PatternPartType,
   PartType,
-  LMInputTextProps
+  LMInputTextProps,
 };

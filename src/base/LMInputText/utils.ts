@@ -78,7 +78,7 @@ const getPartsInterval = (
   parts: Part[],
   cursor: number,
   count: number,
-  isFirst: boolean
+  isFirst: boolean,
 ): Part[] => {
   const newCursor = cursor + count;
 
@@ -102,14 +102,17 @@ const getPartsInterval = (
     partsInterval.push(currentPart);
   } else {
     // For case when tagged user is at the beginning
-    if(currentPart.text==parts[0].text && isFirst){
+    if (currentPart.text == parts[0].text && isFirst) {
       partsInterval.push(
         generatePlainTextPart(
-          currentPart.text.substr(0, currentPart.position.end-currentPart.position.start),
+          currentPart.text.substr(
+            0,
+            currentPart.position.end - currentPart.position.start,
+          ),
         ),
       );
-      currentPart.text='';
-    } else{
+      currentPart.text = '';
+    } else {
       partsInterval.push(
         generatePlainTextPart(
           currentPart.text.substr(cursor - currentPart.position.start, count),
@@ -246,7 +249,7 @@ const generateValueFromPartsAndChangedText = (
   parts: Part[],
   originalText: string,
   changedText: string,
-  isFirst: boolean
+  isFirst: boolean,
 ) => {
   const changes = diffChars(
     originalText,
@@ -285,7 +288,7 @@ const generateValueFromPartsAndChangedText = (
       default: {
         if (change.count !== 0) {
           newParts = newParts.concat(
-            getPartsInterval(parts, cursor, change.count,isFirst),
+            getPartsInterval(parts, cursor, change.count, isFirst),
           );
 
           cursor += change.count;
@@ -612,44 +615,44 @@ const convertToMentionValues = (
     }),
   );
 
-  function detectMentions(input: string) {
-    const mentionRegex = /(?:^|\s)@(\w+)/g;
-    const matches = [];
-    let match;
+function detectMentions(input: string) {
+  const mentionRegex = /(?:^|\s)@(\w+)/g;
+  const matches = [];
+  let match;
 
-    while ((match = mentionRegex.exec(input)) !== null) {
-      const startIndex = match.index;
-      const endIndex = mentionRegex.lastIndex;
-      const nextChar = input.charAt(endIndex);
+  while ((match = mentionRegex.exec(input)) !== null) {
+    const startIndex = match.index;
+    const endIndex = mentionRegex.lastIndex;
+    const nextChar = input.charAt(endIndex);
 
-      if (nextChar !== '@') {
-        matches.push(match[1]);
-      }
+    if (nextChar !== '@') {
+      matches.push(match[1]);
     }
+  }
 
-    const myArray = input.split(' ');
-    const doesExists = myArray.includes('@');
+  const myArray = input.split(' ');
+  const doesExists = myArray.includes('@');
 
-    {
-      /* It basically checks that for the below four conditions:
+  {
+    /* It basically checks that for the below four conditions:
      1. if '@' is at end preceded by a whitespace
      2. if input only contains '@'
      3. if '@' occurs at new line
      4. doesExists checks whether '@' has been typed between two strings
      If any of the above condition is true, it pushes it in the matches list which indicates that member list has to be shown 
     */
-    }
-    if (
-      input.endsWith(' @') ||
-      input === '@' ||
-      input.endsWith('\n@') ||
-      (doesExists && !input.endsWith(' '))
-    ) {
-      matches.push('');
-    }
-
-    return matches;
   }
+  if (
+    input.endsWith(' @') ||
+    input === '@' ||
+    input.endsWith('\n@') ||
+    (doesExists && !input.endsWith(' '))
+  ) {
+    matches.push('');
+  }
+
+  return matches;
+}
 
 export {
   mentionRegEx,
@@ -665,5 +668,5 @@ export {
   getValueFromParts,
   replaceMentionValues,
   convertToMentionValues,
-  detectMentions
+  detectMentions,
 };
