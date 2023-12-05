@@ -9,8 +9,7 @@ function detectLinks(message: string, isLongPress?: boolean) {
   const regex =
     /((?:https?:\/\/)?(?:www\.)?(?:\w+\.)+\w+(?:\/\S*)?|\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b)/i;
 
-  let parts = message.split(regex);
-  let i = 0;
+  const parts = message.split(regex);
   if (parts?.length > 0) {
     return (
       <Text>
@@ -24,8 +23,8 @@ function detectLinks(message: string, isLongPress?: boolean) {
                     const urlRegex = /(https?:\/\/[^\s]+)/gi;
                     const emailRegex =
                       /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
-                    let isURL = urlRegex.test(val);
-                    let isEmail = emailRegex.test(val);
+                    const isURL = urlRegex.test(val);
+                    const isEmail = emailRegex.test(val);
 
                     if (isEmail) {
                       await Linking.openURL(`mailto:${val}`);
@@ -64,13 +63,13 @@ const decode = (
   if (!text) {
     return;
   }
-  let arr: any[] = [];
-  let parts = text?.split(REGEX_USER_SPLITTING);
+  const arr: any[] = [];
+  const parts = text?.split(REGEX_USER_SPLITTING);
 
   if (!!parts) {
     for (const matchResult of parts) {
       if (!!matchResult.match(REGEX_USER_TAGGING)) {
-        let match = REGEX_USER_TAGGING.exec(matchResult);
+        const match = REGEX_USER_TAGGING.exec(matchResult);
         if (match !== null) {
           const {name, route} = match?.groups!;
           arr.push({key: name, route: route});

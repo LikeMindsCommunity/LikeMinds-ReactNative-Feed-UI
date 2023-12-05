@@ -1,6 +1,5 @@
 import {diffChars} from 'diff';
 import {StyleProp, TextStyle} from 'react-native';
-// @ts-ignore the lib do not have TS declarations yet
 import matchAll from 'string.prototype.matchall';
 import {
   CharactersDiffChange,
@@ -102,7 +101,7 @@ const getPartsInterval = (
     partsInterval.push(currentPart);
   } else {
     // For case when tagged user is at the beginning
-    if (currentPart.text == parts[0].text && isFirst) {
+    if (currentPart.text === parts[0].text && isFirst) {
       partsInterval.push(
         generatePlainTextPart(
           currentPart.text.substr(
@@ -176,7 +175,7 @@ const getMentionPartSuggestionKeywords = (
       keywordByTrigger[trigger] = undefined;
 
       // Check if we don't have selection range
-      if (selection.end != selection.start) {
+      if (selection.end !== selection.start) {
         return;
       }
 
@@ -197,7 +196,7 @@ const getMentionPartSuggestionKeywords = (
       // Return undefined in case when:
       if (
         // - the trigger index is not event found
-        triggerIndex == -1 ||
+        triggerIndex === -1 ||
         // - the trigger index is out of found part with selection cursor
         triggerIndex < part.position.start ||
         // - the trigger is not at the beginning and we don't have space or new line before trigger
@@ -499,7 +498,7 @@ const parseValue = (
     }
 
     // In case when we have some text before matched part parsing the text with rest part types
-    if (matches[0].index != 0) {
+    if (matches[0].index !== 0) {
       const text = value.substr(0, matches[0].index);
 
       const plainTextAndParts = parseValue(text, restPartTypes, positionOffset);
@@ -621,7 +620,6 @@ function detectMentions(input: string) {
   let match;
 
   while ((match = mentionRegex.exec(input)) !== null) {
-    const startIndex = match.index;
     const endIndex = mentionRegex.lastIndex;
     const nextChar = input.charAt(endIndex);
 
@@ -633,7 +631,6 @@ function detectMentions(input: string) {
   const myArray = input.split(' ');
   const doesExists = myArray.includes('@');
 
-  {
     /* It basically checks that for the below four conditions:
      1. if '@' is at end preceded by a whitespace
      2. if input only contains '@'
@@ -641,7 +638,6 @@ function detectMentions(input: string) {
      4. doesExists checks whether '@' has been typed between two strings
      If any of the above condition is true, it pushes it in the matches list which indicates that member list has to be shown 
     */
-  }
   if (
     input.endsWith(' @') ||
     input === '@' ||
