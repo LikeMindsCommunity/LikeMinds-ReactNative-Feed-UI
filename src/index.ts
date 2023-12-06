@@ -48,6 +48,7 @@ import {
   PartType,
   LMInputTextProps,
 } from './base/LMInputText/types';
+import {convertToMentionValues} from './base/LMInputText/utils';
 
 export {
   LMText,
@@ -69,6 +70,7 @@ export {
   LMCommentItem,
   LMPost,
   LMHeader,
+  convertToMentionValues,
 };
 export type {
   LMActivityEntityUI,
