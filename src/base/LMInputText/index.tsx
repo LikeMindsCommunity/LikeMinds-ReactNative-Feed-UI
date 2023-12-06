@@ -194,16 +194,18 @@ const defaultStyles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: STYLES.$BACKGROUND_COLORS.LIGHT,
     paddingVertical: 10,
-    fontSize: 14,
-    color: STYLES.$COLORS.BLACK,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   textInputWithRightIcon: {
     width: '90%',
+    fontSize: 14,
+    color: STYLES.$COLORS.BLACK,
   },
   textInputWithoutRightIcon: {
     width: '100%',
+    fontSize: 14,
+    color: STYLES.$COLORS.BLACK,
   },
   rightIconButton: {
     borderWidth: 0,

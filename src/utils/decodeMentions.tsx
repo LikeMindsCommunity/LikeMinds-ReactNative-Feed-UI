@@ -37,8 +37,7 @@ function detectLinks(message: string, isLongPress?: boolean) {
                 }}>
                 <Text
                   style={{
-                    color: 'grey',
-                    fontSize: 13,
+                    color: '#007AFF',
                   }}>
                   {val}
                 </Text>
@@ -89,11 +88,11 @@ const decode = (
               <Text
                 onPress={() => {
                   if (!!!isLongPress) {
-                    Alert.alert(`navigate to the route ${val?.route}`);
+                    // Alert.alert(`navigate to the route ${val?.route}`);
                   }
                 }}
                 style={{
-                  color: 'blue',
+                  color: '#007AFF',
                 }}>
                 {val.key}
               </Text>
@@ -110,7 +109,7 @@ const decode = (
             {!!val.route ? (
               <Text
                 style={{
-                  color: 'blue',
+                  color: '#007AFF',
                 }}>
                 {val.key}
               </Text>

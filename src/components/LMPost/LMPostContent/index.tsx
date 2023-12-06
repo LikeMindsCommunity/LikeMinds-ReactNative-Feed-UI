@@ -1,4 +1,5 @@
 import {
+  Alert,
   Linking,
   StyleSheet,
   Text,
@@ -46,35 +47,35 @@ const LMPostContent = ({
   }, [showText, showMoreButton, MAX_LINES]);
 
   // this renders the text with highlighted link's urls
-  const highlightLinks = (linksText: string) => {
-    const regex = DETECT_LINK_REGEX;
-    const parts = linksText.replace(/\n/g, ' \n').split(' ');
+  // const highlightLinks = (linksText: string) => {
+  //   const regex = DETECT_LINK_REGEX;
+  //   const parts = linksText.replace(/\n/g, ' \n').split(' ');
 
-    return parts?.map((part, index) => {
-      if (regex.test(part.trim())) {
-        return (
-          <Text
-            key={index}
-            style={StyleSheet.flatten([styles.linkText, linkStyle])}
-            onPress={() =>
-              Linking.openURL(
-                part.includes('https://') ? part : `https://${part}`,
-              )
-            }>
-            {part}{' '}
-          </Text>
-        );
-      } else {
-        return (
-          <LMText
-            textStyle={StyleSheet.flatten([styles.contentText, textStyle])}
-            key={index}
-            text={`${part}${' '}`}
-          />
-        );
-      }
-    });
-  };
+  //   return parts?.map((part, index) => {
+  //     if (regex.test(part.trim())) {
+  //       return (
+  //         <Text
+  //           key={index}
+  //           style={StyleSheet.flatten([styles.linkText, linkStyle])}
+  //           onPress={() =>
+  //             Linking.openURL(
+  //               part.includes('https://') ? part : `https://${part}`,
+  //             )
+  //           }>
+  //           {part}{' '}
+  //         </Text>
+  //       );
+  //     } else {
+  //       return (
+  //         <LMText
+  //           textStyle={StyleSheet.flatten([styles.contentText, textStyle])}
+  //           key={index}
+  //           text={`${part}${' '}`}
+  //         />
+  //       );
+  //     }
+  //   });
+  // };
 
   return (
     <View
@@ -83,12 +84,13 @@ const LMPostContent = ({
         {paddingHorizontal: 16, paddingTop: 15},
       ])}>
       {/* post content text */}
-      <Text
-        numberOfLines={numberOfLines}
+      <LMText
+        text={text}
         key={Math.random()}
-        onTextLayout={e => onTextLayout(e)}>
-        {highlightLinks(text)}
-      </Text>
+        maxLines={numberOfLines}
+        textStyle={StyleSheet.flatten([styles.contentText, textStyle])}
+        onTextLayout={e => onTextLayout(e)}
+      />
       {/* show more button section */}
       {showMoreButton && (
         <TouchableOpacity

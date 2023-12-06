@@ -18,7 +18,7 @@ const LMText = ({
       numberOfLines={maxLines}
       onTextLayout={onTextLayout}
       style={StyleSheet.flatten([defaultStyles.textStyle, textStyle])}>
-      {decode(text, false)}
+      {decode(text, true)}
     </Text>
   );
 };
