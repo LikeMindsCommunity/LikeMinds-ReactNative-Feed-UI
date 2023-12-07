@@ -167,6 +167,7 @@ const LMCommentItem = ({
             width: 18,
             height: 18,
           }}
+          isClickable={comment?.menuItems?.length>0 ? false : true}
           buttonStyle={styles.threeDotButton}
         />
       </View>
