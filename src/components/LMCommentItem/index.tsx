@@ -156,7 +156,7 @@ const LMCommentItem = ({
           )}
         </View>
         {/* menu icon */}
-        <LMButton
+       {comment?.menuItems?.length>0 && <LMButton
           onTap={onOverflowMenuClick}
           icon={{
             assetPath: menuIcon?.icon?.assetPath
@@ -169,7 +169,7 @@ const LMCommentItem = ({
           }}
           isClickable={comment?.menuItems?.length>0 ? false : true}
           buttonStyle={styles.threeDotButton}
-        />
+        />}
       </View>
       <View style={styles.commentFooterView}>
         <View style={styles.alignRow}>
