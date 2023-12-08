@@ -94,7 +94,7 @@ const decode = (
                 style={{
                   color: '#007AFF',
                 }}>
-                {val.key}
+                {`@${val.key}`}
               </Text>
             ) : (
               detectLinks(val.key, isLongPress)

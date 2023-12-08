@@ -39,7 +39,7 @@ const defaultMentionTextStyle: StyleProp<TextStyle> = {
 const defaultPlainStringGenerator = (
   {trigger}: MentionPartType,
   {name}: MentionData,
-) => `${name}`;
+) => `${trigger}${name}`;
 
 const isMentionPartType = (partType: PartType): partType is MentionPartType => {
   return (partType as MentionPartType).trigger != null;
