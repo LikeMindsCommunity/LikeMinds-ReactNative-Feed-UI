@@ -1,5 +1,5 @@
 import {StyleSheet, View} from 'react-native';
-import React, {forwardRef} from 'react';
+import React from 'react';
 import LMPostHeader from '../LMPostHeader';
 import LMPostContent from '../LMPostContent';
 import LMPostMedia from '../LMPostMedia';
@@ -9,10 +9,9 @@ import layout from '../../../utils/layout';
 import STYLES from '../../../constants/constants';
 import {LINK_ATTACHMENT_TYPE} from '../../../constants/strings';
 
-const LMPost = forwardRef(function LMPost(
-  {post, headerProps, contentProps, mediaProps, footerProps}: LMPostProps,
-  ref,
-) {
+const LMPost = (
+  {post, headerProps, contentProps, mediaProps, footerProps}: LMPostProps
+) => {
   //creating header props as per customization
   const updatedHeaderProps = {
     post: post,
@@ -114,13 +113,13 @@ const LMPost = forwardRef(function LMPost(
       )}
       {/* post media */}
       {post?.attachments && post?.attachments.length > 0 && (
-        <LMPostMedia {...updatedMediaProps} ref={ref} />
+        <LMPostMedia {...updatedMediaProps} />
       )}
       {/* post footer */}
       <LMPostFooter {...updatedFooterProps} />
     </View>
   );
-});
+}
 
 const styles = StyleSheet.create({
   mainContainer: {

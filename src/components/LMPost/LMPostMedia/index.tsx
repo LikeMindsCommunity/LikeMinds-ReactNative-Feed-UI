@@ -1,5 +1,5 @@
 import {View, StyleSheet} from 'react-native';
-import React, {forwardRef} from 'react';
+import React from 'react';
 import {LMPostMediaProps} from './types';
 import {
   DOCUMENT_ATTACHMENT_TYPE,
@@ -15,7 +15,7 @@ import {
   LMVideo,
 } from '../../LMMedia';
 
-const LMPostMedia = forwardRef(
+const LMPostMedia =
   (
     {
       attachments,
@@ -26,7 +26,6 @@ const LMPostMedia = forwardRef(
       carouselProps,
       linkPreviewProps,
     }: LMPostMediaProps,
-    ref,
   ) => {
     // this handles the rendering of posts with single attachment
     const renderSingleAttachment = () => {
@@ -72,7 +71,6 @@ const LMPostMedia = forwardRef(
               loaderWidget={videoProps?.loaderWidget}
               errorWidget={videoProps?.errorWidget}
               currentVideoUrl={videoProps?.currentVideoUrl}
-              ref={ref}
             />
           );
         }
@@ -191,7 +189,6 @@ const LMPostMedia = forwardRef(
                   loaderWidget={videoProps?.loaderWidget}
                   errorWidget={videoProps?.errorWidget}
                   currentVideoUrl={videoProps?.currentVideoUrl}
-                  ref={ref}
                 />
               )}
               {attachments?.find(
@@ -235,7 +232,7 @@ const LMPostMedia = forwardRef(
         )}
       </View>
     );
-  },
-);
+  }
+
 
 export default LMPostMedia;
