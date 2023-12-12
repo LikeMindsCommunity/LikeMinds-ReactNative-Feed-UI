@@ -24,8 +24,8 @@ const LMPostFooter = ({
   // handling like state and likes count locally
   useEffect(() => {
     setLiked(isLiked);
-    setLikeCount(likesCount)
-  }, [isLiked]);
+    setLikeCount(likesCount);
+  }, [isLiked, likesCount]);
   const likesCountHandler = () => {
     likeIconButton?.onTap();
     setLiked(!liked);
@@ -69,11 +69,7 @@ const LMPostFooter = ({
             buttonStyle={
               likeIconButton?.buttonStyle
                 ? likeIconButton.buttonStyle
-                : {
-                    borderWidth: 0,
-                    alignItems: 'center',
-                    justifyContent: 'space-evenly',
-                  }
+                : styles.defaultLikeIconView
             }
           />
           {/* like text button */}
@@ -87,30 +83,25 @@ const LMPostFooter = ({
             }
             text={{
               text: likeCount
-              ? likeCount > 1
-                ? `${likeCount} Likes`
-                : `${likeCount} Like`
-              : 'Like',
+                ? likeCount > 1
+                  ? `${likeCount} Likes`
+                  : `${likeCount} Like`
+                : 'Like',
               textStyle: likeTextButton?.text?.textStyle
                 ? likeTextButton.text.textStyle
                 : {
                     fontSize: 14.5,
                     fontWeight: '400',
                     color: '#504B4B',
-                    textAlign:'left',
-                    width:55,
+                    textAlign: 'left',
+                    width: 55,
                   },
             }}
             placement={likeTextButton?.placement}
             buttonStyle={
               likeTextButton?.buttonStyle
                 ? likeTextButton.buttonStyle
-                : {
-                    borderWidth: 0,
-                    alignItems: 'center',
-                    justifyContent: 'space-evenly',
-                    marginLeft: 8,
-                  }
+                : styles.defaultLikeTextView
             }
           />
         </View>
@@ -118,14 +109,14 @@ const LMPostFooter = ({
         {/* comment section */}
         <View style={StyleSheet.flatten([styles.alignRow])}>
           <LMButton
-            onTap={commentButton?.onTap ? commentButton.onTap : () => {}}
+            onTap={commentButton?.onTap ? commentButton.onTap : () => null}
             text={{
               text:
                 commentsCount > 0
                   ? commentsCount > 1
                     ? `${commentsCount} Comments`
                     : `${commentsCount} Comment`
-                  : `Add Comment`,
+                  : 'Add Comment',
               textStyle: commentButton?.text?.textStyle
                 ? commentButton.text.textStyle
                 : {
@@ -157,11 +148,7 @@ const LMPostFooter = ({
             buttonStyle={
               commentButton?.buttonStyle
                 ? commentButton.buttonStyle
-                : {
-                    borderWidth: 0,
-                    alignItems: 'center',
-                    marginLeft:5
-                  }
+                : styles.defaultCommentView
             }
           />
         </View>
@@ -177,7 +164,7 @@ const LMPostFooter = ({
         {/* save section */}
         {showBookMarkIcon && (
           <LMButton
-            onTap={saveButton?.onTap ? saveButton.onTap : () => {}}
+            onTap={saveButton?.onTap ? saveButton.onTap : () => null}
             text={saveButton?.text}
             icon={{
               assetPath: saveButton?.icon?.assetPath
@@ -215,7 +202,7 @@ const LMPostFooter = ({
             buttonStyle={
               saveButton?.buttonStyle
                 ? saveButton.buttonStyle
-                : {borderWidth: 0}
+                : styles.buttonWithoutBorder
             }
           />
         )}
@@ -223,7 +210,7 @@ const LMPostFooter = ({
         {/* share section */}
         {showShareIcon && (
           <LMButton
-            onTap={shareButton?.onTap ? shareButton.onTap : () => {}}
+            onTap={shareButton?.onTap ? shareButton.onTap : () => null}
             text={shareButton?.text}
             icon={{
               assetPath: shareButton?.icon?.assetPath
@@ -245,7 +232,7 @@ const LMPostFooter = ({
             buttonStyle={
               shareButton?.buttonStyle
                 ? shareButton.buttonStyle
-                : {borderWidth: 0}
+                : styles.buttonWithoutBorder
             }
           />
         )}
@@ -284,6 +271,25 @@ const styles = StyleSheet.create({
   iconSize: {
     width: layout.normalize(19),
     height: layout.normalize(19),
+  },
+  defaultLikeIconView: {
+    borderWidth: 0,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+  },
+  defaultLikeTextView: {
+    borderWidth: 0,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    marginLeft: 8,
+  },
+  defaultCommentView: {
+    borderWidth: 0,
+    alignItems: 'center',
+    marginLeft: 5,
+  },
+  buttonWithoutBorder: {
+    borderWidth: 0,
   },
 });
 

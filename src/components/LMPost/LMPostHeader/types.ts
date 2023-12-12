@@ -1,8 +1,9 @@
-import {ImageStyle, TextStyle, View, ViewStyle} from 'react-native';
+import {TextStyle, ViewStyle} from 'react-native';
 import {LMTextProps} from '../../../base/LMText/types';
 import {LMIconProps} from '../../../base/LMIcon/types';
 import {LMPostMenuProps} from '../LMPostMenu/types';
 import {LMProfilePictureProps} from '../../../base/LMProfilePicture/types';
+import {LMPostUI, LMUserUI} from '../../../models';
 
 export interface LMPostHeaderProps {
   post: LMPostUI; // post data

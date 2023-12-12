@@ -24,9 +24,9 @@ const LMNotificationFeedItem = ({
   menuIcon,
 }: LMNotificationFeedItemProps) => {
   // storing the attachments if present
-  let activityAttachments = activity.activityEntityData?.attachments;
+  const activityAttachments = activity.activityEntityData?.attachments;
   // storing the value of attachment type of the attachment if present
-  let activityAttachmentType = activityAttachments
+  const activityAttachmentType = activityAttachments
     ? activityAttachments[0].attachmentType
     : '';
   //creating profile picture props as per customization
@@ -44,7 +44,10 @@ const LMNotificationFeedItem = ({
         boxStyle,
         {backgroundColor: activity.isRead ? '' : STYLES.$COLORS.LIGHT_GREY},
       ])}>
-      <TouchableOpacity activeOpacity={0.8} onPress={onTap} style={{flexDirection: 'row'}}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={onTap}
+        style={styles.flexView}>
         {/* profile avatar view */}
         <View>
           {/* profile picture section */}
@@ -57,7 +60,7 @@ const LMNotificationFeedItem = ({
               <LMIcon
                 assetPath={require('../../assets/images/notification_image3x.png')}
                 type="png"
-                boxStyle={{position: 'absolute', bottom: -10, right: -8}}
+                boxStyle={styles.notificationTypeIcon}
                 height={35}
                 width={35}
               />
@@ -66,7 +69,7 @@ const LMNotificationFeedItem = ({
               <LMIcon
                 assetPath={require('../../assets/images/notification_doc3x.png')}
                 type="png"
-                boxStyle={{position: 'absolute', bottom: -10, right: -8}}
+                boxStyle={styles.notificationTypeIcon}
                 height={35}
                 width={35}
               />
@@ -74,7 +77,7 @@ const LMNotificationFeedItem = ({
         </View>
 
         {/* activity content text */}
-        <View style={{width: '75%', marginLeft: 10}}>
+        <View style={styles.contentView}>
           <LMText
             text={activity.activityText.replace(/<<([^|]+)\|[^>]+>>/g, '$1')}
             textStyle={StyleSheet.flatten([activityTextStyle])}
@@ -86,7 +89,10 @@ const LMNotificationFeedItem = ({
         </View>
       </TouchableOpacity>
       {/* menu icon section */}
-      <TouchableOpacity activeOpacity={0.8} hitSlop={{top:10, bottom:10, left:10, right:10}} onPress={onMenuTap}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
+        onPress={onMenuTap}>
         <>
           {menuIcon ? (
             menuIcon
@@ -117,6 +123,15 @@ const styles = StyleSheet.create({
     color: STYLES.$COLORS.BLACK,
     fontSize: 14,
   },
+  flexView: {
+    flexDirection: 'row',
+  },
+  notificationTypeIcon: {
+    position: 'absolute',
+    bottom: -10,
+    right: -8,
+  },
+  contentView: {width: '75%', marginLeft: 10},
 });
 
 export default LMNotificationFeedItem;

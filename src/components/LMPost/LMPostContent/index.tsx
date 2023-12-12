@@ -1,15 +1,12 @@
-import {Linking, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TextLayoutLine, TouchableOpacity, View} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import {LMPostContentProps} from './types';
 import {MAX_DEFAULT_POST_CONTENT_LINES} from '../../../constants/strings';
 import LMText from '../../../base/LMText';
-import { DETECT_LINK_REGEX } from '../../../constants/regex';
 
 const LMPostContent = ({
   text,
-  linkData,
   textStyle,
-  linkStyle,
   visibleLines,
   showMoreText,
   postContentViewStyle,
@@ -23,13 +20,13 @@ const LMPostContent = ({
 
   // this handles the show more functionality
   const onTextLayout = useCallback(
-    (e: any) => {
-      if (e.nativeEvent.lines.length > MAX_LINES && !showText) {
+    (event: {nativeEvent: {lines: string | TextLayoutLine[]}}) => {
+      if (event.nativeEvent.lines.length > MAX_LINES && !showText) {
         setShowMoreButton(true);
         setNumberOfLines(MAX_LINES);
       }
     },
-    [showText],
+    [showText, MAX_LINES],
   );
 
   // this handles the visiblity of whole post content and trimmed text upto maximum line
@@ -37,35 +34,7 @@ const LMPostContent = ({
     if (showMoreButton) {
       setNumberOfLines(showText ? undefined : MAX_LINES);
     }
-  }, [showText, showMoreButton]);
-
-  
-  // this renders the text with highlighted link's urls
-  const highlightLinks = (text: string) => {
-    const regex = DETECT_LINK_REGEX;
-    const parts = text.replace(/\n/g, ' \n').split(' ');
-
-    return parts?.map((part, index) => {
-      if (regex.test(part.trim())) {
-        return (
-          <Text
-            key={index}
-            style={StyleSheet.flatten([styles.linkText, linkStyle])}
-            onPress={() => Linking.openURL(part.includes('https://') ? part : `https://${part}`)}>
-            {part}{" "}
-          </Text>
-        );
-      } else {
-        return (
-          <LMText
-            textStyle={StyleSheet.flatten([styles.contentText, textStyle])}
-            key={index}
-            text={`${part}${' '}`}
-          />
-        );
-      }
-    });
-  };
+  }, [showText, showMoreButton, MAX_LINES]);
 
   return (
     <View
@@ -74,17 +43,20 @@ const LMPostContent = ({
         {paddingHorizontal: 16, paddingTop: 15},
       ])}>
       {/* post content text */}
-      <Text
-        numberOfLines={numberOfLines}
+      <LMText
+        text={text}
         key={Math.random()}
-        onTextLayout={e => onTextLayout(e)}>
-        {highlightLinks(text)}
-      </Text>
+        maxLines={numberOfLines}
+        textStyle={StyleSheet.flatten([styles.contentText, textStyle])}
+        onTextLayout={e => onTextLayout(e)}
+      />
       {/* show more button section */}
       {showMoreButton && (
-        <TouchableOpacity activeOpacity={0.8} hitSlop={{top:10, bottom:10, left:10, right:10}}
+        <TouchableOpacity
+          activeOpacity={0.8}
+          hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
           disabled={showText ? true : false}
-          onPress={() => setShowText(showText => !showText)}
+          onPress={() => setShowText(!showText)}
           accessibilityRole="button">
           <LMText
             text={
@@ -94,7 +66,10 @@ const LMPostContent = ({
                 ? showMoreText.text
                 : 'See More'
             }
-            textStyle={StyleSheet.flatten([styles.showMoreText,showMoreText?.textStyle])}
+            textStyle={StyleSheet.flatten([
+              styles.showMoreText,
+              showMoreText?.textStyle,
+            ])}
           />
         </TouchableOpacity>
       )}
@@ -116,8 +91,8 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   showMoreText: {
-    color: '#9B9B9B'
-  }
+    color: '#9B9B9B',
+  },
 });
 
 export default LMPostContent;

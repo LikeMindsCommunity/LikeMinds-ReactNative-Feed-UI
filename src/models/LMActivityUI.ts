@@ -1,4 +1,7 @@
-interface LMActivityUI {
+import {LMActivityEntityUI} from './LMActivityEntityUI';
+import {LMUserUI} from './LMUserUI';
+
+export interface LMActivityUI {
   id: string;
   isRead: boolean;
   actionOn: string;

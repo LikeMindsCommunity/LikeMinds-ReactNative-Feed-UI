@@ -1,5 +1,7 @@
+import {LMAttachmentMetaUI} from './LMAttachmentMetaUI';
+
 // data model for array of attachments
-interface LMAttachmentUI {
-    attachmentMeta: LMAttachmentMetaUI;
-    attachmentType: number;
+export interface LMAttachmentUI {
+  attachmentMeta: LMAttachmentMetaUI;
+  attachmentType: number;
 }

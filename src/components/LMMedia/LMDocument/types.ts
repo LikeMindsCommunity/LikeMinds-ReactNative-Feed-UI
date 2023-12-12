@@ -1,5 +1,6 @@
 import {TextStyle, ViewStyle} from 'react-native';
 import {LMIconProps} from '../../../base/LMIcon/types';
+import {LMAttachmentUI} from '../../../models';
 
 export interface LMDocumentProps {
   attachments: Array<LMAttachmentUI>; // this represents the array of document attachments to be displayed
@@ -13,6 +14,6 @@ export interface LMDocumentProps {
   documentViewStyle?: ViewStyle; // this represents the style of the document view
   onTap?: () => void; // this represents the function to be executed on click over the document
   showCancel?: boolean; // this represents the visibility of cancel button
-  onCancel?: (index: number) => void // callback function that executes on click of cancel button
-  showMoreText?: boolean
+  onCancel?: (index: number) => void; // callback function that executes on click of cancel button
+  showMoreText?: boolean;
 }
