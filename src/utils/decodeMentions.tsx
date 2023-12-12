@@ -65,8 +65,10 @@ const decode = (
       if (matchResult.match(REGEX_USER_TAGGING)) {
         const match = REGEX_USER_TAGGING.exec(matchResult);
         if (match !== null) {
-          const {name, route} = match?.groups!;
-          arr.push({key: name, route: route});
+          if (match?.groups) {
+            const {name, route} = match.groups!;
+            arr.push({key: name, route: route});
+          }
         }
       } else {
         arr.push({key: matchResult, route: null});
