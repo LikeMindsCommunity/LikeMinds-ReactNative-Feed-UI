@@ -21,6 +21,12 @@ type MentionData = {
   id: string;
 };
 
+type Mention = {
+  original: string;
+  name: string;
+  URLwithID: string;
+};
+
 type CharactersDiffChange = Omit<Change, 'count'> & {count: number};
 
 type RegexMatchResult = string[] & {
@@ -100,7 +106,7 @@ type Part = {
 
 type LMInputTextProps = Omit<TextInputProps, 'onChange'> & {
   inputText: string; // this represents the text to be displayed on text input
-  onType: (value: string) => any; // this represents a callback function that is called when the text input's text changes
+  onType: (value: string) => void; // this represents a callback function that is called when the text input's text changes
 
   partTypes?: PartType[];
 
@@ -147,4 +153,5 @@ export type {
   PatternPartType,
   PartType,
   LMInputTextProps,
+  Mention,
 };

@@ -1,22 +1,12 @@
-import {
-  Alert,
-  Linking,
-  StyleSheet,
-  Text,
-  TextLayoutLine,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, TextLayoutLine, TouchableOpacity, View} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import {LMPostContentProps} from './types';
 import {MAX_DEFAULT_POST_CONTENT_LINES} from '../../../constants/strings';
 import LMText from '../../../base/LMText';
-import {DETECT_LINK_REGEX} from '../../../constants/regex';
 
 const LMPostContent = ({
   text,
   textStyle,
-  linkStyle,
   visibleLines,
   showMoreText,
   postContentViewStyle,
@@ -45,37 +35,6 @@ const LMPostContent = ({
       setNumberOfLines(showText ? undefined : MAX_LINES);
     }
   }, [showText, showMoreButton, MAX_LINES]);
-
-  // this renders the text with highlighted link's urls
-  // const highlightLinks = (linksText: string) => {
-  //   const regex = DETECT_LINK_REGEX;
-  //   const parts = linksText.replace(/\n/g, ' \n').split(' ');
-
-  //   return parts?.map((part, index) => {
-  //     if (regex.test(part.trim())) {
-  //       return (
-  //         <Text
-  //           key={index}
-  //           style={StyleSheet.flatten([styles.linkText, linkStyle])}
-  //           onPress={() =>
-  //             Linking.openURL(
-  //               part.includes('https://') ? part : `https://${part}`,
-  //             )
-  //           }>
-  //           {part}{' '}
-  //         </Text>
-  //       );
-  //     } else {
-  //       return (
-  //         <LMText
-  //           textStyle={StyleSheet.flatten([styles.contentText, textStyle])}
-  //           key={index}
-  //           text={`${part}${' '}`}
-  //         />
-  //       );
-  //     }
-  //   });
-  // };
 
   return (
     <View
