@@ -9,9 +9,13 @@ import layout from '../../../utils/layout';
 import STYLES from '../../../constants/constants';
 import {LINK_ATTACHMENT_TYPE} from '../../../constants/strings';
 
-const LMPost = (
-  {post, headerProps, contentProps, mediaProps, footerProps}: LMPostProps
-) => {
+const LMPost = ({
+  post,
+  headerProps,
+  contentProps,
+  mediaProps,
+  footerProps,
+}: LMPostProps) => {
   //creating header props as per customization
   const updatedHeaderProps = {
     post: post,
@@ -119,7 +123,7 @@ const LMPost = (
       <LMPostFooter {...updatedFooterProps} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   mainContainer: {

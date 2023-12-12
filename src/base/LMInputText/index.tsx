@@ -196,7 +196,7 @@ const defaultStyles = StyleSheet.create({
     paddingVertical: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems:'center'
+    alignItems: 'center',
   },
   textInputWithRightIcon: {
     width: '90%',
