@@ -15,7 +15,7 @@ const LMIcon = ({
 }: LMIconProps) => {
   // this throws the error if both image url and image path are passed as props because only one is required
   if (iconUrl && assetPath) {
-    throw new Error(`Property iconUrl and assetPath can not exist together.`);
+    throw new Error('Property iconUrl and assetPath can not exist together.');
   }
 
   return (

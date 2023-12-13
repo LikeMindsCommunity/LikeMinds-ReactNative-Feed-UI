@@ -1,7 +1,3 @@
-import { getNameInitials, timeStamp, formatBytes } from "./utils";
+import {getNameInitials, timeStamp, formatBytes} from './utils';
 
-export {
-    getNameInitials,
-    timeStamp,
-    formatBytes
-}
+export {getNameInitials, timeStamp, formatBytes};

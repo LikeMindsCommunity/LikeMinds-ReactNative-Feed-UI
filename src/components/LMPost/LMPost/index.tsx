@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {forwardRef} from 'react';
+import {StyleSheet, View} from 'react-native';
+import React from 'react';
 import LMPostHeader from '../LMPostHeader';
 import LMPostContent from '../LMPostContent';
 import LMPostMedia from '../LMPostMedia';
@@ -9,10 +9,13 @@ import layout from '../../../utils/layout';
 import STYLES from '../../../constants/constants';
 import {LINK_ATTACHMENT_TYPE} from '../../../constants/strings';
 
-const LMPost = forwardRef(function LMPost(
-  {post, headerProps, contentProps, mediaProps, footerProps}: LMPostProps,
-  ref,
-) {
+const LMPost = ({
+  post,
+  headerProps,
+  contentProps,
+  mediaProps,
+  footerProps,
+}: LMPostProps) => {
   //creating header props as per customization
   const updatedHeaderProps = {
     post: post,
@@ -30,7 +33,7 @@ const LMPost = forwardRef(function LMPost(
       menuItems: post?.menuItems,
       onSelected: headerProps?.postMenu.onSelected
         ? headerProps.postMenu.onSelected
-        : () => {},
+        : () => null,
       modalPosition: headerProps?.postMenu.modalPosition
         ? headerProps?.postMenu.modalPosition
         : {x: 0, y: 0},
@@ -39,12 +42,12 @@ const LMPost = forwardRef(function LMPost(
         : false,
       onCloseModal: headerProps?.postMenu.onCloseModal
         ? headerProps.postMenu.onCloseModal
-        : () => {},
+        : () => null,
       menuItemTextStyle: headerProps?.postMenu.menuItemTextStyle,
       menuViewStyle: headerProps?.postMenu.menuViewStyle,
       backdropColor: headerProps?.postMenu.backdropColor,
     },
-    onTap: headerProps?.onTap ? headerProps.onTap : () => {},
+    onTap: headerProps?.onTap ? headerProps.onTap : () => null,
     createdAt: {
       text: `${post?.createdAt}`,
       textStyle: headerProps?.createdAt?.textStyle,
@@ -113,14 +116,14 @@ const LMPost = forwardRef(function LMPost(
         <LMPostContent {...updatedContentProps} />
       )}
       {/* post media */}
-      {post?.attachments && post?.attachments.length > 0 && 
-      <LMPostMedia {...updatedMediaProps} ref={ref} />
-      }
+      {post?.attachments && post?.attachments.length > 0 && (
+        <LMPostMedia {...updatedMediaProps} />
+      )}
       {/* post footer */}
-      <LMPostFooter {...updatedFooterProps}  />
+      <LMPostFooter {...updatedFooterProps} />
     </View>
   );
-});
+};
 
 const styles = StyleSheet.create({
   mainContainer: {

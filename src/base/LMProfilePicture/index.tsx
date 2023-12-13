@@ -2,7 +2,7 @@ import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import {LMProfilePictureProps} from './types';
 import {getNameInitials} from '../../utils';
-import STYLES from '../../constants/constants'
+import STYLES from '../../constants/constants';
 
 const LMProfilePicture = ({
   fallbackText,
@@ -14,7 +14,8 @@ const LMProfilePicture = ({
   profilePictureStyle,
 }: LMProfilePictureProps) => {
   return (
-    <TouchableOpacity activeOpacity={0.8}
+    <TouchableOpacity
+      activeOpacity={0.8}
       disabled={onTap ? false : true}
       onPress={() => (onTap ? onTap() : null)}>
       {imageUrl ? (
@@ -27,7 +28,7 @@ const LMProfilePicture = ({
             {
               width: size ? size : defaultStyles.avatarView.width,
               height: size ? size : defaultStyles.avatarView.height,
-              resizeMode:'cover'
+              resizeMode: 'cover',
             },
           ])}
         />

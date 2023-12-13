@@ -27,7 +27,7 @@ const LMCarousel = ({
 
   // this handles the functionality to be execute on click of close icon
   const onCloseHandler = (index: number) => {
-    onCancel ? onCancel(index) : () => {};
+    onCancel ? onCancel(index) : () => null;
     if (attachments.length - 2 === activeIndex - 1) {
       setLastItem(true);
     }

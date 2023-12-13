@@ -1,9 +1,16 @@
 import {StyleSheet, Text} from 'react-native';
 import React from 'react';
 import {LMTextProps} from './types';
-import STYLES from '../../constants/constants'
+import STYLES from '../../constants/constants';
+import decode from '../../utils/decodeMentions';
 
-const LMText = ({text, maxLines, textStyle, selectable, onTextLayout}: LMTextProps) => {
+const LMText = ({
+  text,
+  maxLines,
+  textStyle,
+  selectable,
+  onTextLayout,
+}: LMTextProps) => {
   return (
     // this renders the text component
     <Text
@@ -11,7 +18,7 @@ const LMText = ({text, maxLines, textStyle, selectable, onTextLayout}: LMTextPro
       numberOfLines={maxLines}
       onTextLayout={onTextLayout}
       style={StyleSheet.flatten([defaultStyles.textStyle, textStyle])}>
-      {text}
+      {decode(text, true)}
     </Text>
   );
 };

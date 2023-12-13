@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import STYLES from '../../../constants/constants';
 import layout from '../../../utils/layout';
@@ -37,7 +37,9 @@ const LMPostHeader = ({
   };
 
   // this function is executed on the click of menu icon & handles the position and visibility of the modal
-  const onThreedotsClick = (event: any) => {
+  const onThreedotsClick = (event: {
+    nativeEvent: {pageX: number; pageY: number};
+  }) => {
     const {pageX, pageY} = event.nativeEvent;
     setShowPostMenuModal(true);
     setModalPosition({x: pageX, y: pageY});
@@ -58,7 +60,7 @@ const LMPostHeader = ({
             profilePictureStyle={profilePicture?.profilePictureStyle}
           />
           {/* author details */}
-          <View style={{marginLeft: 12}}>
+          <View style={styles.autherDetailView}>
             {/* author heading */}
             <View style={styles.alignRow}>
               <LMText
@@ -91,7 +93,11 @@ const LMPostHeader = ({
             {/* author subHeading */}
             <View style={styles.alignRow}>
               <LMText
-                text={timeStamp(Number(createdAt?.text)) === undefined ? 'now' : `${timeStamp(Number(createdAt?.text))}`}
+                text={
+                  timeStamp(Number(createdAt?.text)) === undefined
+                    ? 'now'
+                    : `${timeStamp(Number(createdAt?.text))}`
+                }
                 selectable={false}
                 maxLines={createdAt?.maxLines}
                 textStyle={StyleSheet.flatten([
@@ -108,7 +114,7 @@ const LMPostHeader = ({
                     width={styles.dotImageSize.width}
                     height={styles.dotImageSize.height}
                     iconStyle={styles.dotImageSize}
-                    color='#0F1E3D66'
+                    color="#0F1E3D66"
                   />
                   <LMText
                     text="Edited"
@@ -128,7 +134,7 @@ const LMPostHeader = ({
       <View
         style={[
           styles.topRightView,
-          post?.isPinned && {justifyContent: 'space-between'},
+          post?.isPinned && styles.topRightViewIfPinned,
         ]}>
         {/* pin icon section */}
         {post?.isPinned && (
@@ -153,7 +159,10 @@ const LMPostHeader = ({
           </>
         )}
         {/* menu icon section */}
-        <TouchableOpacity activeOpacity={0.8} onPress={onThreedotsClick} hitSlop={{top:10, bottom:10, left:10, right:10}}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={onThreedotsClick}
+          hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
           <>
             {showMenuIcon && (
               <LMIcon
@@ -242,6 +251,14 @@ const styles = StyleSheet.create({
     width: '16%',
     flexDirection: 'row',
     justifyContent: 'flex-end',
+  },
+  topRightViewIfPinned: {
+    width: '16%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  autherDetailView: {
+    marginLeft: 12,
   },
 });
 

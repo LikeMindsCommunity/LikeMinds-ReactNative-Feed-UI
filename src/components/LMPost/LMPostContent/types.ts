@@ -1,5 +1,6 @@
 import {TextStyle, ViewStyle} from 'react-native';
-import { LMTextProps } from '../../../base/LMText/types';
+import {LMTextProps} from '../../../base/LMText/types';
+import {LMAttachmentUI} from '../../../models';
 
 export interface LMPostContentProps {
   text: string; // text content of the post
