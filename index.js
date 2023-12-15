@@ -1,1 +1,1 @@
-export * from './src/index';
+export * from './LMFeed-UI/index';

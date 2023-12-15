@@ -4,6 +4,7 @@ import LMText from './base/LMText';
 import LMProfilePicture from './base/LMProfilePicture';
 import LMInputText from './base/LMInputText';
 import LMHeader from './base/LMHeader';
+import LMLoader from './base/LMLoader';
 import {
   LMImage,
   LMVideo,
@@ -71,6 +72,7 @@ export {
   LMPost,
   LMHeader,
   convertToMentionValues,
+  LMLoader,
 };
 export type {
   LMActivityEntityUI,
