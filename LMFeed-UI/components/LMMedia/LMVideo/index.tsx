@@ -7,6 +7,7 @@ import {
   Image,
 } from 'react-native';
 import React, {useState} from 'react';
+// @ts-ignore the lib do not have TS declarations yet
 import Video from 'react-native-video';
 import {LMVideoProps} from './types';
 import LMLoader from '../../../base/LMLoader';

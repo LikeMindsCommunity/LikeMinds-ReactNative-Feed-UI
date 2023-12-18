@@ -1,3 +1,4 @@
+// @ts-ignore the lib do not have TS declarations yet
 import type {Change} from 'diff';
 import type {ReactNode, Ref} from 'react';
 import type {
