@@ -1,5 +1,7 @@
+// @ts-ignore the lib do not have TS declarations yet
 import {diffChars} from 'diff';
 import {StyleProp, TextStyle} from 'react-native';
+// @ts-ignore the lib do not have TS declarations yet
 import matchAll from 'string.prototype.matchall';
 import {
   CharactersDiffChange,
